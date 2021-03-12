@@ -17,4 +17,9 @@ public class UserDaoImpl implements UserDao{
 		sql.insert("memberMapper.register" , dto);
 	}
 
+	@Override
+	public UserDto signin(UserDto dto) throws Exception {
+		return sql.selectOne("memberMapper.signin" , dto);
+	}
+
 }

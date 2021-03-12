@@ -23,6 +23,12 @@
 	
 	<context:component-scan base-package="com.sh.Controller" />
 	
-	
+	<beans:bean id="AdminInterceptor" class="com.sh.Interceptor.AdminInterceptor"></beans:bean>	
+	<interceptors>
+		<interceptor>
+			<mapping path="/admin/**"/>
+			<beans:ref bean="AdminInterceptor"/>
+		</interceptor>
+	</interceptors>
 	
 </beans:beans>

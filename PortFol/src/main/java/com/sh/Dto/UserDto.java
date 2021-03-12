@@ -10,12 +10,12 @@ public class UserDto {
 	private String userAddr1;
 	private String userAddr2;
 	private String userAddr3;
-	private LocalDateTime regiDate;
+	private LocalDateTime regDate;
 	private int verify;
 
 	public UserDto() {}
 	public UserDto(String userId, String userPass, String userName, String userPhone, String userAddr1, String userAddr2,
-			String userAddr3, LocalDateTime regiDate, int verify) {
+			String userAddr3, LocalDateTime regDate, int verify) {
 		this.userId = userId;
 		this.userPass = userPass;
 		this.userName = userName;
@@ -23,7 +23,7 @@ public class UserDto {
 		this.userAddr1 = userAddr1;
 		this.userAddr2 = userAddr2;
 		this.userAddr3 = userAddr3;
-		this.regiDate = regiDate;
+		this.regDate = regDate;
 		this.verify = verify;
 	}
 	public String getUserId() {
@@ -68,11 +68,11 @@ public class UserDto {
 	public void setUserAddr3(String userAddr3) {
 		this.userAddr3 = userAddr3;
 	}
-	public LocalDateTime getRegiDate() {
-		return regiDate;
+	public LocalDateTime getRegDate() {
+		return regDate;
 	}
-	public void setRegiDate(LocalDateTime regiDate) {
-		this.regiDate = regiDate;
+	public void setRegiDate(LocalDateTime regDate) {
+		this.regDate = regDate;
 	}
 	public int getVerify() {
 		return verify;
