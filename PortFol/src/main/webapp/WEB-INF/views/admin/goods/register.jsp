@@ -1,4 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -93,31 +102,35 @@ footer#footer ul li {
 	margin-right: 10px;
 }
 </style>
-</style>
 </head>
 <body>
 	<header>
 		<div id="header_box">
-			<%@ include file="include/header.jsp"%>
+			<%@ include file="../include/header.jsp"%>
 		</div>
 	</header>
 
 	<nav>
 		<div id="nav_box">
-			<%@ include file="include/nav.jsp"%>
+			<%@ include file="../include/nav.jsp"%>
 		</div>
 	</nav>
 
 	<aside>
 		<div id="aside_box">
-			<%@ include file="include/aside.jsp"%>
+			<%@ include file="../include/aside.jsp"%>
+		</div>
+		<div id="container_box">
+			<h2>상품등록</h2>
 		</div>
 	</aside>
 
 	<footer>
 		<div id="aside_box">
-			<%@ include file="include/footer.jsp"%>
+			<%@ include file="../include/footer.jsp"%>
 		</div>
 	</footer>
+</body>
+</html>
 </body>
 </html>

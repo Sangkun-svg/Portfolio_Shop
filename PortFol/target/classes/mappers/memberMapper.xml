@@ -10,10 +10,12 @@
 	
 	<select id="signin" resultType="com.sh.Dto.UserDto">
 		select 
-			userId , userPass , userName , userPhone , userAddr1 , userAddr2 , userAddr3 , regDate , verify
+			userId , userPass , userName ,verify
 		from 
 			member
 		where userId = #{userId}
+			and userPass =#{userPass} 
 	</select>
+	
 </mapper>
 

@@ -17,5 +17,8 @@ public class AdminController {
 		logger.info("Get Index");
 	}
 	
-	
+	@GetMapping("/goods/register")
+	public void getGoodsRegister() throws Exception{
+		logger.info("Get goods register");
+	}
 }
