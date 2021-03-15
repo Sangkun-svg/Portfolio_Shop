@@ -24,7 +24,29 @@
 				return false;
 			}
 		});
-	})
+
+		$.ajax({
+			url : "${pageContext.request.contextPath}/passValidation",
+			type : "POST",
+			dataType : "json",
+			data : $("#delForm").serializeArray(),
+			success: function(data){
+				
+				if(data==0){
+					alert("패스워드가 틀렸습니다.");
+					return;
+				}else{
+					if(confirm("회원탈퇴하시겠습니까?")){
+						$("#delForm").submit();
+					}
+					
+				}
+			}
+		})
+		
+	});
+
+})
 </script>
 <body>
 	<section id="container">

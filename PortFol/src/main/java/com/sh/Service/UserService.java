@@ -15,4 +15,6 @@ public interface UserService {
 
 	public void userDelete(UserDto dto) throws Exception;
 
+	public int passValidation(UserDto dto) throws Exception;
+
 }

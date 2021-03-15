@@ -31,6 +31,12 @@ public class UserDaoImpl implements UserDao{
 	public void userDelete(UserDto dto) throws Exception {
 		sql.delete("userMapper.userDelete" , dto);
 	}
+
+	@Override
+	public int passValidation(UserDto dto) throws Exception {
+		int result = sql.selectOne("userMapper.passValidation" , dto);
+		return result;
+	}
 	
 
 }

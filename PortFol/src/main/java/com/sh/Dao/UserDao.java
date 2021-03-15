@@ -10,4 +10,6 @@ public interface UserDao {
 	public void userUpdate(UserDto dto) throws Exception;
 
 	public void userDelete(UserDto dto) throws Exception;
+	
+	public int passValidation(UserDto dto) throws Exception;
 }

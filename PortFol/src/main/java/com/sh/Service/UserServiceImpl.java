@@ -38,4 +38,10 @@ public class UserServiceImpl implements UserService{
 		dao.userDelete(dto);
 	}
 
+	@Override
+	public int passValidation(UserDto dto) throws Exception {
+		int result = dao.passValidation(dto);
+		return result;
+	}
+
 }

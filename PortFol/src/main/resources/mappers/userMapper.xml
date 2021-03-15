@@ -37,5 +37,14 @@
 		 	userPass = #{userPass}	
 	</delete>
 	
+	<select id="passValidation">
+		select count (*) from 
+			member 
+		where 
+			userId = #{userId} 
+		and 
+			userPass = #{userPass}
+	</select>
+	
 </mapper>
 

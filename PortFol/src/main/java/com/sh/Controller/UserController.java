@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sh.Dto.UserDto;
@@ -26,12 +28,14 @@ public class UserController {
 	@GetMapping("/signup")
 	public void getSignUp() {
 		logger.info("Get SignUp ");
+		System.out.println("Get SignUp");
 	}
 	
 	@PostMapping
 	public String postSignUp(UserDto dto) throws Exception{
 		logger.info("Post SignUp ");
-		
+		System.out.println("Post SignUp");
+
 		userService.register(dto);
 		
 		return"redirect:/";
@@ -40,12 +44,14 @@ public class UserController {
 	@GetMapping("/signin")
 	public void getSignup()throws Exception{
 		logger.info("Get Signin");
+		System.out.println("Get Signin");
 	}
 	
 	@PostMapping("/signin")
-	public String postSignup(UserDto dto , HttpServletRequest req , RedirectAttributes rttr)throws Exception {
+	public String postSignin(UserDto dto , HttpServletRequest req , RedirectAttributes rttr)throws Exception {
 		logger.info("Post Signin");
-		
+		System.out.println("Post Signin");
+
 		UserDto login = userService.signin(dto);
 		HttpSession session = req.getSession();
 		
@@ -62,7 +68,8 @@ public class UserController {
 	@GetMapping("/signout")
 	public String signout(HttpSession session)throws Exception {
 		logger.info("SignOut");
-		
+		System.out.println("Get SignOut");
+
 		userService.signout(session);
 		return"redirect:/";
 	}
@@ -70,12 +77,14 @@ public class UserController {
 	@GetMapping("/userUpdate")
 	public void GetUserUpdate() throws Exception {
 		logger.info("Get userUpdate");
+		System.out.println("Get UserUpdate");
 	}
 	
 	@PostMapping("/userUpdate")
 	public String PostUserUpdate(UserDto dto , HttpSession session) throws Exception{
 		logger.info("Post userUpdate");
-		
+		System.out.println("Post UserUpdate");
+
 		userService.userUpdate(dto);
 		session.invalidate();
 		return "redirect:/";
@@ -84,12 +93,13 @@ public class UserController {
 	@GetMapping("/userDelete")
 	public void GetUserDelete() throws Exception{
 		logger.info("Get userDelete");
-		
+		System.out.println("Get UserDelete");
 	}
 	@PostMapping("/userDelete")
 	public String PostUserDelete(UserDto dto , HttpSession session , RedirectAttributes rttr	) throws Exception{
 		logger.info("Post userDelete");
-		
+		System.out.println("Post UserDelete");
+
 		UserDto member = (UserDto)session.getAttribute("member");
 		
 		String sessionPass = member.getUserPass();
@@ -105,4 +115,12 @@ public class UserController {
 	}
 
 
+	@ResponseBody
+	@PostMapping("passValidation")
+	public int passValidation(UserDto dto) throws Exception{
+		System.out.println("Post passValidation");
+
+		int result = userService.passValidation(dto);
+		return result;
+	}
 }
