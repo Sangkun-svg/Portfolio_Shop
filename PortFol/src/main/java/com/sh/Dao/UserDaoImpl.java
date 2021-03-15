@@ -26,6 +26,11 @@ public class UserDaoImpl implements UserDao{
 	public void userUpdate(UserDto dto) throws Exception {
 		sql.update("userMapper.userUpdate" , dto);
 	}
+
+	@Override
+	public void userDelete(UserDto dto) throws Exception {
+		sql.delete("userMapper.userDelete" , dto);
+	}
 	
 
 }

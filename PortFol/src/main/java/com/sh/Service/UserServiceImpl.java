@@ -33,4 +33,9 @@ public class UserServiceImpl implements UserService{
 		dao.userUpdate(dto);
 	}
 
+	@Override
+	public void userDelete(UserDto dto) throws Exception {
+		dao.userDelete(dto);
+	}
+
 }

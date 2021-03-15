@@ -13,4 +13,6 @@ public interface UserService {
 
 	public void userUpdate(UserDto dto) throws Exception;
 
+	public void userDelete(UserDto dto) throws Exception;
+
 }

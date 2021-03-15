@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -68,15 +69,40 @@ public class UserController {
 	
 	@GetMapping("/userUpdate")
 	public void GetUserUpdate() throws Exception {
-		logger.info("Get userUpdate Page");
+		logger.info("Get userUpdate");
 	}
 	
 	@PostMapping("/userUpdate")
 	public String PostUserUpdate(UserDto dto , HttpSession session) throws Exception{
-		logger.info("Post userUpdate Page");
+		logger.info("Post userUpdate");
 		
 		userService.userUpdate(dto);
 		session.invalidate();
 		return "redirect:/";
 	}
+
+	@GetMapping("/userDelete")
+	public void GetUserDelete() throws Exception{
+		logger.info("Get userDelete");
+		
+	}
+	@PostMapping("/userDelete")
+	public String PostUserDelete(UserDto dto , HttpSession session , RedirectAttributes rttr	) throws Exception{
+		logger.info("Post userDelete");
+		
+		UserDto member = (UserDto)session.getAttribute("member");
+		
+		String sessionPass = member.getUserPass();
+		String dtoPass = dto.getUserPass();
+		
+		if(!(sessionPass.equals(dtoPass))) {
+			rttr.addFlashAttribute("msg" , false);
+			return "redirect:/userDelete";
+		}
+		userService.userDelete(dto);
+		session.invalidate();
+		return"redirect:/";
+	}
+
+
 }

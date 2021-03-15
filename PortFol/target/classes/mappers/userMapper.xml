@@ -28,5 +28,14 @@
 			userId = #{userId}
 	</update>
 	
+	<delete id="userDelete">
+		delete from 
+			member 
+		where 
+			userId = #{userId}
+		 and 
+		 	userPass = #{userPass}	
+	</delete>
+	
 </mapper>
 

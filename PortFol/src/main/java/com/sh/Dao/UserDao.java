@@ -8,4 +8,6 @@ public interface UserDao {
 	public UserDto signin(UserDto dto) throws Exception;
 	
 	public void userUpdate(UserDto dto) throws Exception;
+
+	public void userDelete(UserDto dto) throws Exception;
 }

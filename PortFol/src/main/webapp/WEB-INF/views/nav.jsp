@@ -16,6 +16,7 @@
 		
 		<li>${member.userName}님환영합니다.</li>
 		<li><a href="${pageContext.request.contextPath}/userUpdate">정보 수정</a></li>
+		<li><a href="${pageContext.request.contextPath}/userDelete">회원 탈퇴</a></li>
 		<li><a href="${pageContext.request.contextPath}/signout">로그아웃</a></li>
 	</c:if>
 </ul>
