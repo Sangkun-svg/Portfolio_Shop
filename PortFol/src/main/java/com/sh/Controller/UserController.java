@@ -15,7 +15,7 @@ import com.sh.Dto.UserDto;
 import com.sh.Service.UserService;
 
 @Controller
-public class MemberController {
+public class UserController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -66,4 +66,17 @@ public class MemberController {
 		return"redirect:/";
 	}
 	
+	@GetMapping("/userUpdate")
+	public void GetUserUpdate() throws Exception {
+		logger.info("Get userUpdate Page");
+	}
+	
+	@PostMapping("/userUpdate")
+	public String PostUserUpdate(UserDto dto , HttpSession session) throws Exception{
+		logger.info("Post userUpdate Page");
+		
+		userService.userUpdate(dto);
+		session.invalidate();
+		return "redirect:/";
+	}
 }

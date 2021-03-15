@@ -14,12 +14,18 @@ public class UserDaoImpl implements UserDao{
 	
 	@Override
 	public void register(UserDto dto) throws Exception {
-		sql.insert("memberMapper.register" , dto);
+		sql.insert("userMapper.register" , dto);
 	}
 
 	@Override
 	public UserDto signin(UserDto dto) throws Exception {
-		return sql.selectOne("memberMapper.signin" , dto);
+		return sql.selectOne("userMapper.signin" , dto);
 	}
+
+	@Override
+	public void userUpdate(UserDto dto) throws Exception {
+		sql.update("userMapper.userUpdate" , dto);
+	}
+	
 
 }

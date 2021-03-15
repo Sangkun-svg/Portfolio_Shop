@@ -28,4 +28,9 @@ public class UserServiceImpl implements UserService{
 		session.invalidate();
 	}
 
+	@Override
+	public void userUpdate(UserDto dto) throws Exception {
+		dao.userUpdate(dto);
+	}
+
 }
