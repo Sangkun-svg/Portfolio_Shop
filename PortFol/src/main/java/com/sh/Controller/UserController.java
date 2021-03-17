@@ -36,6 +36,16 @@ public class UserController {
 		logger.info("Post SignUp ");
 		System.out.println("Post SignUp");
 
+		int result  = userService.idValidation(dto);
+		try {
+			if(result == 1) {
+				return "${pageContext.request.contextPath}/register";
+			}else if(result == 0) {
+				userService.register(dto);
+			}
+		}catch (Exception e) {
+
+		}
 		userService.register(dto);
 		
 		return"redirect:/";
@@ -61,6 +71,7 @@ public class UserController {
 		}else {
 			session.setAttribute("member", null);
 			rttr.addFlashAttribute("msg" , false);
+			System.out.println("Login false");
 		}
 		return"redirect:/";
 	}
@@ -123,4 +134,15 @@ public class UserController {
 		int result = userService.passValidation(dto);
 		return result;
 	}
+	
+
+	@ResponseBody
+	@PostMapping("idValidation")
+	public int idValidation(UserDto dto) throws Exception{
+		System.out.println("Post IdValidation");
+
+		int result = userService.idValidation(dto);
+		return result;
+	}
+
 }

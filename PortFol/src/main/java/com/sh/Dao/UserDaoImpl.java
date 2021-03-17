@@ -37,6 +37,12 @@ public class UserDaoImpl implements UserDao{
 		int result = sql.selectOne("userMapper.passValidation" , dto);
 		return result;
 	}
+
+	@Override
+	public int idValidation(UserDto dto) throws Exception {
+		int result = sql.selectOne("userMapper.idValidation" , dto);
+		return result;
+	}
 	
 
 }

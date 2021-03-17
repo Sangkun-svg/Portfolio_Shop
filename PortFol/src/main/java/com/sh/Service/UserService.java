@@ -17,4 +17,6 @@ public interface UserService {
 
 	public int passValidation(UserDto dto) throws Exception;
 
+	public int idValidation(UserDto dto) throws Exception;
+
 }

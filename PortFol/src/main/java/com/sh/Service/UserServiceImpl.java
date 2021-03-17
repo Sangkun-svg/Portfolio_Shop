@@ -44,4 +44,10 @@ public class UserServiceImpl implements UserService{
 		return result;
 	}
 
+	@Override
+	public int idValidation(UserDto dto) throws Exception {
+		int result = dao.idValidation(dto);
+		return result;
+	}
+
 }

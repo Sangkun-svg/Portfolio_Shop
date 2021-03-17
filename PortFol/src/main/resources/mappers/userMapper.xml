@@ -37,13 +37,12 @@
 		 	userPass = #{userPass}	
 	</delete>
 	
-	<select id="passValidation">
-		select count (*) from 
-			member 
-		where 
-			userId = #{userId} 
-		and 
-			userPass = #{userPass}
+	<select id="passValidation" resultType="int">
+		SELECT COUNT(*) FROM member WHERE userId = #{userId} AND userPass =#{userPass}
+		</select>
+	
+	<select id="idValidation" resultType="int">
+		SELECT COUNT(*) FROM member WHERE userId = #{userId}
 	</select>
 	
 </mapper>

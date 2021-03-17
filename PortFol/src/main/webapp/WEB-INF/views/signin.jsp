@@ -8,7 +8,7 @@
 </head>
 <body>
 	<section id="content">
-		<form role="form" method="post" autocomplete="off">
+		<form role="form" method="post">
 			<div class="input_area">
 				<label for="userId">아이디</label> <input type="email" id="userId"
 					name="userId" required="required" />
