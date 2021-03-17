@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sh.Dto.UserDto;
 import com.sh.Service.UserService;
+import com.sh.Service.UserSha256;
 
 @Controller
 public class UserController {
@@ -31,22 +32,27 @@ public class UserController {
 		System.out.println("Get SignUp");
 	}
 	
-	@PostMapping
+	@PostMapping("/signup")
 	public String postSignUp(UserDto dto) throws Exception{
-		logger.info("Post SignUp ");
+		logger.info("Post SignUp");
 		System.out.println("Post SignUp");
 
 		int result  = userService.idValidation(dto);
+				
 		try {
 			if(result == 1) {
 				return "${pageContext.request.contextPath}/register";
 			}else if(result == 0) {
+				System.out.println("암호화 전 비밀번호 : " + dto.getUserPass());
+				String encryPassword = UserSha256.encrypt(dto.getUserPass());
+				dto.setUserPass(encryPassword);
+				System.out.println("암호화 후 비밀번호 : " + dto.getUserPass());
+				
 				userService.register(dto);
 			}
 		}catch (Exception e) {
 
 		}
-		userService.register(dto);
 		
 		return"redirect:/";
 	}
@@ -63,18 +69,24 @@ public class UserController {
 		System.out.println("Post Signin");
 
 		UserDto login = userService.signin(dto);
+		System.out.println("login : " + login);
 		HttpSession session = req.getSession();
+		String encryPassword = UserSha256.encrypt(dto.getUserPass());
+		dto.setUserPass(encryPassword);
+		System.out.println(dto.getUserPass());
 		
 		if(login != null) {
 			session.setAttribute("member", login);
 			System.out.println("Login Success");
 		}else {
+			System.out.println("입력한 비밀번호 : " + dto.getUserPass());			
 			session.setAttribute("member", null);
 			rttr.addFlashAttribute("msg" , false);
 			System.out.println("Login false");
 		}
 		return"redirect:/";
 	}
+	
 	
 	@GetMapping("/signout")
 	public String signout(HttpSession session)throws Exception {

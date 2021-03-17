@@ -49,7 +49,7 @@
 			success : function(data){
 				if(data == 1){
 					alert("중복된 아이디입니다.");
-				}else if(da	ta == 0){
+				}else if(data == 0){
 					$("#idChk").attr("value", "Y");
 					alert("사용가능한 아이디입니다.");
 				}
@@ -61,7 +61,7 @@
 </script>
 <body>
 	<section id="container">
-		<form action="${pageContext.request.contextPath}/register" method="post" id="regForm">
+		<form action="${pageContext.request.contextPath}/signup" method="post" id="regForm">
 			<div class="form-group has-feedback">
 				<label class="control-label" for="userId">아이디</label>
 				<input class="form-control" type="text" id="userId" name="userId" />
