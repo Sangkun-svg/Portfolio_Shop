@@ -34,4 +34,5 @@
 	<context:component-scan base-package="com.sh.Dto"></context:component-scan>
 	<context:component-scan base-package="com.sh.Dao"></context:component-scan>
 	<context:component-scan base-package="com.sh.Service"></context:component-scan>
+	<context:component-scan base-package="com.sh.Interceptor"></context:component-scan>
 </beans>

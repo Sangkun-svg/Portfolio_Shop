@@ -1,8 +1,22 @@
 package com.sh.Service;
 
+import java.util.List;
+
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Service;
+
+import com.sh.Dao.AdminDao;
+import com.sh.Dto.UserDto;
 
 @Service
 public class AdminServiceImpl implements AdminService{
+
+	@Inject AdminDao dao;
+	
+	@Override
+	public List<UserDto> userList() throws Exception {
+		return dao.userList();
+	}
 
 }

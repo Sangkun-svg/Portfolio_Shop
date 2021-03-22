@@ -70,10 +70,18 @@ public class UserController {
 
 		UserDto login = userService.signin(dto);
 		System.out.println("login : " + login);
+		System.out.println("권한 : " + dto.getVerify());
 		HttpSession session = req.getSession();
+
 		String encryPassword = UserSha256.encrypt(dto.getUserPass());
 		dto.setUserPass(encryPassword);
 		System.out.println(dto.getUserPass());
+		
+		// 작동 안하는 이유는 mapper에 result 타입에 들어가지 않아서 이다????
+		// -> 1. DB 안에서 update 사용해서 id pass 만들고 로그인 시도
+		// -> 2. mapper.signup에 resultType을 Dto로 설정 해보기 
+		// -> 로그인 실패시  login : null
+		// -> 로그인 성공시 
 		
 		if(login != null) {
 			session.setAttribute("member", login);

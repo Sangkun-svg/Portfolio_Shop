@@ -2,9 +2,14 @@ package com.sh.Controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.sh.Service.AdminService;
 
 @Controller
 @RequestMapping("/admin/*")
@@ -12,13 +17,23 @@ public class AdminController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
+	@Autowired AdminService adminService;
+	
 	@GetMapping("/index")
 	public void getIndex() throws Exception{
 		logger.info("Get Index");
 	}
 	
-	@GetMapping("/goods/register")
-	public void getGoodsRegister() throws Exception{
-		logger.info("Get goods register");
+	@RequestMapping(value = "userList"  , method = RequestMethod.GET)
+	public String getUserList(Model model) throws Exception{
+		logger.info("Get UserList");
+		System.out.println("Get UserList");
+		
+		model.addAttribute("userlist" , adminService.userList());
+		System.out.println("model 작동");
+		return "userList";
 	}
+	
+	
+	
 }

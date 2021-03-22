@@ -1,5 +1,7 @@
 package com.sh.Dao;
 
+import java.util.List;
+
 import com.sh.Dto.UserDto;
 
 public interface UserDao {
@@ -14,4 +16,5 @@ public interface UserDao {
 	public int passValidation(UserDto dto) throws Exception;
 	
 	public int idValidation(UserDto dto) throws Exception;
+	
 }				

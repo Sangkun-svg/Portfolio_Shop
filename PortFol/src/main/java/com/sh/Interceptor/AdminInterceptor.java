@@ -20,9 +20,7 @@ public class AdminInterceptor extends HandlerInterceptorAdapter{
 		if(member == null) {
 			res.sendRedirect("/www/signin");
 			return false;
-		}
-		
-		if(member.getVerify() != 9 ) {
+		}else if(member.getVerify() != 9 ) {
 			res.sendRedirect("/");
 			return false;
 		}

@@ -3,6 +3,14 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="adminMapper">
-
+	<select id="userList" resultType="com.sh.Dto.UserDto">
+		SELECT 
+			userId As userId ,
+			userName As userName ,
+			userPhone As userPhone ,
+			Verify As Verify
+		FROM
+			member
+	</select>
 </mapper>
 
