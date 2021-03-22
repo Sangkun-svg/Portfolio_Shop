@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.sh.Dao.AdminDao;
+import com.sh.Dto.Product;
 import com.sh.Dto.UserDto;
 
 @Service
@@ -17,6 +18,16 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<UserDto> userList() throws Exception {
 		return dao.userList();
+	}
+
+	@Override
+	public void proRegister(Product pd) throws Exception {
+		dao.proRegister(pd);
+	}
+
+	@Override
+	public List<Product> proList() throws Exception {
+		return dao.proList();
 	}
 
 }

@@ -9,8 +9,8 @@
 <body>
 	<aside>
 		<ul>
-			<li><a href="">상품 등록</a></li>
-			<li><a href="">상품 목록</a></li>
+			<li><a href="${pageContext.request.contextPath}/admin/proRegister">상품 등록</a></li>
+			<li><a href="${pageContext.request.contextPath}/admin/proList">상품 목록</a></li>
 			<li><a href="">상품 소감</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/userList">유저 목록</a></li>
 		</ul>

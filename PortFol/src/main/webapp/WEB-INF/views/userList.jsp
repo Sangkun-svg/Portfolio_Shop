@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
-<title>게시판</title>
+<title>유저 리스트</title>
 </head>
 <body>
 	<section id="container">

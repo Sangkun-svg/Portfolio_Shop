@@ -12,5 +12,21 @@
 		FROM
 			member
 	</select>
+	
+	<insert id="proRegister">
+		insert into product (proCode , proName , proPrice , proStock , proDescription)
+			 values (#{proCode} , #{proName} ,  #{proPrice} ,  #{proStock} ,  #{proDescription})	
+	</insert>
+	
+	<select id="proList" resultType="com.sh.Dto.Product">
+			SELECT 
+			proCode As proCode,
+			proName As proName,
+			proPrice As proPrice,
+			proStock As proStock,
+			proDescription As proDescription
+		FROM
+			product
+	</select>
 </mapper>
 
