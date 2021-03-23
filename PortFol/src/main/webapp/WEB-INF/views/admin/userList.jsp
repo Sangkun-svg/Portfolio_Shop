@@ -20,6 +20,7 @@
 						<td><c:out value="${userlist.userId}"  /></td>
 						<td><c:out value="${userlist.userName}" /></td>
 						<td><c:out value="${userlist.userPhone}" /></td>
+						<td><c:out value="${userlist.regDate}" /></td>
 					</tr>
 				</c:forEach>
 			</table>

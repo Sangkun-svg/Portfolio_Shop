@@ -33,7 +33,7 @@ public class AdminController {
 		
 		model.addAttribute("userlist" , adminService.userList());
 		System.out.println("model 작동");
-		return "userList";
+		return "admin/userList";
 	}
 	
 	@GetMapping("/proRegister")
@@ -49,7 +49,7 @@ public class AdminController {
 
 		adminService.proRegister(pd);
 		System.out.println("상품 등록 완료");
-		return"redirect:/proList";
+		return "admin/index";
 	}
 	
 	@GetMapping("/proList")
@@ -59,7 +59,7 @@ public class AdminController {
 
 		model.addAttribute("proList" , adminService.proList());
 		
-		return"proList";
+		return "admin/proList";
 	}
 	
 }

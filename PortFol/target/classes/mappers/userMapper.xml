@@ -4,8 +4,8 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="userMapper">
 	<insert id="register">
-		INSERT INTO member (userId , userPass , userName , userPhone) 
-			VALUES (#{userId},#{userPass},#{userName},#{userPhone})
+		INSERT INTO member (userId , userPass , userName , userPhone , regDate) 
+			VALUES (#{userId},#{userPass},#{userName},#{userPhone},#{regDate})
 	</insert>	
 	
 	<select id="signin" resultType="com.sh.Dto.UserDto">

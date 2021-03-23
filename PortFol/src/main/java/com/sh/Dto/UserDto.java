@@ -1,5 +1,6 @@
 package com.sh.Dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class UserDto {
@@ -7,22 +8,15 @@ public class UserDto {
 	private String userPass;
 	private String userName;
 	private String userPhone;
-	private String userAddr1;
-	private String userAddr2;
-	private String userAddr3;
-	private LocalDateTime regDate;
+	private LocalDate regDate = LocalDate.now();
 	private int verify;
 
 	public UserDto() {}
-	public UserDto(String userId, String userPass, String userName, String userPhone, String userAddr1, String userAddr2,
-			String userAddr3, LocalDateTime regDate, int verify) {
+	public UserDto(String userId, String userPass, String userName, String userPhone, LocalDate regDate, int verify) {
 		this.userId = userId;
 		this.userPass = userPass;
 		this.userName = userName;
 		this.userPhone = userPhone;
-		this.userAddr1 = userAddr1;
-		this.userAddr2 = userAddr2;
-		this.userAddr3 = userAddr3;
 		this.regDate = regDate;
 		this.verify = verify;
 	}
@@ -50,28 +44,10 @@ public class UserDto {
 	public void setUserPhone(String userPhone) {
 		this.userPhone = userPhone;
 	}
-	public String getUserAddr1() {
-		return userAddr1;
-	}
-	public void setUserAddr1(String userAddr1) {
-		this.userAddr1 = userAddr1;
-	}
-	public String getUserAddr2() {
-		return userAddr2;
-	}
-	public void setUserAddr2(String userAddr2) {
-		this.userAddr2 = userAddr2;
-	}
-	public String getUserAddr3() {
-		return userAddr3;
-	}
-	public void setUserAddr3(String userAddr3) {
-		this.userAddr3 = userAddr3;
-	}
-	public LocalDateTime getRegDate() {
+	public LocalDate getRegDate() {
 		return regDate;
 	}
-	public void setRegiDate(LocalDateTime regDate) {
+	public void setRegDate(LocalDate regDate) {
 		this.regDate = regDate;
 	}
 	public int getVerify() {

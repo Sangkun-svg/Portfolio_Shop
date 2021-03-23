@@ -1,5 +1,7 @@
 package com.sh.Dto;
 
+import java.time.LocalDate;
+
 public class Product {
 
 	private int proCode;
@@ -7,14 +9,15 @@ public class Product {
 	private int 	proPrice;
 	private int 	proStock;
 	private String 	proDescription;
-
+	private LocalDate regDate = LocalDate.now();
 	public Product() {}
-	public Product(int proCode, String proName, int proPrice, int proStock, String proDescription) {
+	public Product(int proCode, String proName, int proPrice, int proStock, String proDescription, LocalDate regDate) {
 		this.proCode = proCode;
 		this.proName = proName;
 		this.proPrice = proPrice;
 		this.proStock = proStock;
 		this.proDescription = proDescription;
+		this.regDate = regDate;
 	}
 	public int getProCode() {
 		return proCode;
@@ -46,7 +49,13 @@ public class Product {
 	public void setProDescription(String proDescription) {
 		this.proDescription = proDescription;
 	}
-
+	public LocalDate getRegDate() {
+		return regDate;
+	}
+	public void setRegDate(LocalDate regDate) {
+		this.regDate = regDate;
+	}
+	
 	
 
 }

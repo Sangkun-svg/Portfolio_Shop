@@ -8,14 +8,15 @@
 			userId As userId ,
 			userName As userName ,
 			userPhone As userPhone ,
+			regDate As regDate ,
 			Verify As Verify
 		FROM
 			member
 	</select>
 	
 	<insert id="proRegister">
-		insert into product (proCode , proName , proPrice , proStock , proDescription)
-			 values (#{proCode} , #{proName} ,  #{proPrice} ,  #{proStock} ,  #{proDescription})	
+		insert into product (proCode , proName , proPrice , proStock , proDescription , regDate)
+			 values (#{proCode} , #{proName} ,  #{proPrice} ,  #{proStock} ,  #{proDescription} , #{regDate})	
 	</insert>
 	
 	<select id="proList" resultType="com.sh.Dto.Product">

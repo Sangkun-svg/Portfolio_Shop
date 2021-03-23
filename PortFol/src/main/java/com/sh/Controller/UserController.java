@@ -1,5 +1,7 @@
 package com.sh.Controller;
 
+import java.time.LocalDate;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -36,7 +38,8 @@ public class UserController {
 	public String postSignUp(UserDto dto) throws Exception{
 		logger.info("Post SignUp");
 		System.out.println("Post SignUp");
-
+		System.out.println("dto.getDate : " + dto.getRegDate());
+		
 		int result  = userService.idValidation(dto);
 				
 		try {
@@ -76,7 +79,7 @@ public class UserController {
 		String encryPassword = UserSha256.encrypt(dto.getUserPass());
 		dto.setUserPass(encryPassword);
 		System.out.println(dto.getUserPass());
-		
+
 		// 작동 안하는 이유는 mapper에 result 타입에 들어가지 않아서 이다????
 		// -> 1. DB 안에서 update 사용해서 id pass 만들고 로그인 시도
 		// -> 2. mapper.signup에 resultType을 Dto로 설정 해보기 
@@ -99,7 +102,7 @@ public class UserController {
 	@GetMapping("/signout")
 	public String signout(HttpSession session)throws Exception {
 		logger.info("SignOut");
-		System.out.println("Get SignOut");
+		System.out.println("SignOut");
 
 		userService.signout(session);
 		return"redirect:/";
@@ -164,5 +167,11 @@ public class UserController {
 		int result = userService.idValidation(dto);
 		return result;
 	}
+	
+	@GetMapping("/mainPage")
+	public void getMainPage() throws Exception {
+		logger.info("Main Page");
+		System.out.println("MainPage");
 
+	}
 }
