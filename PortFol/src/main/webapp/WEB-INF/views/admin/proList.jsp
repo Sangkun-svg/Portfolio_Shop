@@ -16,6 +16,7 @@
 	<div id="container_box">
 		<table>
 			<tr>
+				<th>BNO</th>				
 				<th>상품 코드</th>
 				<th>상품 품명</th>
 				<th>가격</th>
@@ -25,8 +26,13 @@
 			</tr>
 			<c:forEach items="${proList}" var="proList">
 				<tr>
+					<td style="text-align:center"><c:out value="${proList.bno}"/></td>
 					<td style="text-align:center"><c:out value="${proList.proCode}"/></td>
-					<td style="text-align:center"><c:out value="${proList.proName}" /></td>
+					<td style="text-align:center">
+						<a href="${pageContext.request.contextPath}/admin/adminProView?n=${proList.bno}">
+							<c:out value="${proList.proName}" />
+						</a>
+					</td>
 					<td style="text-align:center"><c:out value="${proList.proPrice}" /></td>
 					<td style="text-align:center"><c:out value="${proList.proStock}" /></td>
 					<td style="text-align:center"><c:out value="${proList.proDescription}" /></td>

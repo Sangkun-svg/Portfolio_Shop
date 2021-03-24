@@ -30,4 +30,10 @@ public class AdminDaoImpl implements AdminDao{
 		return sql.selectList("adminMapper.proList");
 	}
 
+	@Override
+	public Product proView(int bno) throws Exception {
+		return sql.selectOne("adminMapper.proView" , bno);
+	}
+
+	
 }

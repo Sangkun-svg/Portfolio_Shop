@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sh.Dto.Product;
 import com.sh.Service.AdminService;
@@ -56,10 +57,19 @@ public class AdminController {
 	public String postProList(Model model) throws Exception{
 		logger.info("Post proList");
 		System.out.println("Post proList");
-
+		
 		model.addAttribute("proList" , adminService.proList());
 		
 		return "admin/proList";
 	}
-	
+
+	@GetMapping("/adminProView")
+	public void getGoodsview(@RequestParam("n") int bno , Model model , Product pro) throws Exception {
+	 logger.info("Produrtion View for Admin ");
+	 System.out.println("Produrtion View for Admin ");
+	 System.out.println("product.getBno : " + adminService.proView(pro.getBno()));
+
+	 model.addAttribute("pro", adminService.proView(bno));
+	 
+	}	
 }

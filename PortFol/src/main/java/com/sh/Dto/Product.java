@@ -3,21 +3,35 @@ package com.sh.Dto;
 import java.time.LocalDate;
 
 public class Product {
-
+	private int bno;
 	private int proCode;
 	private String 	proName;
 	private int 	proPrice;
 	private int 	proStock;
 	private String 	proDescription;
 	private LocalDate regDate = LocalDate.now();
+	
+	private String proImg;
 	public Product() {}
-	public Product(int proCode, String proName, int proPrice, int proStock, String proDescription, LocalDate regDate) {
+	public Product(int bno ,int proCode, String proName, int proPrice, int proStock, String proDescription, LocalDate regDate,
+			String proImg) {
+		this.bno= bno;
 		this.proCode = proCode;
 		this.proName = proName;
 		this.proPrice = proPrice;
 		this.proStock = proStock;
 		this.proDescription = proDescription;
 		this.regDate = regDate;
+		this.proImg = proImg;
+	}
+	
+	
+	
+	public int getBno() {
+		return bno;
+	}
+	public void setBno(int bno) {
+		this.bno = bno;
 	}
 	public int getProCode() {
 		return proCode;
@@ -55,7 +69,13 @@ public class Product {
 	public void setRegDate(LocalDate regDate) {
 		this.regDate = regDate;
 	}
-	
+	public String getProImg() {
+		return proImg;
+	}
+	public void setProImg(String proImg) {
+		this.proImg = proImg;
+	}
 	
 
+	
 }

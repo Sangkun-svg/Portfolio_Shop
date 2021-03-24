@@ -4,30 +4,42 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="adminMapper">
 	<select id="userList" resultType="com.sh.Dto.UserDto">
-		SELECT 
-			userId As userId ,
-			userName As userName ,
-			userPhone As userPhone ,
-			regDate As regDate ,
-			Verify As Verify
+		SELECT
+		userId As userId ,
+		userName As userName ,
+		userPhone As userPhone ,
+		regDate As regDate ,
+		Verify As Verify
 		FROM
-			member
+		member
 	</select>
-	
+
 	<insert id="proRegister">
-		insert into product (proCode , proName , proPrice , proStock , proDescription , regDate)
-			 values (#{proCode} , #{proName} ,  #{proPrice} ,  #{proStock} ,  #{proDescription} , #{regDate})	
+		insert into product (proCode , proName , proPrice ,
+		proStock , proDescription , regDate )
+		values (#{proCode} , #{proName} , #{proPrice} , #{proStock} ,
+		#{proDescription} , #{regDate} )
 	</insert>
-	
+
 	<select id="proList" resultType="com.sh.Dto.Product">
-			SELECT 
-			proCode As proCode,
-			proName As proName,
-			proPrice As proPrice,
-			proStock As proStock,
-			proDescription As proDescription
+		SELECT
+		bno As bno,
+		proCode As proCode,
+		proName As proName,
+		proPrice As proPrice,
+		proStock As proStock,
+		proDescription As proDescription
 		FROM
-			product
+		product
+	</select>
+
+	<select id="proView" parameterType="int" resultType="com.sh.Dto.Product">
+		SELECT
+			bno , proCode, proName, proPrice, proStock, proDescription
+		FROM
+			product  	
+		where 
+			bno = #{bno}
 	</select>
 </mapper>
 

@@ -13,4 +13,6 @@ public interface AdminService {
 
 	public List<Product> proList() throws Exception;
 
+	public Product proView (int bno) throws Exception;
+
 }
