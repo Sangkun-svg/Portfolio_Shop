@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="includeFile.jsp"%>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <title>상품등록</title>
 </head>
 <style>
@@ -37,6 +38,22 @@ textarea#gdsDes {
 
 .select_img img{margin:20px 0;}
 </style>
+<script type="text/javascript">
+	$(function() {
+	    $("#filename").on('change', function(){
+	        readURL(this);
+	    });
+	});
+	function readURL(input) {
+	    if (input.files && input.files[0]) {
+	       var reader = new FileReader();
+	       reader.onload = function (e) {
+	          $('#preImage').attr('src', e.target.result);
+	       }
+	       reader.readAsDataURL(input.files[0]);
+	    }
+	}
+</script>
 <body>
 	<form role="form" action="proRegister" method="post">
 		<div class="inputArea">
@@ -65,30 +82,12 @@ textarea#gdsDes {
 				name="proDescription"></textarea>
 		</div>
 
-		<div class="inputArea">
-			<label for="gdsImg">이미지</label> <input type="file" id="gdsImg"
-				name="file" />
-			<div class="select_img">
-				<img src="" />
-			</div>
-
-			<script>
-				$("#gdsImg").change(
-						function() {
-							if (this.files && this.files[0]) {
-								var reader = new FileReader;
-								reader.onload = function(data) {
-									$(".select_img img").attr("src",
-											data.target.result).width(500);
-								}
-								reader.readAsDataURL(this.files[0]);
-							}
-						});
-			</script>
-			
-			<%= request.getRealPath("/") %>
-		</div>
-
+		<div class="image-container">
+			<label for="proImg">상품 이미지</label> 
+       		<input type='file' id="filename" name="proImg"/>
+       		<img id="preImage" src="${pageContext.request.contextPath}/saveFile/${noticeVO.filename}" alt="image_title"/>
+       	</div>
+ 
 		<div class="inputArea">
 			<button type="submit" id="register_Btn" class="btn btn-primary">등록</button>
 		</div>

@@ -16,4 +16,9 @@ public interface AdminDao {
 	public List<Product> proList() throws Exception;
 
 	public Product proView (int bno) throws Exception;
+
+	public void proUpdate(Product pro) throws Exception;
+
+	public void proDelete(int bno) throws Exception;
+
 }

@@ -10,7 +10,6 @@ public class Product {
 	private int 	proStock;
 	private String 	proDescription;
 	private LocalDate regDate = LocalDate.now();
-	
 	private String proImg;
 	public Product() {}
 	public Product(int bno ,int proCode, String proName, int proPrice, int proStock, String proDescription, LocalDate regDate,

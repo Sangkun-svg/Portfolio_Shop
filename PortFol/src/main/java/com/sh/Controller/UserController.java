@@ -38,7 +38,6 @@ public class UserController {
 	public String postSignUp(UserDto dto) throws Exception{
 		logger.info("Post SignUp");
 		System.out.println("Post SignUp");
-		System.out.println("dto.getDate : " + dto.getRegDate());
 		
 		int result  = userService.idValidation(dto);
 				

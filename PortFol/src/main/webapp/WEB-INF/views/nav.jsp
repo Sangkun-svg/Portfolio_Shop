@@ -15,6 +15,7 @@
 		</c:if>
 		
 		<li>${member.userName}님환영합니다.</li>
+		<li><a href="${pageContext.request.contextPath}/myPage">마이페이지</a></li>		
 		<li><a href="${pageContext.request.contextPath}/mainPage">쇼핑몰 가기</a></li>		
 		<li><a href="${pageContext.request.contextPath}/userUpdate">정보 수정</a></li>
 		<li><a href="${pageContext.request.contextPath}/userDelete">회원 탈퇴</a></li>

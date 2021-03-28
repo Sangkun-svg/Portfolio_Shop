@@ -7,6 +7,10 @@
 <title>Main Page</title>
 </head>
 <body>
-
+	<div class="Box_outer">
+		<div class="Box_inner">
+			
+		</div>
+	</div>
 </body>
 </html>

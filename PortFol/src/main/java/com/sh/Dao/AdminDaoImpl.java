@@ -35,5 +35,15 @@ public class AdminDaoImpl implements AdminDao{
 		return sql.selectOne("adminMapper.proView" , bno);
 	}
 
+	@Override
+	public void proUpdate(Product pro) throws Exception {
+		sql.update("adminMapper.proUpdate" , pro);
+	}
+
+	@Override
+	public void proDelete(int bno) throws Exception {
+		sql.delete("adminMapper.proDelete" , bno);
+	}
+
 	
 }

@@ -5,41 +5,58 @@
 <mapper namespace="adminMapper">
 	<select id="userList" resultType="com.sh.Dto.UserDto">
 		SELECT
-		userId As userId ,
-		userName As userName ,
-		userPhone As userPhone ,
-		regDate As regDate ,
-		Verify As Verify
+			userId As userId ,
+			userName As userName ,
+			userPhone As userPhone ,
+			regDate As regDate ,
+			Verify As Verify
 		FROM
-		member
+			member
 	</select>
 
 	<insert id="proRegister">
-		insert into product (proCode , proName , proPrice ,
-		proStock , proDescription , regDate )
-		values (#{proCode} , #{proName} , #{proPrice} , #{proStock} ,
-		#{proDescription} , #{regDate} )
+		insert 
+			into product (proCode , proName , proPrice , proStock , proDescription , regDate , proImg)
+		values 
+			(#{proCode} , #{proName} , #{proPrice} , #{proStock} , #{proDescription} , #{regDate}, #{proImg})
 	</insert>
 
 	<select id="proList" resultType="com.sh.Dto.Product">
 		SELECT
 		bno As bno,
-		proCode As proCode,
+		proCode As
+		proCode,
 		proName As proName,
 		proPrice As proPrice,
 		proStock As proStock,
-		proDescription As proDescription
+		proDescription As proDescription,
+		proImg As proImg
 		FROM
 		product
 	</select>
 
 	<select id="proView" parameterType="int" resultType="com.sh.Dto.Product">
 		SELECT
-			bno , proCode, proName, proPrice, proStock, proDescription
+		bno , proCode, proName, proPrice, proStock,
+		proDescription
 		FROM
-			product  	
-		where 
-			bno = #{bno}
+		product
+		where
+		bno = #{bno}
 	</select>
+
+	<update id="proUpdate" parameterType="com.sh.Dto.Product">
+		update product set
+		proCode =#{proCode},
+		proName =#{proName},
+		proPrice =#{proPrice},
+		proDescription =#{proDescription}
+		where bno =#{bno}
+	</update>
+
+	<delete id="proDelete" parameterType="int">
+		delete from product where
+		bno = #{bno}
+	</delete>
 </mapper>
 

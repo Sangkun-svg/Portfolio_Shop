@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.sh.Dto.Product;
 import com.sh.Service.AdminService;
 
@@ -62,14 +63,40 @@ public class AdminController {
 		
 		return "admin/proList";
 	}
+	
+	
+	@GetMapping("/proUpdate")
+	public void getProUpdate(@RequestParam("n") int bno , Model model , Product pro ) throws Exception {
+		 logger.info("Get proUpdate");
+		 System.out.println("Get proUpdate");
+		 pro.setBno(bno);
+		 model.addAttribute("pro", adminService.proView(pro.getBno())); 
+		}	
 
-	@GetMapping("/adminProView")
-	public void getGoodsview(@RequestParam("n") int bno , Model model , Product pro) throws Exception {
-	 logger.info("Produrtion View for Admin ");
-	 System.out.println("Produrtion View for Admin ");
-	 System.out.println("product.getBno : " + adminService.proView(pro.getBno()));
+	
+	@PostMapping("/proUpdate")
+	public String postProUpdate(Product pro) throws Exception{
+		logger.info("Post proUpdate");
+		System.out.println("Post proUpdate");
 
-	 model.addAttribute("pro", adminService.proView(bno));
-	 
-	}	
+		adminService.proUpdate(pro);
+		System.out.println("Update Success");
+		
+		return "redirect:/admin/proList";
+	}
+	
+	@RequestMapping(value = "/proDelete" , method = {RequestMethod.GET , RequestMethod.POST})
+	public String proDelete(@RequestParam("n") int bno) throws Exception{
+		logger.info("Production Delete");
+		System.out.println("Production Delete");
+		//bno가 null 값으로 넘어와서 삭제 안되는 중 
+		adminService.proDelete(bno);
+
+		System.out.println("Delete Success");
+		return "redirect:/admin/proList";
+	}
+	
+	
+	
+	
 }

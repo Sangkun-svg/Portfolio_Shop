@@ -35,4 +35,14 @@ public class AdminServiceImpl implements AdminService{
 		return dao.proView(bno);
 	}
 
+	@Override
+	public void proUpdate(Product pro) throws Exception {
+		dao.proUpdate(pro);
+	}
+
+	@Override
+	public void proDelete(int bno) throws Exception {
+		dao.proDelete(bno);
+	}
+
 }

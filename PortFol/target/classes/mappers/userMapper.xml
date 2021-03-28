@@ -45,5 +45,7 @@
 		SELECT COUNT(*) FROM member WHERE userId = #{userId}
 	</select>
 	
+	
+	
 </mapper>
 
