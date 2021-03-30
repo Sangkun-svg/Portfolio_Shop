@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sh.Dto.Product;
+import com.sh.Dto.UserDto;
 import com.sh.Service.AdminService;
 import com.sh.utils.UploadFileUtils;
 
@@ -152,4 +153,12 @@ public class AdminController {
 		return"admin/claims/refund";
 	}
 	
+	@GetMapping("/userInfo")
+	public void getUserInfo(@RequestParam("n") int bno , Model model , UserDto dto) throws Exception{
+		 logger.info("Get userInfo");
+		 System.out.println("Get userInfo");
+		 dto.setBno(bno);
+		 model.addAttribute("userInfo" , adminService.userInfo(dto.getBno())); 
+		
+	}
 }

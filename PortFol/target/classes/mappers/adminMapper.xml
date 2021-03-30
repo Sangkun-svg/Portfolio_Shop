@@ -5,6 +5,7 @@
 <mapper namespace="adminMapper">
 	<select id="userList" resultType="com.sh.Dto.UserDto">
 		SELECT
+			bno As bno,
 			userId As userId ,
 			userName As userName ,
 			userPhone As userPhone ,
@@ -12,6 +13,21 @@
 			Verify As Verify
 		FROM
 			member
+	</select>
+
+	<select id="userInfo" resultType="com.sh.Dto.UserDto">
+		SELECT
+			bno As bno ,
+			userId As userId ,
+			userName As userName ,
+			userPhone As userPhone ,
+			regDate As regDate ,
+			Verify As Verify
+		FROM
+			member
+		where 
+			bno = #{bno}
+		
 	</select>
 
 	<insert id="proRegister">

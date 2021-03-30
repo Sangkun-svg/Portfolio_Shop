@@ -45,4 +45,9 @@ public class AdminServiceImpl implements AdminService{
 		dao.proDelete(bno);
 	}
 
+	@Override
+	public UserDto userInfo(int bno) throws Exception {
+		return dao.userInfo(bno);
+	}
+
 }

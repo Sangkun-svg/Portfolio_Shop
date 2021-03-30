@@ -45,5 +45,10 @@ public class AdminDaoImpl implements AdminDao{
 		sql.delete("adminMapper.proDelete" , bno);
 	}
 
+	@Override
+	public UserDto userInfo(int bno) throws Exception {
+		return sql.selectOne("adminMapper.userInfo",  bno);	
+	}
+
 	
 }

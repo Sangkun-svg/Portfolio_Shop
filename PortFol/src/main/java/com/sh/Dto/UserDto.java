@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class UserDto {
+	private int bno;
 	private String userId;
 	private String userPass;
 	private String userName;
@@ -16,7 +17,8 @@ public class UserDto {
 	private int verify;
 
 	public UserDto() {}
-	public UserDto(String userId, String userPass, String userName, String userPhone, int verify) {
+	public UserDto(int bno,String userId, String userPass, String userName, String userPhone, int verify) {
+		this.bno = bno;
 		this.userId = userId;
 		this.userPass = userPass;
 		this.userName = userName;
@@ -56,12 +58,18 @@ public class UserDto {
 	public String getRegDate() {
 		return regDate;
 	}
+	public int getBno() {
+		return bno;
+	}
+	public void setBno(int bno) {
+		this.bno = bno;
+	}
 	@Override
 	public String toString() {
 		return "UserDto [userId=" + userId + ", userPass=" + userPass + ", userName=" + userName + ", userPhone="
 				+ userPhone + ", regDate=" + regDate + ", verify=" + verify + "]";
 	}
-
+	
 	
 	
 }
