@@ -11,9 +11,11 @@ public class Product {
 	private String 	proDescription;
 	private LocalDate regDate = LocalDate.now();
 	private String proImg;
+	private String proThumbImg;
+	
 	public Product() {}
 	public Product(int bno ,int proCode, String proName, int proPrice, int proStock, String proDescription, LocalDate regDate,
-			String proImg) {
+			String proImg , String proThumbImg) {
 		this.bno= bno;
 		this.proCode = proCode;
 		this.proName = proName;
@@ -22,6 +24,7 @@ public class Product {
 		this.proDescription = proDescription;
 		this.regDate = regDate;
 		this.proImg = proImg;
+		this.proThumbImg = proThumbImg;
 	}
 	
 	
@@ -74,6 +77,14 @@ public class Product {
 	public void setProImg(String proImg) {
 		this.proImg = proImg;
 	}
+	public String getProThumbImg() {
+		return proThumbImg;
+	}
+	public void setProThumbImg(String proThumbImg) {
+		this.proThumbImg = proThumbImg;
+	}
+	
+	
 	
 
 	

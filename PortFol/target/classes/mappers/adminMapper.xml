@@ -16,42 +16,43 @@
 
 	<insert id="proRegister">
 		insert 
-			into product (proCode , proName , proPrice , proStock , proDescription , regDate , proImg)
+			into product (proCode , proName , proPrice , proStock , proDescription , regDate , proImg , proThumbImg)
 		values 
-			(#{proCode} , #{proName} , #{proPrice} , #{proStock} , #{proDescription} , #{regDate}, #{proImg})
+			(#{proCode} , #{proName} , #{proPrice} , #{proStock} , #{proDescription} , #{regDate}, #{proImg} , #{proThumbImg})
 	</insert>
 
 	<select id="proList" resultType="com.sh.Dto.Product">
 		SELECT
-		bno As bno,
-		proCode As
-		proCode,
-		proName As proName,
-		proPrice As proPrice,
-		proStock As proStock,
-		proDescription As proDescription,
-		proImg As proImg
+			bno As bno,
+			proCode As proCode,
+			proName As proName,
+			proPrice As proPrice,
+			proStock As proStock,
+			proDescription As proDescription,
+			proImg As proImg,
+			proThumbImg As proThumbImg
 		FROM
-		product
+			product
 	</select>
 
 	<select id="proView" parameterType="int" resultType="com.sh.Dto.Product">
 		SELECT
-		bno , proCode, proName, proPrice, proStock,
-		proDescription
+			bno , proCode, proName, proPrice, proStock, proDescription, proImg, proThumbImg
 		FROM
-		product
+			product
 		where
-		bno = #{bno}
+			bno = #{bno}
 	</select>
 
 	<update id="proUpdate" parameterType="com.sh.Dto.Product">
 		update product set
-		proCode =#{proCode},
-		proName =#{proName},
-		proPrice =#{proPrice},
-		proDescription =#{proDescription}
-		where bno =#{bno}
+			proCode =#{proCode},
+			proName =#{proName},
+			proPrice =#{proPrice},
+			proDescription =#{proDescription}		
+			proImg =#{proImg}
+		where
+			bno =#{bno}
 	</update>
 
 	<delete id="proDelete" parameterType="int">

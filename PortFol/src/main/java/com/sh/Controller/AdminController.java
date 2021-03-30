@@ -1,5 +1,9 @@
 package com.sh.Controller;
 
+import java.io.File;
+
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.sh.Dto.Product;
 import com.sh.Service.AdminService;
+import com.sh.utils.UploadFileUtils;
 
 @Controller
 @RequestMapping("/admin/*")
@@ -22,6 +27,10 @@ public class AdminController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@Autowired AdminService adminService;
+	   
+	@Resource(name = "uploadPath")
+	private String uploadPath;
+	
 	
 	@GetMapping("/index")
 	public void getIndex() throws Exception{
@@ -45,12 +54,28 @@ public class AdminController {
 	}
 	
 	@PostMapping("/proRegister")
-	public String postRegister(Product pd) throws Exception{
+	public String postRegister(Product pd , MultipartFile file) throws Exception{
 		logger.info("Post Register");
 		System.out.println("Post Register");
 
+		
+		String imgUploadPath = uploadPath + File.separator + "imgUpload";
+		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+		String fileName = null;
+
+		if(file != null) {
+			fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
+		} else {
+			fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+		}
+
+		pd.setProImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+		pd.setProThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+		
+		
 		adminService.proRegister(pd);
 		System.out.println("상품 등록 완료");
+
 		return "admin/index";
 	}
 	

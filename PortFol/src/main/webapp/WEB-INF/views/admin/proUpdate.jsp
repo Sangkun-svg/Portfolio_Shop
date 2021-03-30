@@ -36,6 +36,9 @@ textarea#gdsDes {
 }
 
 .select_img img{margin:20px 0;}
+
+.oriImg{width: 500px; height: auto;}
+.thumbImg{}
 </style>
 <body>
 	<form role="form" action="${pageContext.request.contextPath}/admin/proUpdate" method="post">
@@ -64,6 +67,14 @@ textarea#gdsDes {
 			<input type="text" id="proDescription" name="proDescription" value="${pro.proDescription}" style="width: 300px; height: 100px">
 		</div>
 
+		<div class="inputArea">
+			<label for="proImg">이미지</label>
+			<p>원본 이미지</p>
+		<img src="${pro.proImg}" class="oriImg" alt="Img Err"/>
+		
+		<p>썸네일</p>
+			<img src="${pro.proThumbImg}" class="thumbImg" alt="Thumbmail Err"/>
+		</div>
 
 		<div class="inputArea">
 			<button type="submit" id="update_Btn" class="btn btn-primary">수정</button>
