@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <title>관리자 화면</title>
 <style type="text/css">
-<
 style>body {
 	font-family: '맑은 고딕', verdana;
 	padding: 0;

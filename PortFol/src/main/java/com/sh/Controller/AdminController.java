@@ -121,7 +121,35 @@ public class AdminController {
 		return "redirect:/admin/proList";
 	}
 	
+	@GetMapping("/claim")
+	public void getClaim() throws Exception{
+		logger.info("Get claim");
+		System.out.println("Get claim");
+	}
+//	sales
+//	delivery
+//	refund
+
+	@GetMapping("/sales")
+	public String getSales () throws Exception{
+		logger.info("Get sales");
+		System.out.println("Get sales");
+		
+		return"admin/claims/sales";
+	}
 	
+	@GetMapping("/delivery")
+	public String getDelivery () throws Exception{		
+		logger.info("Get delivery");
+		System.out.println("Get delivery");
+		return"admin/claims/delivery";
+	}
 	
+	@GetMapping("/refund")
+	public String getRefund () throws Exception{
+		logger.info("Get refund");
+		System.out.println("Get refund");
+		return"admin/claims/refund";
+	}
 	
 }
