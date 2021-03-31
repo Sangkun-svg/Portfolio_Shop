@@ -10,13 +10,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sh.Dto.Product;
 import com.sh.Dto.UserDto;
+import com.sh.Service.AdminService;
 import com.sh.Service.UserService;
 import com.sh.Service.UserSha256;
 
@@ -27,6 +30,8 @@ public class UserController {
 
 	@Inject
 	private UserService userService;
+	@Inject 
+	private AdminService adminService;
 	
 	@GetMapping("/signup")
 	public void getSignUp() {
@@ -167,10 +172,10 @@ public class UserController {
 		return result;
 	}
 	
-	@GetMapping("/mainPage")
-	public void getMainPage() throws Exception {
+	@GetMapping("/main")
+	public void getMainPage(Model model) throws Exception {
 		logger.info("Main Page");
 		System.out.println("MainPage");
-
+		model.addAttribute("prolist", adminService.proList());
 	}
 }
