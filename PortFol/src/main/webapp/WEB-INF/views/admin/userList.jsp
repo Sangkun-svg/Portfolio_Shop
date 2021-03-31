@@ -30,7 +30,14 @@
 						<td style="text-align:center"><c:out value="${userlist.userPhone}" /></td>
 						<td style="text-align:center"><c:out value="${userlist.regDate}" /></td>
 						<td style="text-align:center"><c:out value="${userlist.verify}" /></td>					
-						<td style="text-align:center"><button type="button" onclick="location.href='${pageContext.request.contextPath}/admin/userInfo?n=${userlist.bno}'" class="btn btn-danger">수정</button></td>
+						<c:if test ="${userlist.verify != 9}">
+							<td style="text-align:center"><button type="button" onclick="location.href='${pageContext.request.contextPath}/admin/userInfo?n=${userlist.bno}'" class="btn btn-danger">수정</button></td>
+						</c:if>
+						<c:if test ="${userlist.verify == 9}">
+							<td style="text-align:center">타 관리자 정보</td>
+						</c:if>
+												
+						
 					</tr>
 				</c:forEach>
 			</table>
