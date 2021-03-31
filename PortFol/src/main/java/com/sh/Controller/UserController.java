@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -177,5 +178,15 @@ public class UserController {
 		logger.info("Main Page");
 		System.out.println("MainPage");
 		model.addAttribute("prolist", adminService.proList());
+	}
+	
+	@GetMapping("/proInfo")
+	public void getProInfo(@RequestParam("n") int bno ,Model model , Product pro ) throws Exception {
+		logger.info("Get ProInfo");
+		System.out.println("Get ProInfo");
+		
+		pro.setBno(bno);
+		model.addAttribute("pro", adminService.proView(pro.getBno())); 
+		
 	}
 }

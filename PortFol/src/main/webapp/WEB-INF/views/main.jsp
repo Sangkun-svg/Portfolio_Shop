@@ -15,6 +15,7 @@
 		float: left;
 		margin-left: 3%;
 		margin-top: 3%;
+		cursor: pointer;
 	}
 	    .thumbnail{
         border: 1px solid;
@@ -33,7 +34,7 @@
 </style>
 <body>
 	<c:forEach items="${prolist}" var="prolist">
-	    <div class="test" onclick="location.href='상세페이지'" style="cursor: pointer;">
+	    <div class="test" onclick="location.href='${pageContext.request.contextPath}/proInfo?n=${prolist.bno}'">
 	        <div class="thumbnail">
 	            <img src="" alt="썸네일">
 	        </div>
