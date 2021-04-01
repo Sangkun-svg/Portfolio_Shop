@@ -1,6 +1,7 @@
 package com.sh.Controller;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sh.Dto.Product;
+import com.sh.Dto.ReplyDto;
 import com.sh.Dto.UserDto;
 import com.sh.Service.AdminService;
+import com.sh.Service.ReplyService;
 import com.sh.Service.UserService;
 import com.sh.Service.UserSha256;
 
@@ -33,6 +36,9 @@ public class UserController {
 	private UserService userService;
 	@Inject 
 	private AdminService adminService;
+	@Inject 
+	private ReplyService replyService;
+	
 	
 	@GetMapping("/signup")
 	public void getSignUp() {
@@ -186,7 +192,11 @@ public class UserController {
 		System.out.println("Get ProInfo");
 		
 		pro.setBno(bno);
+		System.out.println("bno : " + pro.getBno());
 		model.addAttribute("pro", adminService.proView(pro.getBno())); 
+		List<ReplyDto> replyList = replyService.readReply(pro.getBno());
+		
+		model.addAttribute("replyList", replyList);
 		
 	}
 }

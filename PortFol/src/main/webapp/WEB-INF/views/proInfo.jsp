@@ -11,7 +11,7 @@
 <style>
     .wrap{
         width: 80%;
-        height: 1000px;
+        height: 1500px;
         border: 1px solid;
         margin: 0 auto;
     }
@@ -34,7 +34,11 @@
         border-radius: 30px;
         cursor: pointer;
     }
-
+	#reply{
+		width: 500px;
+		height: 300px;
+		border: 1px solid;
+	}
 </style>
 <body>
     <div class="wrap">
@@ -49,8 +53,19 @@
 																				
         <li><button onclick="" class="btn">주문하기</button><br></li>
         <li><button onclick="" class="btn">장바구니에 담기</button><br></li>
-        후기<br>
-        평점<br>
+
+		<div id="reply">
+			<c:forEach items="${replyList}" var="replyList">
+				<li>
+					<p>
+						 작성자 : ${replyList.writer}<br />
+					</p>
+				
+					<p>${replyList.content}</p>
+				</li>
+			</c:forEach>   
+		</div>
+
     </div>
 </body>
 </html>
