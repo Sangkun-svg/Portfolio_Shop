@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ include file="includeFile.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,25 +46,39 @@
             <img src="" alt="img"
                 style="width: 100%; height: 100%;">
         </div>
+        
         <li><h3>이름 : <c:out value="${pro.proName}"/></h3></li>
         <li><h3>가격 : <c:out value="${pro.proPrice}"/></h3></li>
         <li><h3>수량 : <c:out value="${pro.proStock}"/></h3></li>
         <li><h3>상품소개 : <c:out value="${pro.proDescription}"/></h3></li>
+		<input type="hidden" value="${pro.proCode}">
 																				
-        <li><button onclick="" class="btn">주문하기</button><br></li>
-        <li><button onclick="" class="btn">장바구니에 담기</button><br></li>
-
-		<div id="reply">
-			<c:forEach items="${replyList}" var="replyList">
-				<li>
-					<p>
-						 작성자 : ${replyList.writer}<br />
-					</p>
-				
-					<p>${replyList.content}</p>
-				</li>
-			</c:forEach>   
+        <li><button onclick="location.href='${pageContext.request.contextPath}/'" class="btn">주문하기</button><br></li>
+        <li><button onclick="location.href='${pageContext.request.contextPath}/'" class="btn">장바구니에 담기</button><br></li>
+	<div>
+		<c:forEach items="${replyList}" var="replyList">
+			<li>
+				<p>
+					작성자 : ${replyList.writer}<br />
+					내용 : ${replyList.content}<br />
+					R번호 : ${replyList.rno}<br />
+					B번호 : ${replyList.bno}<br />					 
+				</p>
+			</li>
+		</c:forEach>   
+	</div>
+    
+		
+		<div>
+			<label for="writer">댓글 작성자</label><input type="text" id="writer" name="writer" />
+			<br/>
+			<label for="content">댓글 내용</label><input type="text" id="content" name="content" />
 		</div>
+
+		<div>
+
+		</div>
+
 
     </div>
 </body>

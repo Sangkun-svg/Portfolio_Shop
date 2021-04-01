@@ -19,4 +19,9 @@ public class ReplyDaoImpl implements ReplyDao{
 		return sql.selectList("replyMapper.readReply" , bno);
 	}
 
+	@Override
+	public void writeReply(ReplyDto dto) throws Exception {
+		sql.insert("replyMapper.writeReply" , dto);
+	}
+
 }

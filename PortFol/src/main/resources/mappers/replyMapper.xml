@@ -5,11 +5,18 @@
 <mapper namespace="replyMapper">
 	<select id="readReply" resultType="com.sh.Dto.ReplyDto">
 		SELECT
-    		rno, content, writer, regDate
+    		bno , rno, content, writer, regDate
     	FROM 
     		proReply
     	WHERE 
     		bno = #{bno}
 	</select>
+	
+	<insert id="writeReply">
+		insert into proReply 
+			(rno , content , writer )
+		values 
+			(#{rno} ,#{content} , #{writer} )
+	</insert>
 </mapper>
 

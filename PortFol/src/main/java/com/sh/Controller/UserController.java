@@ -194,9 +194,26 @@ public class UserController {
 		pro.setBno(bno);
 		System.out.println("bno : " + pro.getBno());
 		model.addAttribute("pro", adminService.proView(pro.getBno())); 
+
 		List<ReplyDto> replyList = replyService.readReply(pro.getBno());
 		
 		model.addAttribute("replyList", replyList);
-		
+
 	}
+	
+	@GetMapping("/replyWrite")
+	public String replyWrite(@RequestParam("n") int bno ,ReplyDto dto , RedirectAttributes rttr , Product pro) throws Exception {
+		logger.info("Post ReplyWrite");
+		System.out.println("Post ReplyWrite");
+		System.out.println("pro : " + pro.getBno());
+		
+		bno = pro.getBno();
+		
+		replyService.writeReply(dto);
+
+		rttr.addAttribute("bno" , dto.getBno());
+
+		return"redirect:/proInfo";
+	}
+	
 }
