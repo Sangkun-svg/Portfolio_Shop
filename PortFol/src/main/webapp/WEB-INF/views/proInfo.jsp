@@ -68,7 +68,7 @@
 		</c:forEach>   
 	</div>
     
-		
+		 
 		<div>
 			<label for="writer">댓글 작성자</label><input type="text" id="writer" name="writer" />
 			<br/>
