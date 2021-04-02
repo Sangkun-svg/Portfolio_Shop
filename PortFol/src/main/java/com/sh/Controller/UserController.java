@@ -100,6 +100,7 @@ public class UserController {
 		if(login != null) {
 			session.setAttribute("member", login);
 			System.out.println("Login Success");
+			System.out.println("session : " + session);
 		}else {
 			System.out.println("입력한 비밀번호 : " + dto.getUserPass());			
 			session.setAttribute("member", null);
@@ -180,11 +181,14 @@ public class UserController {
 	}
 	
 	@GetMapping("/main")
-	public void getMainPage(Model model) throws Exception {
+	public void getMainPage(Model model,HttpServletRequest req) throws Exception {
 		logger.info("Main Page");
 		System.out.println("MainPage");
 		model.addAttribute("prolist", adminService.proList());
-	}
+		HttpSession session = req.getSession();
+		System.out.println("session : " + session);
+		
+		}
 	
 	@GetMapping("/proInfo")
 	public void getProInfo(@RequestParam("n") int bno ,Model model , Product pro ) throws Exception {
