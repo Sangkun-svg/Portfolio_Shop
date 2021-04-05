@@ -127,7 +127,7 @@ header ul li :hover {
 					<ul>
 						<li><a href="#">Login</a></li>
 						<li><a href="">Join</a></li>
-						<c:if test="${}">
+						<c:if test="${session.session}">
 							<li><a href="">My Info</a></li>
 						</c:if>
 					</ul>
