@@ -125,9 +125,12 @@ header ul li :hover {
 				<h2>Sangkun-Svg Portfolio</h2>
 				<nav>
 					<ul>
-						<li><a href="#">Login</a></li>
-						<li><a href="">Join</a></li>
-						<c:if test="${session.session}">
+						<c:if test="${session == null}">
+							<li><a href="#">Login</a></li>
+							<li><a href="">Join</a></li>
+						</c:if>
+						<c:if test="${session != null}">
+							<li><a href="">Logout</a></li>
 							<li><a href="">My Info</a></li>
 						</c:if>
 					</ul>

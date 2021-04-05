@@ -186,8 +186,11 @@ public class UserController {
 		System.out.println("MainPage");
 		model.addAttribute("prolist", adminService.proList());
 		HttpSession session = req.getSession();
-		System.out.println("session : " + session);
-		
+			if(session != null) {
+				session.setAttribute("session", session);
+			}else {
+				session.setAttribute("session", null);
+			}
 		}
 	
 	@GetMapping("/proInfo")
