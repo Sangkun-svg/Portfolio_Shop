@@ -51,7 +51,7 @@ aside ul li a:hover {
 <body>
 	<aside>
 		<ul>
-			<li><a href="${pageContext.request.contextPath}/">내 정보 수정</a></li>
+			<li><a href="${pageContext.request.contextPath}/userUpdate">내 정보 수정</a></li>
 			<li><a href="${pageContext.request.contextPath}/deliveryInfo">주문 정보</a></li>
 			<li><a href="${pageContext.request.contextPath}/">환불하기</a></li>
 			<li><a href="${pageContext.request.contextPath}/">회원 탈퇴</a></li>

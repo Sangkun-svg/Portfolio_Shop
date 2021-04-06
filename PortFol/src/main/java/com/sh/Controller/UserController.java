@@ -121,22 +121,6 @@ public class UserController {
 		
 		return"redirect:/main";
 	}
-	
-	@GetMapping("/userUpdate")
-	public void GetUserUpdate() throws Exception {
-		logger.info("Get userUpdate");
-		System.out.println("Get UserUpdate");
-	}
-	
-	@PostMapping("/userUpdate")
-	public String PostUserUpdate(UserDto dto , HttpSession session) throws Exception{
-		logger.info("Post userUpdate");
-		System.out.println("Post UserUpdate");
-
-		userService.userUpdate(dto);
-		session.invalidate();
-		return "redirect:/";
-	}
 
 	@GetMapping("/userDelete")
 	public void GetUserDelete() throws Exception{
@@ -188,9 +172,9 @@ public class UserController {
 		System.out.println("MainPage");
 		model.addAttribute("prolist", adminService.proList());
 
+		//내가 짠 코드
 		HttpSession session = req.getSession();
 		System.out.println("session : " + session );
-//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 		if(session.isNew() == true) {
 			System.out.println(session.isNew());
 			System.out.println("새로 생긴 세션");
@@ -199,6 +183,7 @@ public class UserController {
 			System.out.println(session.isNew());
 			model.addAttribute("session" , session);			
 		}
+		// 여기까지
 		
 	}
 	
@@ -237,16 +222,30 @@ public class UserController {
 		logger.info("My Info");
 		System.out.println("My Info");
 		
-		
 	}
 
 	@GetMapping("/deliveryInfo")
 	public void getDeliveryInfo() throws Exception {
 		logger.info("Get DeliveryInfo");
 		System.out.println("Get DeliveryInfo");
-		
-		
+		 
 	}
 	
+	@GetMapping("/userUpdate")
+	public void GetUserUpdate() throws Exception {
+		logger.info("Get userUpdate");
+		System.out.println("Get UserUpdate");
+	}
+	
+	@PostMapping("/userUpdate")
+	public String PostUserUpdate(UserDto dto , HttpSession session) throws Exception{
+		logger.info("Post userUpdate");
+		System.out.println("Post UserUpdate");
+
+		userService.userUpdate(dto);
+		session.invalidate();
+		return "redirect:/";
+	}
+
 	
 }

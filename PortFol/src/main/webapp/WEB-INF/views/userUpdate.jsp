@@ -1,58 +1,116 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<title>회원가입</title>
+<meta charset="UTF-8">
+<title>내 정보 수정</title>
 </head>
-<script type="text/javascript">
-	$(document).ready(function() {
-		// 취소
-		$(".cencle").on("click", function() {
+<style>  
+style>body {
+	font-family: '맑은 고딕', verdana;
+	padding: 0;
+	margin: 0;
+}
 
-			location.href = "${pageContext.request.contextPath}/";
-		})
-		$("#submit").on("click", function() {
-			if ($("#userPass").val() == "") {
-				alert("비밀번호를 입력해주세요.");
-				$("#userPass").focus();
-				return false;
-			}
-			if ($("#userName").val() == "") {
-				alert("성명을 입력해주세요.");
-				$("#userName").focus();
-				return false;
-			}
-		});
-	})
-</script>
+ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	 
+}
 
+
+aside {
+	float: left;
+	width : 200px;
+}
+
+div#container_box {
+	float: right;
+	width: calc(100% - 200px - 20px);
+}
+
+aside ul li {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+aside ul li a {
+	display: block;
+	width: 100%;
+	padding: 10px 0;
+	text-decoration:none;
+}
+
+aside ul li a:hover {
+	background: #eee;
+}
+
+.select{
+    width: 30%;
+    height: 500px;
+    border: 1px solid;
+    float: left;
+
+}
+.select > aside > ul > li>a{
+    width: 100%;
+    height: 90px;
+    margin-top: 15px;
+}
+
+.info{
+    width: 30%;
+    height: 500px;
+    border: 1px solid;
+    float: left;
+}
+
+.info > .input-area > input{
+    width: 300px;
+    height: 40px;
+    border-radius: 15px;
+    margin: 12px 0px 12px 15px;
+}
+</style>
 <body>
-	<section id="container">
-		<form action="${pageContext.request.contextPath}/userUpdate" method="post">
-			<div class="form-group has-feedback">
-				<label class="control-label" for="userId">아이디</label> <input
-					class="form-control" type="text" id="userId" name="userId"
-					value="${member.userId}" readonly="readonly" />
-			</div>
-			<div class="form-group has-feedback">
-				<label class="control-label" for="userPass">패스워드</label> <input
-					class="form-control" type="password" id="userPass" name="userPass" />
-			</div>
-			<div class="form-group has-feedback">
-				<label class="control-label" for="userName">성명</label> <input
-					class="form-control" type="text" id="userName" name="userName"
-					value="${member.userName}" />
-			</div>
-			<div class="form-group has-feedback">
-				<button class="btn btn-success" type="submit" id="submit">회원정보수정</button>
-				<button class="cencle btn btn-danger" type="button">취소</button>
-			</div>
-		</form>
-	</section>
+    <div class="select">
+        <aside style="width: 100%;">
+            <ul style="width: 100%;">
+                <li><a href="${pageContext.request.contextPath}/">아이디 변경</a></li>
+                <li><a href="${pageContext.request.contextPath}/">이름 변경</a></li>
+                <li><a href="${pageContext.request.contextPath}/">주소 변경</a></li>
+                <li><a href="${pageContext.request.contextPath}/">번호 변경</a></li>
+                </ul>
+        </aside>
+    </div>
+
+    <div class="info">
+        <div class="input-area">
+            <label for><h2 style="margin: 0;">ID</h2></label><br>
+            <input type="text" id="" name="" value="" readonly="readonly" >
+            <button type="button" class="btn">수정하기</button>    
+
+        </div>
+
+        <div class="input-area">
+            <label for><h2 style="margin: 0;">Name</h2></label><br>
+            <input type="text" id="" name="" value="" readonly="readonly">    
+            <button type="button" class="btn">수정하기</button>    
+        </div>
+
+        <div class="input-area">
+            <label for><h2 style="margin: 0;">Phone</h2></label><br>
+            <input type="text" id="" name="" value="" readonly="readonly">    
+            <button type="button" class="btn">수정하기</button>    
+        </div>
+
+        <div class="input-area">
+            <label for><h2 style="margin: 0;">Address</h2></label><br>
+            <input type="text" id="" name="" value="" readonly="readonly">    
+            <button type="button" class="btn">수정하기</button>    
+        </div>
+    </div>
 </body>
 </html>
