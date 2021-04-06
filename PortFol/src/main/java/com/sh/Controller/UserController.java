@@ -84,7 +84,7 @@ public class UserController {
 
 		UserDto login = userService.signin(dto);
 		System.out.println("login : " + login);
-		System.out.println("권한 : " + dto.getVerify());
+		System.out.println("권한 : " + login.getVerify());
 		HttpSession session = req.getSession();
 
 		String encryPassword = UserSha256.encrypt(dto.getUserPass());
@@ -114,10 +114,12 @@ public class UserController {
 	@GetMapping("/signout")
 	public String signout(HttpSession session)throws Exception {
 		logger.info("SignOut");
-		System.out.println("SignOut");
 
 		userService.signout(session);
-		return"redirect:/";
+		
+		System.out.println("SignOut");
+		
+		return"redirect:/main";
 	}
 	
 	@GetMapping("/userUpdate")
@@ -181,17 +183,13 @@ public class UserController {
 	}
 	
 	@GetMapping("/main")
-	public void getMainPage(Model model,HttpServletRequest req) throws Exception {
+	public void getMainPage(Model model,HttpServletRequest req , UserDto dto) throws Exception {
 		logger.info("Main Page");
 		System.out.println("MainPage");
 		model.addAttribute("prolist", adminService.proList());
-		HttpSession session = req.getSession();
-			if(session != null) {
-				session.setAttribute("session", session);
-			}else {
-				session.setAttribute("session", null);
-			}
-		}
+
+		
+	}
 	
 	@GetMapping("/proInfo")
 	public void getProInfo(@RequestParam("n") int bno ,Model model , Product pro ) throws Exception {
@@ -222,5 +220,12 @@ public class UserController {
 
 		return"redirect:/proInfo";
 	}
-	
+
+	@GetMapping("/myInfo")
+	public void getMyInfo() throws Exception {
+		logger.info("My Info");
+		System.out.println("My Info");
+		
+		
+	}
 }

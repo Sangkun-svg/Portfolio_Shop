@@ -126,12 +126,12 @@ header ul li :hover {
 				<nav>
 					<ul>
 						<c:if test="${session == null}">
-							<li><a href="#">Login</a></li>
-							<li><a href="">Join</a></li>
+							<li><a href="${pageContext.request.contextPath}/signin">Login</a></li>
+							<li><a href="${pageContext.request.contextPath}/signup">Join</a></li>
+							<li><a href="${pageContext.request.contextPath}/signout">Logout</a></li>
+							<li><a href="${pageContext.request.contextPath}/myInfo">My Info</a></li>
 						</c:if>
 						<c:if test="${session != null}">
-							<li><a href="">Logout</a></li>
-							<li><a href="">My Info</a></li>
 						</c:if>
 					</ul>
 				</nav>
@@ -145,7 +145,7 @@ header ul li :hover {
 			<div class="test" onclick="location.href='${pageContext.request.contextPath}/proInfo?n=${prolist.bno}'">
 
 			<div class="thumbnail">
-				<img src="" alt="썸네일">
+				<img src="" alt="Err">
 			</div>
 				<br><li>이름 : <c:out value="${prolist.proName}"/></li><br>
 				<li>가격 : <c:out value="${prolist.proPrice}"/></li>

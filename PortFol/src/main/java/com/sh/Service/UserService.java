@@ -19,4 +19,7 @@ public interface UserService {
 
 	public int idValidation(UserDto dto) throws Exception;
 
+	public int myInfo(int bno) throws Exception;
+
+	
 }

@@ -50,4 +50,10 @@ public class UserServiceImpl implements UserService{
 		return result;
 	}
 
+	@Override
+	public int myInfo(int bno) throws Exception {
+		int result = dao.myInfo(bno);
+		return result;
+	}
+
 }

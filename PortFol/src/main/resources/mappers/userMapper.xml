@@ -45,7 +45,14 @@
 		SELECT COUNT(*) FROM member WHERE userId = #{userId}
 	</select>
 	
-	
+	<select id="myInfo" resultType="int">
+		select 
+			userId , userName ,verify , bno
+		from 
+			member
+		where 
+			bno = #{bno}
+	</select>
 	
 </mapper>
 
