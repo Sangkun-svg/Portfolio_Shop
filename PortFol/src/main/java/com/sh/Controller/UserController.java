@@ -228,4 +228,14 @@ public class UserController {
 		
 		
 	}
+
+	@GetMapping("/deliveryInfo")
+	public void getDeliveryInfo() throws Exception {
+		logger.info("Get DeliveryInfo");
+		System.out.println("Get DeliveryInfo");
+		
+		
+	}
+	
+	
 }

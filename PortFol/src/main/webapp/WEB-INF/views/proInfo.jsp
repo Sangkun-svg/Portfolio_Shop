@@ -31,8 +31,10 @@
     .btn{
         width: 250px;
         height: 50px;
+        border : 1px solid ;
         border-radius: 30px;
         cursor: pointer;
+        background-color: skyblue;
     }
 	#reply{
 		width: 500px;
