@@ -85,6 +85,7 @@ public class UserController {
 		UserDto login = userService.signin(dto);
 		System.out.println("login : " + login);
 		System.out.println("권한 : " + login.getVerify());
+		System.out.println("유저 BNo : " + login.getBno());
 		HttpSession session = req.getSession();
 
 		String encryPassword = UserSha256.encrypt(dto.getUserPass());
@@ -116,7 +117,6 @@ public class UserController {
 		logger.info("SignOut");
 
 		userService.signout(session);
-		
 		System.out.println("SignOut");
 		
 		return"redirect:/main";
@@ -188,6 +188,17 @@ public class UserController {
 		System.out.println("MainPage");
 		model.addAttribute("prolist", adminService.proList());
 
+		HttpSession session = req.getSession();
+		System.out.println("session : " + session );
+//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+		if(session.isNew() == true) {
+			System.out.println(session.isNew());
+			System.out.println("새로 생긴 세션");
+			session = null;			
+		}else {
+			System.out.println(session.isNew());
+			model.addAttribute("session" , session);			
+		}
 		
 	}
 	

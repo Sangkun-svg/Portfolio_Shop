@@ -47,7 +47,7 @@
 	
 	<select id="myInfo" resultType="int">
 		select 
-			userId , userName ,verify , bno
+			userId , userName ,verify 
 		from 
 			member
 		where 

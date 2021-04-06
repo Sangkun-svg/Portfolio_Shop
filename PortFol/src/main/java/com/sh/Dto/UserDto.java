@@ -15,15 +15,17 @@ public class UserDto {
 	private String regDate = formatDate;
 	
 	private int verify;
+	private int orderProCode;
 
 	public UserDto() {}
-	public UserDto(int bno,String userId, String userPass, String userName, String userPhone, int verify) {
+	public UserDto(int bno,String userId, String userPass, String userName, String userPhone, int verify , int orderProCode) {
 		this.bno = bno;
 		this.userId = userId;
 		this.userPass = userPass;
 		this.userName = userName;
 		this.userPhone = userPhone;
 		this.verify = verify;
+		this.orderProCode = orderProCode;
 	}
 	public String getUserId() {
 		return userId;
@@ -63,6 +65,12 @@ public class UserDto {
 	}
 	public void setBno(int bno) {
 		this.bno = bno;
+	}
+	public int getOrderProCode() {
+		return orderProCode;
+	}
+	public void setOrderProCode(int orderProCode) {
+		this.orderProCode = orderProCode;
 	}
 	@Override
 	public String toString() {

@@ -54,8 +54,14 @@
         <li><h3>수량 : <c:out value="${pro.proStock}"/></h3></li>
         <li><h3>상품소개 : <c:out value="${pro.proDescription}"/></h3></li>
 		<input type="hidden" value="${pro.proCode}">
-																				
-        <li><button onclick="location.href='${pageContext.request.contextPath}/'" class="btn">주문하기</button><br></li>
+					
+		<script type="text/javascript">
+			function goMyInfo(){
+				alert('주문 정보에 상품이 저장 되었습니다 ! ')
+				location.href="${pageContext.request.contextPath}/deliveryInfo";
+			}
+		</script>																		
+        <li><button onclick="goMyInfo()" class="btn">주문하기</button><br></li>
         <li><button onclick="location.href='${pageContext.request.contextPath}/'" class="btn">장바구니에 담기</button><br></li>
 	<div>
 		<c:forEach items="${replyList}" var="replyList">

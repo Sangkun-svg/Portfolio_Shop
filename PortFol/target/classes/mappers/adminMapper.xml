@@ -75,5 +75,15 @@
 		delete from product where
 		bno = #{bno}
 	</delete>
+	
+	<update id="minusProStock">
+		update 
+			product set proStock = proStock-1 
+		where
+			proCode = #{proCOde}
+	</update>
+	
+
+	
 </mapper>
 

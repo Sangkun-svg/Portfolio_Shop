@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" session="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -128,10 +128,11 @@ header ul li :hover {
 						<c:if test="${session == null}">
 							<li><a href="${pageContext.request.contextPath}/signin">Login</a></li>
 							<li><a href="${pageContext.request.contextPath}/signup">Join</a></li>
-							<li><a href="${pageContext.request.contextPath}/signout">Logout</a></li>
-							<li><a href="${pageContext.request.contextPath}/myInfo">My Info</a></li>
 						</c:if>
 						<c:if test="${session != null}">
+							<li>WelCome bro</li>
+							<li><a href="${pageContext.request.contextPath}/signout">Logout</a></li>
+							<li><a href="${pageContext.request.contextPath}/myInfo">My Info</a></li>
 						</c:if>
 					</ul>
 				</nav>
