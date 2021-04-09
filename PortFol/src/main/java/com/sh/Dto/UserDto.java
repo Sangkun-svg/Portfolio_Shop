@@ -16,9 +16,12 @@ public class UserDto {
 	
 	private int verify;
 	private int orderProCode;
-
+	private String deliEnum;
+	private String deliSituationEnum;
+	
 	public UserDto() {}
-	public UserDto(int bno,String userId, String userPass, String userName, String userPhone, int verify , int orderProCode) {
+	public UserDto(int bno,String userId, String userPass, String userName, 
+			String userPhone, int verify , int orderProCode ,String deliEnum ,String deliSituationEnum ) {
 		this.bno = bno;
 		this.userId = userId;
 		this.userPass = userPass;
@@ -26,6 +29,8 @@ public class UserDto {
 		this.userPhone = userPhone;
 		this.verify = verify;
 		this.orderProCode = orderProCode;
+		this.deliEnum =deliEnum ; 
+		this.deliSituationEnum = deliSituationEnum; 
 	}
 	public String getUserId() {
 		return userId;
@@ -71,6 +76,18 @@ public class UserDto {
 	}
 	public void setOrderProCode(int orderProCode) {
 		this.orderProCode = orderProCode;
+	}
+	public String getDeliEnum() {
+		return deliEnum;
+	}
+	public void setDeliEnum(String deliEnum) {
+		this.deliEnum = deliEnum;
+	}
+	public String getDeliSituationEnum() {
+		return deliSituationEnum;
+	}
+	public void setDeliSituationEnum(String deliSituationEnum) {
+		this.deliSituationEnum = deliSituationEnum;
 	}
 	@Override
 	public String toString() {

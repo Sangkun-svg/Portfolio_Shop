@@ -89,20 +89,20 @@ aside ul li a:hover {
     <div class="info">
         <div class="input-area">
             <label for><h2 style="margin: 0;">ID</h2></label><br>
-            <input type="text" id="" name="" value="" readonly="readonly" >
+            <input type="text" id="userId" name="userId" value="${member.userId }" readonly="readonly" >
             <button type="button" class="btn">수정하기</button>    
 
         </div>
 
         <div class="input-area">
             <label for><h2 style="margin: 0;">Name</h2></label><br>
-            <input type="text" id="" name="" value="" readonly="readonly">    
+            <input type="text" id="userPass" name="userPass" value="${member.userPass }" readonly="readonly">    
             <button type="button" class="btn">수정하기</button>    
         </div>
 
         <div class="input-area">
             <label for><h2 style="margin: 0;">Phone</h2></label><br>
-            <input type="text" id="" name="" value="" readonly="readonly">    
+            <input type="text" id="userPhone" name="userPhone" value="${member.userName }" readonly="readonly">    
             <button type="button" class="btn">수정하기</button>    
         </div>
 

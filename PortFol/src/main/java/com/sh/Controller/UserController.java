@@ -167,7 +167,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/main")
-	public void getMainPage(Model model,HttpServletRequest req , UserDto dto) throws Exception {
+	public void getMainPage( Model model,HttpServletRequest req , UserDto dto) throws Exception {
 		logger.info("Main Page");
 		System.out.println("MainPage");
 		model.addAttribute("prolist", adminService.proList());
@@ -175,6 +175,8 @@ public class UserController {
 		//내가 짠 코드
 		HttpSession session = req.getSession();
 		System.out.println("session : " + session );
+		System.out.println("session.getId : " + session.getId());
+		
 		if(session.isNew() == true) {
 			System.out.println(session.isNew());
 			System.out.println("새로 생긴 세션");
@@ -183,6 +185,7 @@ public class UserController {
 			System.out.println(session.isNew());
 			model.addAttribute("session" , session);			
 		}
+		
 		// 여기까지
 		
 	}
@@ -218,10 +221,9 @@ public class UserController {
 	}
 
 	@GetMapping("/myInfo")
-	public void getMyInfo() throws Exception {
+	public void getMyInfo(UserDto dto) throws Exception {
 		logger.info("My Info");
 		System.out.println("My Info");
-		
 	}
 
 	@GetMapping("/deliveryInfo")
