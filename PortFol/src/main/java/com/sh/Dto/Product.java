@@ -9,22 +9,22 @@ public class Product {
 	private int 	proPrice;
 	private int 	proStock;
 	private String 	proDescription;
-	private LocalDate regDate = LocalDate.now();
+	private LocalDate proRegDate = LocalDate.now();
 	private String proImg;
-	private String proThumbImg;
+	private String proThumbnail;
 	
 	public Product() {}
-	public Product(int bno ,int proCode, String proName, int proPrice, int proStock, String proDescription, LocalDate regDate,
-			String proImg , String proThumbImg) {
+	public Product(int bno ,int proCode, String proName, int proPrice, int proStock, String proDescription, LocalDate proRegDate,
+			String proImg , String proThumbnail) {
 		this.bno= bno;
 		this.proCode = proCode;
 		this.proName = proName;
 		this.proPrice = proPrice;
 		this.proStock = proStock;
 		this.proDescription = proDescription;
-		this.regDate = regDate;
+		this.proRegDate = proRegDate;
 		this.proImg = proImg;
-		this.proThumbImg = proThumbImg;
+		this.proThumbnail= proThumbnail;
 	}
 	
 	
@@ -65,11 +65,11 @@ public class Product {
 	public void setProDescription(String proDescription) {
 		this.proDescription = proDescription;
 	}
-	public LocalDate getRegDate() {
-		return regDate;
+	public LocalDate getProRegDate() {
+		return proRegDate;
 	}
-	public void setRegDate(LocalDate regDate) {
-		this.regDate = regDate;
+	public void setProRegDate(LocalDate regDate) {
+		this.proRegDate = proRegDate;
 	}
 	public String getProImg() {
 		return proImg;
@@ -77,11 +77,11 @@ public class Product {
 	public void setProImg(String proImg) {
 		this.proImg = proImg;
 	}
-	public String getProThumbImg() {
-		return proThumbImg;
+	public String getProThumbnail() {
+		return proThumbnail;
 	}
-	public void setProThumbImg(String proThumbImg) {
-		this.proThumbImg = proThumbImg;
+	public void setProThumbnail(String proThumbnail) {
+		this.proThumbnail = proThumbnail;
 	}
 	
 	

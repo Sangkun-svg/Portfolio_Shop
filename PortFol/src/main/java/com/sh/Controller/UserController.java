@@ -85,7 +85,6 @@ public class UserController {
 		UserDto login = userService.signin(dto);
 		System.out.println("login : " + login);
 		System.out.println("권한 : " + login.getVerify());
-		System.out.println("유저 BNo : " + login.getBno());
 		HttpSession session = req.getSession();
 
 		String encryPassword = UserSha256.encrypt(dto.getUserPass());
