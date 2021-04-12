@@ -95,6 +95,6 @@ public class UserDto {
 				+ userPhone + ", regDate=" + regDate + ", verify=" + verify + "]";
 	}
 	 
-	
+	 
 	
 }
