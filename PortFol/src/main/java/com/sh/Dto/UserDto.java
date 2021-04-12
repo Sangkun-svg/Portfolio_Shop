@@ -94,7 +94,7 @@ public class UserDto {
 		return "UserDto [userId=" + userId + ", userPass=" + userPass + ", userName=" + userName + ", userPhone="
 				+ userPhone + ", regDate=" + regDate + ", verify=" + verify + "]";
 	}
-	
+	 
 	
 	
 }
