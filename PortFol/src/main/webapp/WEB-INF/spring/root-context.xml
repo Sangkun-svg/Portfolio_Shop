@@ -15,7 +15,7 @@
 	<!-- DataSource -->
 	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
 		<property value="com.mysql.cj.jdbc.Driver" name="driverClassName"/>
-		<property value="jdbc:mysql://localhost:3306/database1?characterEncoding=UTF-8&amp;serverTimezone=UTC" name="url"/>
+		<property value="jdbc:mysql://localhost:3306/portfolio?characterEncoding=UTF-8&amp;serverTimezone=UTC" name="url"/>
 		<property value="root" name="username"/>
 		<property value="tiger" name="password"/>
 	</bean>
@@ -43,5 +43,7 @@
 	<context:component-scan base-package="com.sh.Interceptor"></context:component-scan>
 
 	<context:component-scan base-package="com.sh.utils"></context:component-scan>
+
+	<context:component-scan base-package="com.sh.enum"></context:component-scan>
 	
 </beans>

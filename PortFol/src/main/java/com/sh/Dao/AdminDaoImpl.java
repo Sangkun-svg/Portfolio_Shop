@@ -46,8 +46,8 @@ public class AdminDaoImpl implements AdminDao{
 	}
 
 	@Override
-	public UserDto userInfo(int bno) throws Exception {
-		return sql.selectOne("adminMapper.userInfo",  bno);	
+	public UserDto userInfo(String userId) throws Exception {
+		return sql.selectOne("adminMapper.userInfo",  userId);	
 	}
 
 	

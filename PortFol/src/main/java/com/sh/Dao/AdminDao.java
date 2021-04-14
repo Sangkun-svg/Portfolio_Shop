@@ -21,5 +21,5 @@ public interface AdminDao {
 
 	public void proDelete(int bno) throws Exception;
 	
-	public UserDto userInfo(int bno) throws Exception; 
+	public UserDto userInfo(String userId) throws Exception; 
 }

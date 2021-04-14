@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.sh.Dao.UserDao;
 import com.sh.Dto.UserDto;
+import com.sh.Enum.DeliveryAdmin;
+import com.sh.Enum.DeliverySituation;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -51,9 +53,9 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public int myInfo(int bno) throws Exception {
-		int result = dao.myInfo(bno);
-		return result;
+	public String myInfo(String string) throws Exception {
+		return dao.myInfo(string);
 	}
+
 
 }

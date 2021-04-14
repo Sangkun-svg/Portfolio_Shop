@@ -46,8 +46,9 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public UserDto userInfo(int bno) throws Exception {
-		return dao.userInfo(bno);
+	public Object userInfo(String userId) throws Exception {
+		return dao.userInfo(userId);
 	}
+
 
 }

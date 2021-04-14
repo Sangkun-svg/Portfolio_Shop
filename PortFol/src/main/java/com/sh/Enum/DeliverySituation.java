@@ -1,5 +1,5 @@
 package com.sh.Enum;
 
 public enum DeliverySituation {
-	Ready , Going , Done
+	준비중 , 배달진행중 , 배달완료
 }

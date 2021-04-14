@@ -40,7 +40,7 @@
 					<td style="text-align:center"><c:out value="${proList.proPrice}" /></td>
 					<td style="text-align:center"><c:out value="${proList.proStock}" /></td>
 					<td style="text-align:center"><c:out value="${proList.proDescription}" /></td>
-					<td style="text-align:center"><c:out value="${proList.regDate}" /></td>
+					<td style="text-align:center"><c:out value="${proList.proRegDate}" /></td>
 					<td style="text-align:center"><button type="button" onclick="location.href='${pageContext.request.contextPath}/admin/proUpdate?n=${proList.bno}'" id="update_Btn" class="btn btn-warning">수정</button></td>
 					<td style="text-align:center"><button type="button" onclick="location.href='${pageContext.request.contextPath}/admin/proDelete?n=${proList.bno}'"id="delete_Btn" class="btn btn-danger">삭제</button></td>
 					<td style="text-align:center"><img alt="Thumnail" src="${proList.proImg}"></td>

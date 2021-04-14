@@ -19,6 +19,7 @@ public interface AdminService {
 
 	public void proDelete(int bno) throws Exception;
 
-	public UserDto userInfo(int bno) throws Exception; 
+
+	public Object userInfo(String userId) throws Exception; 
 
 }

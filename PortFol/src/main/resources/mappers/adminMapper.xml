@@ -5,36 +5,33 @@
 <mapper namespace="adminMapper">
 	<select id="userList" resultType="com.sh.Dto.UserDto">
 		SELECT
-			bno As bno,
 			userId As userId ,
 			userName As userName ,
 			userPhone As userPhone ,
-			regDate As regDate ,
-			Verify As Verify
+			userJoinDate As userJoinDate ,
+			verify As verify
 		FROM
-			member
+			user
 	</select>
 
 	<select id="userInfo" resultType="com.sh.Dto.UserDto">
 		SELECT
-			bno As bno ,
 			userId As userId ,
 			userName As userName ,
 			userPhone As userPhone ,
-			regDate As regDate ,
+			userJoinDate As userJoinDate ,
 			Verify As Verify
 		FROM
-			member
+			user
 		where 
-			bno = #{bno}
-		
+			userId = #{userId}
 	</select>
 
 	<insert id="proRegister">
 		insert 
-			into product (proCode , proName , proPrice , proStock , proDescription , regDate , proImg , proThumbImg)
+			into product (bno , proCode , proName , proPrice , proStock , proDescription , proRegDate , proImg , proThumbnail)
 		values 
-			(#{proCode} , #{proName} , #{proPrice} , #{proStock} , #{proDescription} , #{regDate}, #{proImg} , #{proThumbImg})
+			(#{bno}, #{proCode} , #{proName} , #{proPrice} , #{proStock} , #{proDescription} , #{proRegDate }, #{proImg} , #{proThumbnail})
 	</insert>
 
 	<select id="proList" resultType="com.sh.Dto.Product">
@@ -46,14 +43,14 @@
 			proStock As proStock,
 			proDescription As proDescription,
 			proImg As proImg,
-			proThumbImg As proThumbImg
+			proThumbnail As proThumbnail
 		FROM
 			product
 	</select>
 
 	<select id="proView" parameterType="int" resultType="com.sh.Dto.Product">
 		SELECT
-			bno , proCode, proName, proPrice, proStock, proDescription, proImg, proThumbImg
+			bno , proCode, proName, proPrice, proStock, proDescription, proImg, proThumbnail
 		FROM
 			product
 		where

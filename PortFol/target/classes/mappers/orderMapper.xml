@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orderMapper">
+	<insert id="order">
+		insert into orderInfo 
+			(orderId , userId , proCode ,orderStock , orderPrice , address)
+		values
+			(#{orderId},#{userId},#{proCode},#{orderStock},#{orderPrice},#{address})
+	</insert>
+
+	<select id="orderInfo" resultType="com.sh.Dto.OrderInfo">
+		select 
+			orderId , user.userId , product.proCode , orderStock , product.proPrice As orderPrice
+		from
+			portfolio.orderInfo
+		LEFT JOIN
+			portfolio.user ON user.userId = orderinfo.userId
+		LEFT JOIN
+			portfolio.product ON product.proCode = orderInfo.proCode
+		where 
+			user.userId = #{userId};
+	</select>
+</mapper>
+

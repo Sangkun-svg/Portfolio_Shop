@@ -6,19 +6,19 @@ public class OrderInfo {
 	private String userId;
 	private int proCode;
 	private int orderStock;
-	private int orderprice;
+	private int orderPrice;
 	private String address;
 	private String deliveryInfo;
 
 	public OrderInfo() {}
-	public OrderInfo(String orderId, String userId, int proCode, int orderStock, int orderprice, String address,
+	public OrderInfo(String orderId, String userId, int proCode, int orderStock, int orderPrice, String address,
 			String deliveryInfo) {
 		super();
 		this.orderId = orderId;
 		this.userId = userId;
 		this.proCode = proCode;
 		this.orderStock = orderStock;
-		this.orderprice = orderprice;
+		this.orderPrice = orderPrice;
 		this.address = address;
 		this.deliveryInfo = deliveryInfo;
 	}
@@ -46,11 +46,11 @@ public class OrderInfo {
 	public void setOrderStock(int orderStock) {
 		this.orderStock = orderStock;
 	}
-	public int getOrderprice() {
-		return orderprice;
+	public int getOrderPrice() {
+		return orderPrice;
 	}
-	public void setOrderprice(int orderprice) {
-		this.orderprice = orderprice;
+	public void setOrderPrice(int orderPrice) {
+		this.orderPrice = orderPrice;
 	}
 	public String getAddress() {
 		return address;

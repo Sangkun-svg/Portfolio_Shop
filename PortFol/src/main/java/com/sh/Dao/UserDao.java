@@ -18,7 +18,7 @@ public interface UserDao {
 	
 	public int idValidation(UserDto dto) throws Exception;
 	
-	public int myInfo(int bno) throws Exception;
+	public String myInfo(String string) throws Exception;
 
 
 	

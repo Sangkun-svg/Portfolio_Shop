@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sh.Dto.OrderInfo;
 import com.sh.Dto.Product;
 import com.sh.Dto.ReplyDto;
 import com.sh.Dto.UserDto;
 import com.sh.Service.AdminService;
+import com.sh.Service.OrderService;
 import com.sh.Service.ReplyService;
 import com.sh.Service.UserService;
 import com.sh.Service.UserSha256;
@@ -38,7 +40,8 @@ public class UserController {
 	private AdminService adminService;
 	@Inject 
 	private ReplyService replyService;
-	
+	@Inject 
+	private OrderService orderService;
 	
 	@GetMapping("/signup")
 	public void getSignUp() {
@@ -226,10 +229,13 @@ public class UserController {
 	}
 
 	@GetMapping("/deliveryInfo")
-	public void getDeliveryInfo() throws Exception {
+	public void getDeliveryInfo(OrderInfo orderInfo) throws Exception {
 		logger.info("Get DeliveryInfo");
 		System.out.println("Get DeliveryInfo");
-		 
+		// 주문정보에 주문한 상품과 회원정보를 담는 코드 
+		orderInfo.setOrderId("1");
+		System.out.println("orderInfo_userId : " + orderInfo.getUserId());
+		System.out.println("orderInfo_userId : " + orderInfo.getProCode());
 	}
 	
 	@GetMapping("/userUpdate")
@@ -248,5 +254,30 @@ public class UserController {
 		return "redirect:/";
 	}
 
+	@GetMapping("/orderPage")
+	public void getOrderPage(@RequestParam("n") String string , OrderInfo orderInfo ) throws Exception {
+		logger.info("Get OrderPage");
+		System.out.println("Get OrderPage");	
+		// 주문하기 버튼 누른 후 
+		// 주문 정보를 DB에 담는다
+		int proCode2 = 1;	// 상품번호를 가져왔다고 치자 
+		orderInfo.setUserId(string);
+		orderInfo.setProCode(proCode2);
+		System.out.println("myInfo :" + userService.myInfo(string));
+		System.out.println("getUserId : "+orderInfo.getUserId());
+		System.out.println("getProCode : "+orderInfo.getProCode());
+//		orderService.order(orderInfo);
+		orderService.orderinto(orderInfo);
+		System.out.println("orderInfo : " + orderService.orderinto(orderInfo).getOrderId());
+		System.out.println("orderInfo : " + orderService.orderinto(orderInfo).getOrderPrice());
+
+		//주문정보 中 proCode , orderStock , orderPrice 
+		
+		
+		
+		
+		// 상세 주소를 DB에 담는다
+		// myInfo -> deliveryInfo.jsp 에 주문한 정보를 띄운다
+	}
 	
 }

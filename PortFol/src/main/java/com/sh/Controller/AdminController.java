@@ -44,7 +44,6 @@ public class AdminController {
 		System.out.println("Get UserList");
 		
 		model.addAttribute("userlist" , adminService.userList());
-		System.out.println("model 작동");
 		return "admin/userList";
 	}
 	
@@ -71,7 +70,7 @@ public class AdminController {
 		}
 
 		pd.setProImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
-		pd.setProThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+		pd.setProThumbnail(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 		
 		
 		adminService.proRegister(pd);
@@ -152,13 +151,16 @@ public class AdminController {
 		System.out.println("Get refund");
 		return"admin/claims/refund";
 	}
+
 	
 	@GetMapping("/userInfo")
-	public void getUserInfo(@RequestParam("n") int bno , Model model , UserDto dto) throws Exception{
+	public void getUserInfo(@RequestParam("n") String userId , Model model , UserDto dto) throws Exception{
 		 logger.info("Get userInfo");
 		 System.out.println("Get userInfo");
-		 dto.setBno(bno);
-		 model.addAttribute("userInfo" , adminService.userInfo(dto.getBno())); 
+		 dto.setUserId(userId);
+		 System.out.println("userId : " + userId);
+		 model.addAttribute("userInfo" , adminService.userInfo(dto.getUserId())); 
 		
 	}
+	
 }

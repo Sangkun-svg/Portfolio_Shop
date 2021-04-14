@@ -4,22 +4,22 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="userMapper">
 	<insert id="register">
-		INSERT INTO member (userId , userPass , userName , userPhone , regDate) 
-			VALUES (#{userId},#{userPass},#{userName},#{userPhone},#{regDate})
+		INSERT INTO user (userId , userPass , userName , userPhone , userJoinDate) 
+			VALUES (#{userId},#{userPass},#{userName},#{userPhone},#{userJoinDate})
 	</insert>	
 	
 	<select id="signin" resultType="com.sh.Dto.UserDto">
 		select 
 			userId , userPass , userName ,verify
 		from 
-			member
+			user
 		where userId = #{userId}
 			and userPass =#{userPass} 
 	</select>
 	
 	<update id="userUpdate">
 		update 
-			member 
+			user 
 		set 
 			userPass = #{userPass},
 			userName = #{userName},
@@ -30,7 +30,7 @@
 	
 	<delete id="userDelete">
 		delete from 
-			member 
+			user 
 		where 
 			userId = #{userId}
 		 and 
@@ -38,21 +38,20 @@
 	</delete>
 	
 	<select id="passValidation" resultType="int">
-		SELECT COUNT(*) FROM member WHERE userId = #{userId} AND userPass =#{userPass}
+		SELECT COUNT(*) FROM user WHERE userId = #{userId} AND userPass =#{userPass}
 		</select>
 	
 	<select id="idValidation" resultType="int">
-		SELECT COUNT(*) FROM member WHERE userId = #{userId}
+		SELECT COUNT(*) FROM user WHERE userId = #{userId}
 	</select>
 	
-	<select id="myInfo" resultType="int">
+	<select id="myInfo" resultType="String">
 		select 
 			userId , userName ,verify 
 		from 
-			member
+			user
 		where 
-			bno = #{bno}
+			userId = #{userId}
 	</select>
 	
 </mapper>
-

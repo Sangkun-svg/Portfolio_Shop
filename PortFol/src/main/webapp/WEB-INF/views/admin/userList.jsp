@@ -25,13 +25,13 @@
 				</tr>
 				<c:forEach items="${userlist}" var="userlist">
 					<tr>
-						<td style="text-align:center"><c:out value="${userlist.userId}"  /></td>
+						<td style="text-align:center"><c:out value="${userInfo.userId}"  /></td>
 						<td style="text-align:center"><c:out value="${userlist.userName}" /></td>
 						<td style="text-align:center"><c:out value="${userlist.userPhone}" /></td>
 						<td style="text-align:center"><c:out value="${userlist.regDate}" /></td>
 						<td style="text-align:center"><c:out value="${userlist.verify}" /></td>					
 						<c:if test ="${userlist.verify != 9}">
-							<td style="text-align:center"><button type="button" onclick="location.href='${pageContext.request.contextPath}/admin/userInfo?n=${userlist.bno}'" class="btn btn-danger">수정</button></td>
+							<td style="text-align:center"><button type="button" onclick="location.href='${pageContext.request.contextPath}/admin/userInfo?n=${userlist.userId }'" class="btn btn-danger">수정</button></td>
 						</c:if>
 						<c:if test ="${userlist.verify == 9}">
 							<td style="text-align:center">타 관리자 정보</td>
