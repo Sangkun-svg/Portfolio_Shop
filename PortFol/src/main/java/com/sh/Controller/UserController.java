@@ -270,7 +270,7 @@ public class UserController {
 		orderService.orderinto(orderInfo);
 		System.out.println("orderInfo : " + orderService.orderinto(orderInfo).getOrderId());
 		System.out.println("orderInfo : " + orderService.orderinto(orderInfo).getOrderPrice());
-
+ 
 		//주문정보 中 proCode , orderStock , orderPrice 
 		
 		
