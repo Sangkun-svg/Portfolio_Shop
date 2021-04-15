@@ -44,51 +44,38 @@
 </style>
 <body>
     <div class="wrap">
-        <div class="img">
-            <img src="" alt="img"
-                style="width: 100%; height: 100%;">
-        </div>
-        
-        <li><h3>이름 : <c:out value="${pro.proName}"/></h3></li>
-        <li><h3>가격 : <c:out value="${pro.proPrice}"/></h3></li>
-        <li><h3>수량 : <c:out value="${pro.proStock}"/></h3></li>
-        <li><h3>상품소개 : <c:out value="${pro.proDescription}"/></h3></li>
-        <li><h3>상품번호 : <c:out value="${pro.proCode}"/></h3></li>
-		<input type="hidden" value="${pro.proCode}">
-					
-		<script type="text/javascript">
-			function goOrderPage(){
-				alert('주문 정보에 상품이 저장 되었습니다 ! ')
-				location.href="${pageContext.request.contextPath}/orderPage?n=${member.userId}";
-			}
-		</script>																		
-        <li><button onclick="goOrderPage()" class="btn">주문하기</button><br></li>
-        <li><button onclick="location.href='${pageContext.request.contextPath}/cart'" class="btn">장바구니에 담기</button><br></li>
-	<div>
-		<c:forEach items="${replyList}" var="replyList">
-			<li>
-				<p>
-					작성자 : ${replyList.writer}<br />
-					내용 : ${replyList.content}<br />
-					R번호 : ${replyList.rno}<br />
-					B번호 : ${replyList.bno}<br />					 
-				</p>
-			</li>
-		</c:forEach>   
-	</div>
-     
-		 
-		<div>
-			<label for="writer">댓글 작성자</label><input type="text" id="writer" name="writer" />
-			<br/>
-			<label for="content">댓글 내용</label><input type="text" id="content" name="content" />
-		</div>
+    	<form action="${pageContext.request.contextPath}/orderPage?n=${member.userId}&bno=${pro.bno}" method="get">
+			<input type="hidden" value="${member.userId}" name="n">
+			<input type="hidden" value="${pro.bno}" name="bno">
+	        <div class="img">
+	            <img src="" alt="img"
+	                style="width: 100%; height: 100%;">
+	        </div>
+	        
+	        <li><h3>이름 : <c:out value="${pro.proName}"/></h3></li>
+	        <li><h3>가격 : <c:out value="${pro.proPrice}"/></h3></li>
+	        <li><h3>수량 : <c:out value="${pro.proStock}"/></h3></li>
+	        <li><h3>상품소개 : <c:out value="${pro.proDescription}"/></h3></li>
+	        <li><h3>상품번호 : <c:out value="${pro.proCode}"/></h3></li>
+	        <li><h3>상품Bno : <c:out value="${pro.bno}"/></h3></li>
 
-		<div>
+			<input type="hidden" value="${pro.proCode}">
 
-		</div>
-
-
+						
+	        <li><button type="submit"  class="btn">주문하기</button><br></li>
+		</form>
+	        <li><button onclick="goCart()" class="btn">장바구니에 담기</button><br></li>
+				<script type="text/javascript">
+					function goCart(){
+						alert('장바구니에 저장 되었습니다 !')
+						location.href="${pageContext.request.contextPath}/main";
+					}
+				</script>																		
+				
+	
+			<div>
+				<!-- 댓글에 값이 없어서 ERR 뜸 -> 그래서 일단 빼놈 -->
+			</div>
     </div>
 </body>
 </html>

@@ -130,7 +130,7 @@ header ul li :hover {
 							<li><a href="${pageContext.request.contextPath}/signup">Join</a></li>
 						</c:if>
 						<c:if test="${session != null}">
-							<li>WelCome bro</li>
+							<li>어서오세요! ${member.userName}님</li>
 							<li><a href="${pageContext.request.contextPath}/signout">Logout</a></li>
 							<li><a href="${pageContext.request.contextPath}/myInfo">My Info</a></li>
 						</c:if>

@@ -45,8 +45,8 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public String myInfo(String string) throws Exception {
-		return sql.selectOne("userMapper.myInfo" , string);
+	public UserDto myInfo(UserDto dto) throws Exception {
+		return sql.selectOne("userMapper.myInfo" , dto);
 	}
 	
 

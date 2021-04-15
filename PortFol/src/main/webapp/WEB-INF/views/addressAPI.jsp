@@ -7,12 +7,23 @@
 <title>다음 주소 API</title>
 </head>
 <body>
-<input type="text" id="sample4_postcode" placeholder="우편번호">
+<input type="text" id="sample4_postcode" placeholder="우편번호" name="addressCode">
 <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-<input type="text" id="sample4_roadAddress" placeholder="도로명주소">
-<input type="text" id="sample4_jibunAddress" placeholder="지번주소">
+<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="streetCode">
+<input type="text" id="sample4_jibunAddress" placeholder="지번주소" name="address">
 <span id="guide" style="color:#999;display:none"></span>
-<input type="text" id="sample4_detailAddress" placeholder="상세주소"><br>
+<input type="text" id="sample4_detailAddress" placeholder="상세주소" name="details"><br>
+            배송메모
+            <select name="referenceInfo">
+                <option value="option_1">배송 시 요청사항을 선택해주세요</option>
+                <option value="option_2">부재 시 경비실에 맡겨주세요</option>
+                <option value="option_3">부재 시 택배함에 맡겨주세요</option>
+                <option value="option_4">부재 시 집 앞에 놔주세요</option>
+                <option value="option_5">배송 전 연락 바랍니다</option>
+                <option value="option_6">부재시 경비실에 맡겨주세요</option>
+                <option value="option_7">파손의 위험이 있는 상품입니다. 배송 시 주의해주세요</option>
+                <option value="option_8">직접입력</option>
+            </select><br>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>

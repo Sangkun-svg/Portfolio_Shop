@@ -45,9 +45,9 @@
 		SELECT COUNT(*) FROM user WHERE userId = #{userId}
 	</select>
 	
-	<select id="myInfo" resultType="String">
+	<select id="myInfo" resultType="com.sh.Dto.UserDto">
 		select 
-			userId , userName ,verify 
+			userId , userName , userPhone , verify , address
 		from 
 			user
 		where 

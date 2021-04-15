@@ -53,8 +53,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public String myInfo(String string) throws Exception {
-		return dao.myInfo(string);
+	public UserDto myInfo(UserDto dto) throws Exception {
+		return dao.myInfo(dto);
 	}
 
 

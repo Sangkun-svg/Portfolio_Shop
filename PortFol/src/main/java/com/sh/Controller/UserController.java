@@ -19,10 +19,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
+import com.mysql.cj.x.protobuf.MysqlxCrud.Order;
+import com.sh.Dto.Address;
 import com.sh.Dto.OrderInfo;
 import com.sh.Dto.Product;
 import com.sh.Dto.ReplyDto;
 import com.sh.Dto.UserDto;
+import com.sh.Service.AddressService;
 import com.sh.Service.AdminService;
 import com.sh.Service.OrderService;
 import com.sh.Service.ReplyService;
@@ -42,6 +46,9 @@ public class UserController {
 	private ReplyService replyService;
 	@Inject 
 	private OrderService orderService;
+	@Inject 
+	private AddressService addressService;
+	
 	
 	@GetMapping("/signup")
 	public void getSignUp() {
@@ -173,7 +180,7 @@ public class UserController {
 		logger.info("Main Page");
 		System.out.println("MainPage");
 		model.addAttribute("prolist", adminService.proList());
-
+		
 		//내가 짠 코드
 		HttpSession session = req.getSession();
 		System.out.println("session : " + session );
@@ -193,7 +200,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/proInfo")
-	public void getProInfo(@RequestParam("n") int bno ,Model model , Product pro ) throws Exception {
+	public void getProInfo(@RequestParam("n") int bno ,Model model , Product pro , UserDto dto) throws Exception {
 		logger.info("Get ProInfo");
 		System.out.println("Get ProInfo");
 		
@@ -204,7 +211,6 @@ public class UserController {
 		List<ReplyDto> replyList = replyService.readReply(pro.getBno());
 		
 		model.addAttribute("replyList", replyList);
-
 	}
 	
 	@GetMapping("/replyWrite")
@@ -255,29 +261,46 @@ public class UserController {
 	}
 
 	@GetMapping("/orderPage")
-	public void getOrderPage(@RequestParam("n") String string , OrderInfo orderInfo ) throws Exception {
+	public void getOrderPage(@RequestParam("n") String string 
+							,@RequestParam("bno") int bno
+							,OrderInfo orderInfo , Model model , UserDto dto ,Product pro) throws Exception {
 		logger.info("Get OrderPage");
 		System.out.println("Get OrderPage");	
-		// 주문하기 버튼 누른 후 
-		// 주문 정보를 DB에 담는다
-		int proCode2 = 1;	// 상품번호를 가져왔다고 치자 
-		orderInfo.setUserId(string);
-		orderInfo.setProCode(proCode2);
-		System.out.println("myInfo :" + userService.myInfo(string));
-		System.out.println("getUserId : "+orderInfo.getUserId());
-		System.out.println("getProCode : "+orderInfo.getProCode());
-//		orderService.order(orderInfo);
-		orderService.orderinto(orderInfo);
-		System.out.println("orderInfo : " + orderService.orderinto(orderInfo).getOrderId());
-		System.out.println("orderInfo : " + orderService.orderinto(orderInfo).getOrderPrice());
- 
-		//주문정보 中 proCode , orderStock , orderPrice 
-		
-		
-		
-		
-		// 상세 주소를 DB에 담는다
-		// myInfo -> deliveryInfo.jsp 에 주문한 정보를 띄운다
+		// 주문정보 中 회원정보 넣어주기
+		dto.setUserId(string);
+		model.addAttribute("member" , userService.myInfo(dto));
+		// 주문정보 中 상품정보 넣어주기
+		model.addAttribute("pro" , adminService.proView(bno));
+		// 1차 orderInfo Table 채우기
+		//orderService.order(orderInfo);
 	}
+
+	@PostMapping("orderPage")
+	public String postOrderPage(Address address) throws Exception {
+		//addressService.insertAddress();
+		//2차 orderInfo table 채우기
+		//orderService.orderUpdate(orderInfo);
+		//enum class 세팅
+			/*
+			 * 1. 구매자 -> myInfo -> deliveryInfo.jsp -> Enum(배송상태).set 준비중
+			 * 2. 관리자 -> admin/claim/delivery(배송상태) -> Enum.set(주문요청) -> Btn click -> 구매자 Enum.set 배달진행중
+			 * 3. 관리자 -> 배송완료시 -> enum.set 배달완료
+			 */
+		// 후기 권한 On
+		//adminService.proMinusProStock Dao , Service 만들기 (Dao 나 Service로만 처리 가능 한가?)
+		return "주문 환료 페이지 ";
+	}
+
 	
+//	@GetMapping("/주문 완료 페이지")
+//	public void 주문완료_페이지(Order order) throws Exception {
+//		if(order == true) {	// 주문이 성공하면
+//			return "main" or "myInfo";
+//		}else if(order == false) {
+//			//주문 실패 예시 찾아복;
+//			System.out.println("주문이 실패하였습니다.");
+//			return "proInfo";
+//		}
+//	}
+
 }
