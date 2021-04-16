@@ -54,4 +54,8 @@
 			userId = #{userId}
 	</select>
 	
+	<select id="orderList" resultType="">
+		<!-- 주문한 상품 리스트 뽑아서 담기 -->
+	</select>
+	
 </mapper>

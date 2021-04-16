@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.sh.Dao.AddressDao;
+import com.sh.Dto.Address;
 
 @Service
 public class AddressServiceImpl implements AddressService{
@@ -13,8 +14,8 @@ public class AddressServiceImpl implements AddressService{
 	AddressDao dao;
 	
 	@Override
-	public void insertAddress() throws Exception {
-		dao.insertAddress();
+	public void insertAddress(Address address) throws Exception {
+		dao.insertAddress(address);
 	}
 	
 }

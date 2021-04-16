@@ -1,5 +1,7 @@
 package com.sh.Dto;
 
+import com.sh.Enum.DeliverySituation;
+
 public class OrderInfo {
 
 	private String orderId;
@@ -8,11 +10,11 @@ public class OrderInfo {
 	private int orderStock;
 	private int orderPrice;
 	private String address;
-	private String deliveryInfo;
+	private DeliverySituation deliveryInfo;
 
 	public OrderInfo() {}
 	public OrderInfo(String orderId, String userId, int proCode, int orderStock, int orderPrice, String address,
-			String deliveryInfo) {
+			DeliverySituation deliveryInfo) {
 		super();
 		this.orderId = orderId;
 		this.userId = userId;
@@ -58,11 +60,14 @@ public class OrderInfo {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getDeliveryInfo() {
+	
+	
+	
+	public DeliverySituation getDeliveryInfo() {
 		return deliveryInfo;
 	}
-	public void setDeliveryInfo(String deliveryInfo) {
-		this.deliveryInfo = deliveryInfo;
+	public void setDeliveryInfo(DeliverySituation string) {
+		this.deliveryInfo = string;
 	}
 	
 	

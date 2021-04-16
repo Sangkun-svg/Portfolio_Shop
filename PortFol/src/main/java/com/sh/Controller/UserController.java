@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,7 @@ import com.sh.Dto.OrderInfo;
 import com.sh.Dto.Product;
 import com.sh.Dto.ReplyDto;
 import com.sh.Dto.UserDto;
+import com.sh.Enum.DeliverySituation;
 import com.sh.Service.AddressService;
 import com.sh.Service.AdminService;
 import com.sh.Service.OrderService;
@@ -271,35 +273,69 @@ public class UserController {
 		model.addAttribute("member" , userService.myInfo(dto));
 		// 주문정보 中 상품정보 넣어주기
 		model.addAttribute("pro" , adminService.proView(bno));
-		// 1차 orderInfo Table 채우기
-		//orderService.order(orderInfo);
+
+		System.out.println("orderEntity userId : " + userService.myInfo(dto).getUserId()); //proCode , address
+		System.out.println("orderEntity proCode : " +adminService.proView(bno).getProCode() );
+		System.out.println("orderEntity userId : " + userService.myInfo(dto).getAddress()); //proCode , address
 	}
 
 	@PostMapping("orderPage")
-	public String postOrderPage(Address address) throws Exception {
-		//addressService.insertAddress();
-		//2차 orderInfo table 채우기
-		//orderService.orderUpdate(orderInfo);
+	public String postOrderPage(@RequestParam("n") String string 
+								,@RequestParam("bno") int bno
+								,OrderInfo orderInfo , Model model , UserDto dto , Address address
+								, BindingResult bindingResult ,DeliverySituation userEnum ) throws Exception {
+		logger.info("POST OrderPage");
+		System.out.println("POST OrderPage");	
+
+		dto.setUserId(string);
+		orderInfo.setUserId(userService.myInfo(dto).getUserId());
+		orderInfo.setProCode(adminService.proView(bno).getProCode());
+		orderInfo.setAddress(userService.myInfo(dto).getAddress());
+		orderInfo.setOrderPrice(adminService.proView(bno).getProPrice());
+		orderInfo.setDeliveryInfo(userEnum.Ready);
+		orderService.order(orderInfo);
+		// 주문 한 수량 가저오기
 		//enum class 세팅
 			/*
 			 * 1. 구매자 -> myInfo -> deliveryInfo.jsp -> Enum(배송상태).set 준비중
 			 * 2. 관리자 -> admin/claim/delivery(배송상태) -> Enum.set(주문요청) -> Btn click -> 구매자 Enum.set 배달진행중
 			 * 3. 관리자 -> 배송완료시 -> enum.set 배달완료
 			 */
+		//address 정보 보기
+		address.setUserId(userService.myInfo(dto).getUserId());
+		orderInfo.setDeliveryInfo(userEnum.Ready);
+		System.out.println("userVerify : " + userService.myInfo(dto).getVerify());
+		System.out.println("enum class test : " + orderInfo.getDeliveryInfo());
+
+		System.out.println("address userId : " + address.getUserId());
+		System.out.println("address Code : " + address.getAddressCode());
+		System.out.println("address streetAddress : " + address.getStreetAddress());
+		System.out.println("address Address : " + address.getAddress());
+		System.out.println("address details : " + address.getDetails());
+		System.out.println("address ReferenceInfo : " + address.getReferenceInfo());
+
+		
+		
+		
+		addressService.insertAddress(address);
+		//
 		// 후기 권한 On
 		//adminService.proMinusProStock Dao , Service 만들기 (Dao 나 Service로만 처리 가능 한가?)
-		return "주문 환료 페이지 ";
+
+//		if(order == true) {	// 주문이 성공하면
+//		return "main" or "myInfo";
+//	}else if(order == false) {
+//		//주문 실패 예시 찾아복;
+//		System.out.println("주문이 실패하였습니다.");
+//		return "proInfo";
+
+		
+		return "redirect:/main";
 	}
 
 	
 //	@GetMapping("/주문 완료 페이지")
 //	public void 주문완료_페이지(Order order) throws Exception {
-//		if(order == true) {	// 주문이 성공하면
-//			return "main" or "myInfo";
-//		}else if(order == false) {
-//			//주문 실패 예시 찾아복;
-//			System.out.println("주문이 실패하였습니다.");
-//			return "proInfo";
 //		}
 //	}
 

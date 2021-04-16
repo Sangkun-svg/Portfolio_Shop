@@ -6,10 +6,10 @@
 <meta charset="UTF-8">
 <title>다음 주소 API</title>
 </head>
-<body>
+<body>															   
 <input type="text" id="sample4_postcode" placeholder="우편번호" name="addressCode">
 <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="streetCode">
+<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="streetAddress">
 <input type="text" id="sample4_jibunAddress" placeholder="지번주소" name="address">
 <span id="guide" style="color:#999;display:none"></span>
 <input type="text" id="sample4_detailAddress" placeholder="상세주소" name="details"><br>

@@ -3,11 +3,11 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="orderMapper">
-	<insert id="order">
+	<insert id="order"><!-- #{orderStock} 우선 빼놓음 -->
 		insert into orderInfo 
-			(orderId , userId , proCode ,orderStock , orderPrice , address)
+			(orderId , userId , proCode , address , orderPrice , deliveryInfo)
 		values
-			(#{orderId},#{userId},#{proCode},#{orderStock},#{orderPrice},#{address})
+			(#{orderId},#{userId},#{proCode},#{address},#{orderPrice},#{deliveryInfo})
 	</insert>
 
 	<select id="orderInfo" resultType="com.sh.Dto.OrderInfo">

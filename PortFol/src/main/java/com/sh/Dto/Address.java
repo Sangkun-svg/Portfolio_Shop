@@ -2,39 +2,46 @@ package com.sh.Dto;
 
 public class Address {
 
-	private String addressId;	
-	private int addressCode; // 우편번호
-	private int address;
+	private int addressId;	
+	private String addressCode; // 우편번호
+	private String streetAddress;
+	private String address;
 	private String userId;
 	private String details;
 	private String referenceInfo;
 
 	public Address() {}
-	public Address(String addressId, int addressCode, int address, String userId, String details,
-			String referenceInfo) {
-		this.addressId = addressId;
+	public Address(int addressId, String addressCode, String streetAddress, String address, String userId,
+			String details, String referenceInfo) {		this.addressId = addressId;
 		this.addressCode = addressCode;
+		this.streetAddress = streetAddress;
 		this.address = address;
 		this.userId = userId;
 		this.details = details;
 		this.referenceInfo = referenceInfo;
 	}
-	public String getAddressId() {
+	public int getAddressId() {
 		return addressId;
 	}
-	public void setAddressId(String addressId) {
+	public void setAddressId(int addressId) {
 		this.addressId = addressId;
 	}
-	public int getAddressCode() {
+	public String getAddressCode() {
 		return addressCode;
 	}
-	public void setAddressCode(int addressCode) {
+	public void setAddressCode(String addressCode) {
 		this.addressCode = addressCode;
 	}
-	public int getAddress() {
+	public String getStreetAddress() {
+		return streetAddress;
+	}
+	public void setStreetAddress(String streetAddress) {
+		this.streetAddress = streetAddress;
+	}
+	public String getAddress() {
 		return address;
 	}
-	public void setAddress(int address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 	public String getUserId() {
