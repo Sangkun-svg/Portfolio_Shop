@@ -60,9 +60,6 @@ public class OrderInfo {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
-	
-	
 	public DeliverySituation getDeliveryInfo() {
 		return deliveryInfo;
 	}

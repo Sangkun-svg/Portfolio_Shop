@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,11 +18,11 @@
 </style>
 <body>
 	<div class="wrap">
-		내가 주문한 상품 : userOrderProduction<br><br>
-		가격 : userOrderProduction<br><br>
-		배송상태  : enum class<br><br>
-		취소 Btn(enum DeliverySituation이 Ready 일 때만 가능 )<br><br>
-		뒤로 Btn <br><br>
+		<c:forEach items="${orderList}" var="prolist">
+				<li>상품코드 : <c:out value="${orderList.proCode}"/></li>
+				<li>가격 : <c:out value="${orderList.orderPrice}"/></li>
+				<li>배달상황 : <c:out value="${orderList.deliveryInfo}"/></li>
+		</c:forEach>
 	</div>
 </body>
 </html>

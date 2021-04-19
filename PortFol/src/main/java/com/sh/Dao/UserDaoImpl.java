@@ -1,10 +1,13 @@
 package com.sh.Dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.sh.Dto.OrderInfo;
 import com.sh.Dto.UserDto;
 
 @Repository
@@ -42,6 +45,11 @@ public class UserDaoImpl implements UserDao{
 	public int idValidation(UserDto dto) throws Exception {
 		int result = sql.selectOne("userMapper.idValidation" , dto);
 		return result;
+	}
+
+	@Override
+	public List<OrderInfo> orderList(String userId) throws Exception {
+		return sql.selectList("userMapper.orderList" , userId);
 	}
 
 	@Override

@@ -90,19 +90,25 @@ public class UserController {
 	}
 	
 	@PostMapping("/signin")
-	public String postSignin(UserDto dto , HttpServletRequest req , RedirectAttributes rttr)throws Exception {
+	public String postSignin(UserDto dto , HttpServletRequest req , RedirectAttributes rttr , Model model)throws Exception {
 		logger.info("Post Signin");
 		System.out.println("Post Signin");
-
+		String test = dto.getUserId();
+		System.out.println("dto.userID : " + dto.getUserId());
+		System.out.println("dto.userPass : " + dto.getUserPass());
 		UserDto login = userService.signin(dto);
+		
 		System.out.println("login : " + login);
-		System.out.println("권한 : " + login.getVerify());
+		System.out.println("userId : " + dto.getUserId());
+		model.addAttribute("user" , userService.myInfo(dto));
+
 		HttpSession session = req.getSession();
 
+		
 		String encryPassword = UserSha256.encrypt(dto.getUserPass());
 		dto.setUserPass(encryPassword);
 		System.out.println(dto.getUserPass());
-
+				
 		// 작동 안하는 이유는 mapper에 result 타입에 들어가지 않아서 이다????
 		// -> 1. DB 안에서 update 사용해서 id pass 만들고 로그인 시도
 		// -> 2. mapper.signup에 resultType을 Dto로 설정 해보기 
@@ -119,7 +125,7 @@ public class UserController {
 			rttr.addFlashAttribute("msg" , false);
 			System.out.println("Login false");
 		}
-		return"redirect:/";
+		return"redirect:/nav?n="+test;
 	}
 	
 	
@@ -154,7 +160,7 @@ public class UserController {
 		}
 		userService.userDelete(dto);
 		session.invalidate();
-		return"redirect:/";
+		return"redirect:/"; 
 	}
 
 
@@ -178,11 +184,12 @@ public class UserController {
 	}
 	
 	@GetMapping("/main")
-	public void getMainPage( Model model,HttpServletRequest req , UserDto dto) throws Exception {
+	public void getMainPage(@RequestParam(value="n" , required=false) String string ,Model model , HttpServletRequest req , UserDto dto) throws Exception {
 		logger.info("Main Page");
 		System.out.println("MainPage");
 		model.addAttribute("prolist", adminService.proList());
-		
+		dto.setUserId(string);
+		model.addAttribute("user" , userService.myInfo(dto));
 		//내가 짠 코드
 		HttpSession session = req.getSession();
 		System.out.println("session : " + session );
@@ -231,20 +238,13 @@ public class UserController {
 	}
 
 	@GetMapping("/myInfo")
-	public void getMyInfo(UserDto dto) throws Exception {
+	public void getMyInfo(@RequestParam(value="n" , required=false) String string, Model model , UserDto dto) throws Exception {
 		logger.info("My Info");
 		System.out.println("My Info");
+		dto.setUserId(string);
+		model.addAttribute("user", userService.myInfo(dto));
 	}
 
-	@GetMapping("/deliveryInfo")
-	public void getDeliveryInfo(OrderInfo orderInfo) throws Exception {
-		logger.info("Get DeliveryInfo");
-		System.out.println("Get DeliveryInfo");
-		// 주문정보에 주문한 상품과 회원정보를 담는 코드 
-		orderInfo.setOrderId("1");
-		System.out.println("orderInfo_userId : " + orderInfo.getUserId());
-		System.out.println("orderInfo_userId : " + orderInfo.getProCode());
-	}
 	
 	@GetMapping("/userUpdate")
 	public void GetUserUpdate() throws Exception {
@@ -271,6 +271,13 @@ public class UserController {
 		// 주문정보 中 회원정보 넣어주기
 		dto.setUserId(string);
 		model.addAttribute("member" , userService.myInfo(dto));
+//		userId , userName , userPhone , verify , address
+
+		System.out.println("test : " + userService.myInfo(dto).getUserId());
+		System.out.println("test : " + userService.myInfo(dto).getUserName());
+		System.out.println("test : " + userService.myInfo(dto).getUserPhone());
+		System.out.println("test : " + userService.myInfo(dto).getAddress());
+
 		// 주문정보 中 상품정보 넣어주기
 		model.addAttribute("pro" , adminService.proView(bno));
 
@@ -286,7 +293,8 @@ public class UserController {
 								, BindingResult bindingResult ,DeliverySituation userEnum ) throws Exception {
 		logger.info("POST OrderPage");
 		System.out.println("POST OrderPage");	
-
+		//
+		//
 		dto.setUserId(string);
 		orderInfo.setUserId(userService.myInfo(dto).getUserId());
 		orderInfo.setProCode(adminService.proView(bno).getProCode());
@@ -333,10 +341,22 @@ public class UserController {
 		return "redirect:/main";
 	}
 
-	
 //	@GetMapping("/주문 완료 페이지")
 //	public void 주문완료_페이지(Order order) throws Exception {
 //		}
 //	}
+
+
+
+	@GetMapping("/deliveryInfo")
+	public void getDeliveryInfo(@RequestParam(value="n" , required=false) String string,OrderInfo orderInfo , UserDto dto , Model model) throws Exception {
+		logger.info("Get DeliveryInfo");
+		System.out.println("Get DeliveryInfo");
+		// 주문정보에 주문한 상품과 회원정보를 담는 코드 
+		dto.setUserId(string);
+		System.out.println("userId : "+ dto.getUserId());
+		model.addAttribute("orderList",userService.orderList(dto.getUserId()));
+		
+	}
 
 }

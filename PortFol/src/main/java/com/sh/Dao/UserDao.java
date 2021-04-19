@@ -2,6 +2,7 @@ package com.sh.Dao;
 
 import java.util.List;
 
+import com.sh.Dto.OrderInfo;
 import com.sh.Dto.Product;
 import com.sh.Dto.UserDto;
 
@@ -20,6 +21,6 @@ public interface UserDao {
 	
 	public UserDto myInfo(UserDto dto) throws Exception;
 
-
+	public List<OrderInfo> orderList(String userId) throws Exception;
 	
 }				

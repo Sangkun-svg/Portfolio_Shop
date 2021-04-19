@@ -1,7 +1,10 @@
 package com.sh.Service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
+import com.sh.Dto.OrderInfo;
 import com.sh.Dto.UserDto;
 
 public interface UserService {
@@ -21,5 +24,6 @@ public interface UserService {
 
 	public UserDto myInfo(UserDto dto) throws Exception;
 
+	public List<OrderInfo> orderList(String userId) throws Exception;
 	
 }

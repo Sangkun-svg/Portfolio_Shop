@@ -78,13 +78,13 @@
 		<h1 style="text-align: center;">로그인 폼</h1>
 		<form role="form" method="post">
 			<input type="email" id="userId" name="userId" required="required" /><br>
-			<input type="password" id="userPass" name="userPass"
-				required="required" />
+			<input type="password" id="userPass" name="userPass" required="required" />			
 			<button type="submit" id="signin_btn" name="signin_btn">로그인</button>
+			
 			<c:if test="${msg == false}">
 				<p style="color: #f00;">로그인에 실패했습니다.</p>
 			</c:if>
-		</form>
+		</form>		
 	</div>
 </body>
 </html>

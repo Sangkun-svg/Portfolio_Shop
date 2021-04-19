@@ -1,11 +1,14 @@
 package com.sh.Service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
 import com.sh.Dao.UserDao;
+import com.sh.Dto.OrderInfo;
 import com.sh.Dto.UserDto;
 import com.sh.Enum.DeliveryAdmin;
 import com.sh.Enum.DeliverySituation;
@@ -55,6 +58,11 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public UserDto myInfo(UserDto dto) throws Exception {
 		return dao.myInfo(dto);
+	}
+
+	@Override
+	public List<OrderInfo> orderList(String userId) throws Exception {
+		return dao.orderList(userId);
 	}
 
 
