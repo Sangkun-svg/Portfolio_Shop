@@ -349,14 +349,35 @@ public class UserController {
 
 
 	@GetMapping("/deliveryInfo")
-	public void getDeliveryInfo(@RequestParam(value="n" , required=false) String string,OrderInfo orderInfo , UserDto dto , Model model) throws Exception {
+	public void getDeliveryInfo(@RequestParam(value="n" , required=false) String string
+								,OrderInfo orderInfo , UserDto dto , Model model) throws Exception {
 		logger.info("Get DeliveryInfo");
 		System.out.println("Get DeliveryInfo");
 		// 주문정보에 주문한 상품과 회원정보를 담는 코드 
 		dto.setUserId(string);
 		System.out.println("userId : "+ dto.getUserId());
+		model.addAttribute("user",userService.myInfo(dto));		
 		model.addAttribute("orderList",userService.orderList(dto.getUserId()));
 		
 	}
 
+	@GetMapping("refund")
+	public void getRefund(@RequestParam(value = "n" , required = false) String string )throws Exception {
+		logger.info("Get Refund Page");
+		System.out.println("Get Refund Page");
+
+		System.out.println("넘어온 아이디 : " + string );
+	}
+	
+	@PostMapping("postRefund")
+	public String postRefund() throws Exception {
+		logger.info("Post Refund");
+		System.out.println("Post Refund");
+		
+		// amdin -> client.claim -> 환불요청 띄우기 
+		
+		// user -> deliveryInfo -> 배송상황 = stop_for_refund 변경
+		
+		return "redirect:/main";
+	}
 }

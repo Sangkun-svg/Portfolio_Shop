@@ -58,7 +58,7 @@
 		<!-- 주문한 상품 리스트 뽑아서 담기 -->
 	<select id="orderList" resultType="com.sh.Dto.OrderInfo">
 		select 
-			orderId , userId , proCode , orderStock , orderPrice , Address , deliveryInfo
+			orderId , userId , proCode , orderStock , orderPrice , address , deliveryInfo
 		from
 			orderInfo 
 		where 
