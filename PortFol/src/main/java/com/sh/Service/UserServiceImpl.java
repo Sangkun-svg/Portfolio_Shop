@@ -65,5 +65,15 @@ public class UserServiceImpl implements UserService{
 		return dao.orderList(userId);
 	}
 
+	@Override
+	public OrderInfo myOrdered(OrderInfo orderInfo) throws Exception {
+		return dao.myOrdered(orderInfo);
+	}
+
+	@Override
+	public void DsUpdate(OrderInfo orderInfo) throws Exception {
+		dao.DsUpdate(orderInfo);
+	}
+
 
 }

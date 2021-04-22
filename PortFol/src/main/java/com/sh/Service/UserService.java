@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import com.sh.Dto.OrderInfo;
 import com.sh.Dto.UserDto;
+import com.sh.Enum.DeliverySituation;
 
 public interface UserService {
 	public void register(UserDto dto) throws Exception;
@@ -26,4 +27,8 @@ public interface UserService {
 
 	public List<OrderInfo> orderList(String userId) throws Exception;
 	
+	public OrderInfo myOrdered (OrderInfo orderInfo) throws Exception;
+
+	public void DsUpdate (OrderInfo orderInfo) throws Exception; 
+
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sh.Dto.OrderInfo;
 import com.sh.Dto.UserDto;
+import com.sh.Enum.DeliverySituation;
 
 @Repository
 public class UserDaoImpl implements UserDao{
@@ -56,6 +57,17 @@ public class UserDaoImpl implements UserDao{
 	public UserDto myInfo(UserDto dto) throws Exception {
 		return sql.selectOne("userMapper.myInfo" , dto);
 	}
+
+	@Override
+	public OrderInfo myOrdered(OrderInfo orderInfo) throws Exception {
+		return sql.selectOne("userMapper.myOrdered" , orderInfo);
+	}
+
+	@Override
+	public void DsUpdate(OrderInfo orderInfo) throws Exception {
+		sql.update("userMapper.DsUpdate" , orderInfo);
+	}
+
 	
 
 }

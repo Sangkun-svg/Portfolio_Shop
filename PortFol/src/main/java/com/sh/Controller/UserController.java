@@ -353,31 +353,59 @@ public class UserController {
 								,OrderInfo orderInfo , UserDto dto , Model model) throws Exception {
 		logger.info("Get DeliveryInfo");
 		System.out.println("Get DeliveryInfo");
+
 		// 주문정보에 주문한 상품과 회원정보를 담는 코드 
 		dto.setUserId(string);
+		
 		System.out.println("userId : "+ dto.getUserId());
-		model.addAttribute("user",userService.myInfo(dto));		
+		orderInfo.setUserId(string);
+		
+		model.addAttribute("user",userService.myInfo(dto));
 		model.addAttribute("orderList",userService.orderList(dto.getUserId()));
 		
+		
 	}
-
+	
+	
+		
 	@GetMapping("refund")
-	public void getRefund(@RequestParam(value = "n" , required = false) String string )throws Exception {
+	public void getRefund(@RequestParam(value = "userId" , required = false) String userId
+						 ,@RequestParam(value = "orderId" , required = false) String orderId
+						 , UserDto dto , Model model , OrderInfo orderInfo)throws Exception {
 		logger.info("Get Refund Page");
 		System.out.println("Get Refund Page");
 
-		System.out.println("넘어온 아이디 : " + string );
+		System.out.println("넘어온 주문 아이디 : " + orderId );
+		System.out.println("넘어온 아이디 : " + userId);
+		dto.setUserId(userId);
+
+		orderInfo.setUserId(userId);
+		orderInfo.setOrderId(orderId);
+		
+		model.addAttribute("ordered" , userService.myOrdered(orderInfo));
+		System.out.println("Check Refund orderProName : "+userService.myOrdered(orderInfo).getOrderProName());
+		System.out.println("Check Refund orderPrice : "+userService.myOrdered(orderInfo).getOrderPrice());
+		System.out.println("Check Refund orderStock : "+userService.myOrdered(orderInfo).getOrderStock());
 	}
 	
-	@PostMapping("postRefund")
-	public String postRefund() throws Exception {
+	@PostMapping("refund")
+	public String postRefund(@RequestParam(value = "userId" , required = false)String userId
+							,@RequestParam(value = "orderId" , required = false)String orderId
+							,UserDto dto , OrderInfo orderInfo , DeliverySituation ds) throws Exception {
 		logger.info("Post Refund");
 		System.out.println("Post Refund");
-		
+		System.out.println("userId : " + userId); // -> 안넘어옴
+		System.out.println("orderId : " + orderId);
+		// 후기 기능 삭제
+		 
 		// amdin -> client.claim -> 환불요청 띄우기 
-		
+//		adminService.userClaim(orderInfo).setDeliveryInfo(d.request_refund);
+
 		// user -> deliveryInfo -> 배송상황 = stop_for_refund 변경
-		
-		return "redirect:/main";
+		orderInfo.setUserId(userId);
+		orderInfo.setOrderId(orderId);
+		orderInfo.setDeliveryInfo(ds.Stop_for_refund);
+		userService.DsUpdate(orderInfo);
+		return "redirect:/main?n="+userId;
 	}
 }

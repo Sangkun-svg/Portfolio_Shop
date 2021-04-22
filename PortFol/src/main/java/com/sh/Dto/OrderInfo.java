@@ -6,6 +6,7 @@ public class OrderInfo {
 
 	private String orderId;
 	private String userId;
+	private String orderProName;
 	private int proCode;
 	private int orderStock;
 	private int orderPrice;
@@ -13,7 +14,7 @@ public class OrderInfo {
 	private DeliverySituation deliveryInfo;
 
 	public OrderInfo() {}
-	public OrderInfo(String orderId, String userId, int proCode, int orderStock, int orderPrice, String address,
+	public OrderInfo(String orderId, String userId,String orderProName, int proCode, int orderStock, int orderPrice, String address,
 			DeliverySituation deliveryInfo) {
 		super();
 		this.orderId = orderId;
@@ -23,6 +24,7 @@ public class OrderInfo {
 		this.orderPrice = orderPrice;
 		this.address = address;
 		this.deliveryInfo = deliveryInfo;
+		this.orderProName = orderProName;
 	}
 	public String getOrderId() {
 		return orderId;
@@ -65,6 +67,12 @@ public class OrderInfo {
 	}
 	public void setDeliveryInfo(DeliverySituation string) {
 		this.deliveryInfo = string;
+	}
+	public String getOrderProName() {
+		return orderProName;
+	}
+	public void setOrderProName(String orderProName) {
+		this.orderProName = orderProName;
 	}
 	
 	

@@ -56,17 +56,19 @@
     }
 </script>
 <body>
-    <div class="wrap">
+    <form action="refund" method="post" class="wrap">
         <h1 style="text-align: center;">환불 페이지</h1>
         <div class="line"></div>
-        
-        <label for="refund_Price"><h2>상품명 : </h2></label><br>
-        <label for="refund_Price"><h2>상품 가격 : </h2></label><br>
-        <label for="refund_Price"><h2>주문 수량 : </h2></label><br>
+        <label for="refund_Price"><h2>ID : ${ordered.userId}</h2></label><br>
+        <input type="hidden" name="userId" value="${ordered.userId}">        
+        <input type="hidden" name="orderId" value="${ordered.orderId}">        
+        <label for="refund_Price"><h2>상품명 : ${ordered.orderProName}</h2></label><br>
+        <label for="refund_Price"><h2>상품 가격 : ${ordered.orderPrice}</h2></label><br>
+        <label for="refund_Price"><h2>주문 수량 : ${ordered.orderStock}</h2></label><br>
         <label for="refund_Price"><h2>환불 방법 :             
             <input type="radio" name="chk_info" value="credit" id="radio_btn">신용카드
             <input type="radio" name="chk_info" value="address" id="radio_btn">계좌입금
-</h2>
+
         </label><br>
 
         <label for="refund_Price"><h2>환불 이유 : 
@@ -83,7 +85,7 @@
 
 
         <button type="button" class="refund_btn" onclick="goBack()">취소</button>
-        <button type="button" class="refund_btn" onclick="goRefund()">환불</button>
-    </div>
+        <button type="summit" class="refund_btn">환불</button>
+    </form>
 </body>
 </html>

@@ -5,6 +5,7 @@ import java.util.List;
 import com.sh.Dto.OrderInfo;
 import com.sh.Dto.Product;
 import com.sh.Dto.UserDto;
+import com.sh.Enum.DeliverySituation;
 
 public interface UserDao {
 	public void register(UserDto dto) throws Exception;
@@ -22,5 +23,8 @@ public interface UserDao {
 	public UserDto myInfo(UserDto dto) throws Exception;
 
 	public List<OrderInfo> orderList(String userId) throws Exception;
-	
+
+	public OrderInfo myOrdered (OrderInfo orderInfo) throws Exception;
+
+	public void DsUpdate (OrderInfo orderInfo) throws Exception; 
 }				

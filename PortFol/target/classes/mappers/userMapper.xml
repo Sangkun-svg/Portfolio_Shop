@@ -58,11 +58,33 @@
 		<!-- 주문한 상품 리스트 뽑아서 담기 -->
 	<select id="orderList" resultType="com.sh.Dto.OrderInfo">
 		select 
-			orderId , userId , proCode , orderStock , orderPrice , address , deliveryInfo
+			orderId ,orderProName , userId , proCode , orderStock , orderPrice , address , deliveryInfo
 		from
 			orderInfo 
 		where 
 			userId = #{userId}
 	</select>
-	
+
+	<select id="myOrdered" resultType="com.sh.Dto.OrderInfo">
+		select 
+			orderId ,orderProName , userId , proCode , orderStock , orderPrice , address , deliveryInfo
+		from
+			orderInfo 
+		where 
+			userId = #{userId}
+		and 
+			orderId = #{orderId}
+	</select>
+
+	<update id="DsUpdate">
+		update 
+			orderInfo 
+		set 
+			deliveryInfo = #{deliveryInfo} 
+		where 
+			userId = #{userId}
+		and 
+			orderId = #{orderId}
+
+	</update>
 </mapper>
