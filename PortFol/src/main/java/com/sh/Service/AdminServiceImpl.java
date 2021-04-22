@@ -50,5 +50,15 @@ public class AdminServiceImpl implements AdminService{
 		return dao.userInfo(userId);
 	}
 
+	@Override
+	public void minusProStock(int proCode) throws Exception {
+		dao.minusProStock(proCode);
+	}
+
+	@Override
+	public void plusProStock(int proCode) throws Exception {
+		dao.plusProStock(proCode);
+	}
+
 
 }

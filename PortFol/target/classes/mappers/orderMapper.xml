@@ -23,8 +23,5 @@
 			user.userId = #{userId};
 	</select>
 	
-	<update id="order_refund_Cancle">
-		update product set proStock = proStock + 1 where proCode = 1;
-	</update>
 </mapper>
 

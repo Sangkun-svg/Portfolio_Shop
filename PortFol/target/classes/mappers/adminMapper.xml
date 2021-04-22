@@ -77,9 +77,17 @@
 		update 
 			product set proStock = proStock-1 
 		where
-			proCode = #{proCOde}
+			proCode = #{proCode}
 	</update>
 	
+	<update id="plusProStock">
+		update 
+			product 
+		set 
+			proStock = proStock + 1 
+		where 
+			proCode = #{proCode};
+	</update>
 
 	
 </mapper>

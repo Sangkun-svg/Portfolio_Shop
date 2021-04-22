@@ -7,4 +7,6 @@ public interface OrderDao {
 	public void order(OrderInfo orderInfo) throws Exception;
 	
 	public OrderInfo orderinto(OrderInfo orderInfo) throws Exception;
+
+	
 }

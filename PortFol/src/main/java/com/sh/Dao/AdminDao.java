@@ -22,4 +22,9 @@ public interface AdminDao {
 	public void proDelete(int bno) throws Exception;
 	
 	public UserDto userInfo(String userId) throws Exception; 
+
+	public void minusProStock(int proCode) throws Exception;
+
+	public void plusProStock(int proCode) throws Exception;
+
 }

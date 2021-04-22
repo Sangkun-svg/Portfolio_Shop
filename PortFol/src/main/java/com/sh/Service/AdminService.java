@@ -19,7 +19,10 @@ public interface AdminService {
 
 	public void proDelete(int bno) throws Exception;
 
-
 	public Object userInfo(String userId) throws Exception; 
+
+	public void minusProStock(int proCode) throws Exception;
+
+	public void plusProStock(int proCode) throws Exception;
 
 }

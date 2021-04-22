@@ -302,6 +302,7 @@ public class UserController {
 		orderInfo.setOrderPrice(adminService.proView(bno).getProPrice());
 		orderInfo.setDeliveryInfo(userEnum.Ready);
 		orderService.order(orderInfo);
+		
 		// 주문 한 수량 가저오기
 		//enum class 세팅
 			/*
@@ -337,8 +338,10 @@ public class UserController {
 //		System.out.println("주문이 실패하였습니다.");
 //		return "proInfo";
 
-		
-		return "redirect:/main";
+		// 상품 수량 -1
+		System.out.println("proCode 비교 : " + orderInfo.getProCode());
+		adminService.minusProStock(orderInfo.getProCode());
+		return "redirect:/main?n="+string;
 	}
 
 //	@GetMapping("/주문 완료 페이지")
@@ -406,6 +409,7 @@ public class UserController {
 		orderInfo.setOrderId(orderId);
 		orderInfo.setDeliveryInfo(ds.Stop_for_refund);
 		userService.DsUpdate(orderInfo);
+		adminService.plusProStock(userService.myOrdered(orderInfo).getProCode());
 		return "redirect:/main?n="+userId;
 	}
 }

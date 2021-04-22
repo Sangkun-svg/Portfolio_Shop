@@ -50,5 +50,15 @@ public class AdminDaoImpl implements AdminDao{
 		return sql.selectOne("adminMapper.userInfo",  userId);	
 	}
 
+	@Override
+	public void minusProStock(int proCode) throws Exception {
+		sql.update("adminMapper.minusProStock" , proCode);
+	}
+
+	@Override
+	public void plusProStock(int proCode) throws Exception {
+		sql.update("adminMapper.plusProStock" , proCode);		
+	}
+
 	
 }
