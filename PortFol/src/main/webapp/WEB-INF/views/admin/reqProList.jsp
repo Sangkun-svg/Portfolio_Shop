@@ -41,7 +41,8 @@
 
 						<td style="text-align:center">
 							<c:if test ="${req.deliveryInfo == 'Stop_for_refund'}">
-								<button type="button" class="btn btn-danger">환불 요청</button>
+								<button type="button" class="btn btn-danger"
+								 onclick="location.href='${pageContext.request.contextPath}/admin/reqRefund?n=${req.userId}&orderId=${req.orderId }'">환불 요청</button>
 							</c:if>  
 							<c:if test ="${req.deliveryInfo != 'Stop_for_refund'}">
 								<p style="text-align:center"> X </p>
@@ -50,7 +51,8 @@
 
 						<td style="text-align:center">
 							<c:if test ="${req.deliveryInfo == 'Stop_for_delivery_Cancle'}">
-								<button type="button" class="btn btn-danger">취소 요청</button>
+								<button type="button" class="btn btn-danger"
+								 onclick="location.href='${pageContext.request.contextPath}/admin/reqCancle?n=${req.userId}&orderId=${req.orderId }'">취소 요청</button>
 							</c:if>
 							<c:if test ="${req.deliveryInfo != 'Stop_for_delivery_Cancle'}">
 								<p style="text-align:center"> X </p>
@@ -60,7 +62,8 @@
 						
 						<td style="text-align:center">
 							<c:if test ="${req.deliveryInfo == 'Stop_for_change'}">
-								<button type="button" class="btn btn-danger">교환 요청</button>
+								<button type="button" class="btn btn-danger"
+								 onclick="location.href='${pageContext.request.contextPath}/admin/reqChange?n=${req.userId}&orderId=${req.orderId }'">교환 요청</button>
 							</c:if>
 							<c:if test ="${req.deliveryInfo != 'Stop_for_change'}">
 								<p style="text-align:center"> X </p>

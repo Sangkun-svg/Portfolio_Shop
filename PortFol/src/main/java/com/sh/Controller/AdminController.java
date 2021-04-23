@@ -145,12 +145,6 @@ public class AdminController {
 		return"admin/claims/delivery";
 	}
 	
-	@GetMapping("/refund") // admin/refund
-	public String getRefund () throws Exception{
-		logger.info("Get refund");
-		System.out.println("Get refund");
-		return"admin/claims/refund";
-	}
 
 	@GetMapping("/reqProList") // indexOutOfBoundsException occur & reason : 
 							   // numberException : for input string & reason :
@@ -160,7 +154,7 @@ public class AdminController {
 		System.out.println("Get reqProduction");
 		adminService.reqProList().clear();
 		model.addAttribute("req" , adminService.reqProList());
-}
+	}
 	
 	
 	@GetMapping("/userInfo")
@@ -173,5 +167,33 @@ public class AdminController {
 		
 	}
 	
+	
+	@GetMapping("/reqRefund") 
+	public void getRefund (@RequestParam(value = "n" , required = false) String n
+						  ,@RequestParam(value = "orderId" , required = false) int orderId) throws Exception{
+		logger.info("Get user Request Refund");
+		System.out.println("Get user Request Refund");
+		
+		System.out.println("넘어온 아이디  : " + n);
+		System.out.println("넘어온 주문번호 : " + orderId);		
+	}
+	@GetMapping("/reqCancle") 
+	public void getCancle (@RequestParam(value = "n" , required = false) String n
+			  ,@RequestParam(value = "orderId" , required = false) int orderId) throws Exception{
+		logger.info("Get user Request Cancle");
+		System.out.println("Get user Request Cancle");
+
+		System.out.println("넘어온 아이디  : " + n);
+		System.out.println("넘어온 주문번호 : " + orderId);		
+}
+	@GetMapping("/reqChange") 
+	public void getChange (@RequestParam(value = "n" , required = false) String n
+			  ,@RequestParam(value = "orderId" , required = false) int orderId) throws Exception{
+		logger.info("Get user Request Change");
+		System.out.println("Get user Request Change");
+
+		System.out.println("넘어온 아이디  : " + n);
+		System.out.println("넘어온 주문번호 : " + orderId);		
+}
 	
 }
