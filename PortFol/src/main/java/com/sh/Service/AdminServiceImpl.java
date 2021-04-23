@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.sh.Dao.AdminDao;
+import com.sh.Dto.OrderInfo;
 import com.sh.Dto.Product;
 import com.sh.Dto.UserDto;
 
@@ -58,6 +59,11 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public void plusProStock(int proCode) throws Exception {
 		dao.plusProStock(proCode);
+	}
+
+	@Override
+	public List<OrderInfo> reqProList() throws Exception {
+		return dao.reqProList();
 	}
 
 

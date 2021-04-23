@@ -22,10 +22,12 @@
 					<th style="text-align:center">등록일</th>
 					<th style="text-align:center">권한</th>
 					<th style="text-align:center">상세정보 보기</th>
+					<th style="text-align:center">환불 요청</th>
+					<th style="text-align:center">취소 요청</th>
 				</tr>
 				<c:forEach items="${userlist}" var="userlist">
 					<tr>
-						<td style="text-align:center"><c:out value="${userInfo.userId}"  /></td>
+						<td style="text-align:center"><c:out value="${userlist.userId}"  /></td>
 						<td style="text-align:center"><c:out value="${userlist.userName}" /></td>
 						<td style="text-align:center"><c:out value="${userlist.userPhone}" /></td>
 						<td style="text-align:center"><c:out value="${userlist.regDate}" /></td>
@@ -36,8 +38,6 @@
 						<c:if test ="${userlist.verify == 9}">
 							<td style="text-align:center">타 관리자 정보</td>
 						</c:if>
-												
-						
 					</tr>
 				</c:forEach>
 			</table>

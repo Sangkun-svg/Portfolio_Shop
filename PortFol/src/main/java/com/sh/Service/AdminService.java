@@ -2,6 +2,7 @@ package com.sh.Service;
 
 import java.util.List;
 
+import com.sh.Dto.OrderInfo;
 import com.sh.Dto.Product;
 import com.sh.Dto.UserDto;
 
@@ -24,5 +25,7 @@ public interface AdminService {
 	public void minusProStock(int proCode) throws Exception;
 
 	public void plusProStock(int proCode) throws Exception;
+
+	public List<OrderInfo> reqProList() throws Exception;
 
 }

@@ -145,13 +145,23 @@ public class AdminController {
 		return"admin/claims/delivery";
 	}
 	
-	@GetMapping("/refund")
+	@GetMapping("/refund") // admin/refund
 	public String getRefund () throws Exception{
 		logger.info("Get refund");
 		System.out.println("Get refund");
 		return"admin/claims/refund";
 	}
 
+	@GetMapping("/reqProList") // indexOutOfBoundsException occur & reason : 
+							   // numberException : for input string & reason :
+								
+	public void getReqProcuction(Model model) throws Exception{
+		logger.info("Get reqProduction");
+		System.out.println("Get reqProduction");
+		adminService.reqProList().clear();
+		model.addAttribute("req" , adminService.reqProList());
+}
+	
 	
 	@GetMapping("/userInfo")
 	public void getUserInfo(@RequestParam("n") String userId , Model model , UserDto dto) throws Exception{
@@ -162,5 +172,6 @@ public class AdminController {
 		 model.addAttribute("userInfo" , adminService.userInfo(dto.getUserId())); 
 		
 	}
+	
 	
 }

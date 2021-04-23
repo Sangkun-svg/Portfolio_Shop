@@ -11,7 +11,8 @@
 		<ul>
 			<li><a href="${pageContext.request.contextPath}/admin/proRegister">상품 등록</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/proList">상품 목록</a></li>
-			<li><a href="">상품 소감</a></li>
+			<li><a href="${pageContext.request.contextPath}/admin/reqProList">주문 요청된 상품</a></li>
+			<li><a href="">상품 후기</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/userList">유저 목록</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/claim">고객 요청</a></li>
 		</ul>

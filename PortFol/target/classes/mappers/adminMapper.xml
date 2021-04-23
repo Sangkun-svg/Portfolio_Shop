@@ -89,6 +89,26 @@
 			proCode = #{proCode};
 	</update>
 
+	<!--orderProName 대신 product.proName, 넣기  / -->
+	<!-- orderInfo.orderProName , deliveryInfo  -->
+	<select id="reqProList" resultType="hashmap">
+		SELECT 
+			user.userId As userId ,
+			user.userName As userName, 
+			user.address As address,
+			orderId As orderId, 
+			orderInfo.proCode As proCode, 
+			orderInfo.orderProName	As orderProName,	
+			orderStock As orderStock, 
+			orderPrice As orderPrice,
+			deliveryInfo As deliveryInfo
+		FROM 
+			portfolio.user 
+		LEFT JOIN 
+			portfolio.orderInfo on user.userId = orderInfo.userId
+		WHERE 
+			orderId is not null
+	</select>	
 	
 </mapper>
 

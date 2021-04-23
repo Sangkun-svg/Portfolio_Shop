@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.sh.Dto.OrderInfo;
 import com.sh.Dto.Product;
 import com.sh.Dto.UserDto;
 
@@ -58,6 +59,11 @@ public class AdminDaoImpl implements AdminDao{
 	@Override
 	public void plusProStock(int proCode) throws Exception {
 		sql.update("adminMapper.plusProStock" , proCode);		
+	}
+
+	@Override
+	public List<OrderInfo> reqProList() throws Exception {
+		return sql.selectList("adminMapper.reqProList");
 	}
 
 	
