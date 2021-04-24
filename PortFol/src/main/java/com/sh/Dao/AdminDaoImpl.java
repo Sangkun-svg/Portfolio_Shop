@@ -66,5 +66,11 @@ public class AdminDaoImpl implements AdminDao{
 		return sql.selectList("adminMapper.reqProList");
 	}
 
+	@Override
+	public void DeleteOrderInfo(OrderInfo orderInfo) throws Exception {
+		sql.delete("adminMapper.DeleteOrderInfo" , orderInfo);
+	}
+
+
 	
 }

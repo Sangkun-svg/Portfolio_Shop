@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sh.Dto.OrderInfo;
 import com.sh.Dto.Product;
 import com.sh.Dto.UserDto;
+import com.sh.Enum.DeliverySituation;
 import com.sh.Service.AdminService;
+import com.sh.Service.UserService;
 import com.sh.utils.UploadFileUtils;
 
 @Controller
@@ -28,6 +31,7 @@ public class AdminController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@Autowired AdminService adminService;
+	@Autowired UserService userService;
 	   
 	@Resource(name = "uploadPath")
 	private String uploadPath;
@@ -170,13 +174,57 @@ public class AdminController {
 	
 	@GetMapping("/reqRefund") 
 	public void getRefund (@RequestParam(value = "n" , required = false) String n
-						  ,@RequestParam(value = "orderId" , required = false) int orderId) throws Exception{
+						  ,@RequestParam(value = "orderId" , required = false) String orderId
+						  , OrderInfo orderInfo ,Model model) throws Exception{
 		logger.info("Get user Request Refund");
 		System.out.println("Get user Request Refund");
 		
-		System.out.println("넘어온 아이디  : " + n);
-		System.out.println("넘어온 주문번호 : " + orderId);		
+		orderInfo.setUserId(n);
+		orderInfo.setOrderId(orderId);
+		System.out.println("set userID : " + n);
+		System.out.println("set orderID: " + orderId);		
+		
+		model.addAttribute("test" ,userService.myOrdered(orderInfo) ); 
 	}
+	
+	@GetMapping("/acceptRefund")
+	public void acceptRefund(@RequestParam(value = "n" , required = false) String n
+			  ,@RequestParam(value = "orderId" , required = false) String orderId
+			  , OrderInfo orderInfo ,Model model,DeliverySituation ds)throws Exception {
+		logger.info("Get acceptRefund");
+		System.out.println("Get acceptRefund");
+		
+		orderInfo.setDeliveryInfo(ds.Success_refund);
+		orderInfo.setUserId(n);
+		orderInfo.setOrderId(orderId);
+		userService.DsUpdate(orderInfo);
+		//주문 목록에서 삭제
+		adminService.DeleteOrderInfo(orderInfo);
+		
+	}
+	@GetMapping("/disallowRefund")	// 환불 불허
+	public void disallowRefund(@RequestParam(value = "n" , required = false) String n
+			  ,@RequestParam(value = "orderId" , required = false) String orderId
+			  , OrderInfo orderInfo ,Model model,DeliverySituation ds)throws Exception {
+		logger.info("Get disallowRefund");
+		System.out.println("Get disallowRefund");
+
+		orderInfo.setDeliveryInfo(ds.GOING);
+		orderInfo.setUserId(n);
+		orderInfo.setOrderId(orderId);
+		userService.DsUpdate(orderInfo);
+		// 채널톡을 이용한 유저에게 불허 알림 
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	@GetMapping("/reqCancle") 
 	public void getCancle (@RequestParam(value = "n" , required = false) String n
 			  ,@RequestParam(value = "orderId" , required = false) int orderId) throws Exception{
@@ -185,7 +233,7 @@ public class AdminController {
 
 		System.out.println("넘어온 아이디  : " + n);
 		System.out.println("넘어온 주문번호 : " + orderId);		
-}
+	}
 	@GetMapping("/reqChange") 
 	public void getChange (@RequestParam(value = "n" , required = false) String n
 			  ,@RequestParam(value = "orderId" , required = false) int orderId) throws Exception{
@@ -194,6 +242,24 @@ public class AdminController {
 
 		System.out.println("넘어온 아이디  : " + n);
 		System.out.println("넘어온 주문번호 : " + orderId);		
-}
+	}
+	
+
+	
+	@GetMapping("/acceptCancle")
+	public void acceptCancle()throws Exception {
+		
+	}
+
+	
+	@GetMapping("/acceptChange")
+	public void acceptChange()throws Exception {
+		
+	}
+	@GetMapping("/disallowChange")	// 교환 불허
+	public void disallowChange()throws Exception {
+		
+	}
+
 	
 }

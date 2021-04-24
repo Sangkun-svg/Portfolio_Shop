@@ -66,5 +66,10 @@ public class AdminServiceImpl implements AdminService{
 		return dao.reqProList();
 	}
 
+	@Override
+	public void DeleteOrderInfo(OrderInfo orderInfo) throws Exception {
+		dao.DeleteOrderInfo(orderInfo);
+	}
+
 
 }

@@ -109,6 +109,14 @@
 		WHERE 
 			orderId is not null
 	</select>	
-	
+
+	<delete id="DeleteOrderInfo">
+		delete from 
+			orderInfo 
+		where 
+			orderId =#{orderId}
+		and
+			userId =#{userId}
+	</delete>	
 </mapper>
 

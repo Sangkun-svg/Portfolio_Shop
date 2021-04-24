@@ -30,4 +30,5 @@ public interface AdminDao {
 
 	public List<OrderInfo> reqProList() throws Exception;
 
+	public void DeleteOrderInfo(OrderInfo orderInfo) throws Exception;
 }
