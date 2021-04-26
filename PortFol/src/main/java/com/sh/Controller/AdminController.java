@@ -188,7 +188,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("/acceptRefund")
-	public void acceptRefund(@RequestParam(value = "n" , required = false) String n
+	public String acceptRefund(@RequestParam(value = "n" , required = false) String n
 			  ,@RequestParam(value = "orderId" , required = false) String orderId
 			  , OrderInfo orderInfo ,Model model,DeliverySituation ds)throws Exception {
 		logger.info("Get acceptRefund");
@@ -200,8 +200,10 @@ public class AdminController {
 		userService.DsUpdate(orderInfo);
 		//주문 목록에서 삭제
 		adminService.DeleteOrderInfo(orderInfo);
-		
+		//채널톡에서 환불 완료 알림
+		return "admin/reqProList";
 	}
+	
 	@GetMapping("/disallowRefund")	// 환불 불허
 	public void disallowRefund(@RequestParam(value = "n" , required = false) String n
 			  ,@RequestParam(value = "orderId" , required = false) String orderId
@@ -227,7 +229,7 @@ public class AdminController {
 	
 	@GetMapping("/reqCancle") 
 	public void getCancle (@RequestParam(value = "n" , required = false) String n
-			  ,@RequestParam(value = "orderId" , required = false) int orderId) throws Exception{
+			  			  ,@RequestParam(value = "orderId" , required = false) int orderId) throws Exception{
 		logger.info("Get user Request Cancle");
 		System.out.println("Get user Request Cancle");
 
@@ -236,7 +238,7 @@ public class AdminController {
 	}
 	@GetMapping("/reqChange") 
 	public void getChange (@RequestParam(value = "n" , required = false) String n
-			  ,@RequestParam(value = "orderId" , required = false) int orderId) throws Exception{
+			  			  ,@RequestParam(value = "orderId" , required = false) int orderId) throws Exception{
 		logger.info("Get user Request Change");
 		System.out.println("Get user Request Change");
 

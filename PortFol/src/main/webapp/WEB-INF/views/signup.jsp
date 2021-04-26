@@ -62,25 +62,26 @@
 <body>
 	<section id="container">
 		<form action="${pageContext.request.contextPath}/signup" method="post" id="regForm">
-			<div class="form-group has-feedback">
 				<label class="control-label" for="userId">아이디</label>
 				<input class="form-control" type="text" id="userId" name="userId" />
-				<button class="idChk" type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button>
-			</div>
-			<div class="form-group has-feedback">
+				<button class="idChk" type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button><br>
+
 				<label class="control-label" for="userPass">패스워드</label>
 				<input class="form-control" type="password" id="userPass" name="userPass" />
-			</div>
-			<div class="form-group has-feedback">
+
 				<label class="control-label" for="userName">성명</label>
 				<input class="form-control" type="text" id="userName" name="userName" />
-			</div>	
-		</form>
+
+				<label class="control-label" for="userPhone">번호</label>
+				<input class="form-control" type="text" id="userPhone" name="userPhone" />
+
+				<label class="control-label" for="address">주소</label>
+				<input class="form-control" type="text" id="address" name="address" placeholder="Ex) 은평구 녹번동"/>
+
 		
-			<div class="form-group has-feedback">
-				<button class="btn btn-success" type="button" id="submit">회원가입</button>
+				<button type="submit" class="btn btn-success" >회원가입</button>
 				<button class="cencle btn btn-danger" type="button">취소</button>
-			</div>
+		</form>
 	</section>	
 </body>
 </html>

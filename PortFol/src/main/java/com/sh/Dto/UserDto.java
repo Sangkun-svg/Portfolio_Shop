@@ -5,19 +5,20 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class UserDto {
+
 	private String userId;
 	private String userPass;
 	private String userName;
 	private String address;	
 	private String userPhone;
 	String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-	private String regDate = formatDate;	
+	private String userJoinDate = formatDate;	
 	private int verify;
 	
 	public UserDto() {}
 
 	public UserDto(String userId, String userPass, String userName, String address, String userPhone, String formatDate,
-			String regDate, int verify) {
+			String userJoinDate, int verify) {
 		super();
 		this.userId = userId;
 		this.userPass = userPass;
@@ -25,7 +26,7 @@ public class UserDto {
 		this.address = address;
 		this.userPhone = userPhone;
 		this.formatDate = formatDate;
-		this.regDate = regDate;
+		this.userJoinDate = userJoinDate;
 		this.verify = verify;
 	}
 
@@ -69,12 +70,12 @@ public class UserDto {
 		this.userPhone = userPhone;
 	}
 
-	public String getRegDate() {
-		return regDate;
+	public String getUserJoinDate() {
+		return userJoinDate;
 	}
 
-	public void setRegDate(String regDate) {
-		this.regDate = regDate;
+	public void setUserJoinDate(String userJoinDate) {
+		this.userJoinDate = userJoinDate;
 	}
 
 	public int getVerify() {

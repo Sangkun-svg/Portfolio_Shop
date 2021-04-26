@@ -9,6 +9,7 @@
 <body>
 	<aside>
 		<ul>
+			<li><a href="https://desk.channel.io/#/channels/47583/user_chats/60865fecb8a34f2b1a27" target="_blank">채널톡 접속</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/proRegister">상품 등록</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/proList">상품 목록</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/reqProList">주문 요청된 상품</a></li>

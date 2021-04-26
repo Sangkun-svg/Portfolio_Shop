@@ -31,8 +31,8 @@
         <p> Reason_Of_Refund  :  Option_N</p>        
         <p> Reason_Of_Refund  :  wrote_userSelf</p>
 
-        <button>허가</button>
-        <button>불허</button>
+        <button type="button" onclick="location.href='${pageContext.request.contextPath}/admin/acceptRefund?n=${test.userId}&orderId=${test.orderId}'">허가</button>
+        <button type="button" onclick="location.href='${pageContext.request.contextPath}/admin/disallowRefund?n=${test.userId}&orderId=${test.orderId}'">불허</button>
     </div>
 </body>
 </html>

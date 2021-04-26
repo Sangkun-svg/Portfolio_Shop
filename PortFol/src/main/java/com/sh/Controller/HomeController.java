@@ -27,7 +27,15 @@ public class HomeController {
 		System.out.println("Get nav");
 		System.out.println("RequestParam : " + string);
 		dto.setUserId(string);
+		System.out.println(userService.myInfo(dto));
+		System.out.println("id : " + userService.myInfo(dto).getUserId());
+		System.out.println("pass : " + userService.myInfo(dto).getUserPass());
+		System.out.println("name : " + userService.myInfo(dto).getUserName());
+		System.out.println("phone : " + userService.myInfo(dto).getUserPhone());
+		System.out.println("address : " + userService.myInfo(dto).getAddress());
 		System.out.println("verify : " + userService.myInfo(dto).getVerify());
+		System.out.println("joinDate : " + userService.myInfo(dto).getUserJoinDate());
+//		System.out.println("verify : " + userService.myInfo(dto).getVerify());
 		
 		
 		

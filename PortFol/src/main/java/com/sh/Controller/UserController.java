@@ -69,6 +69,12 @@ public class UserController {
 			if(result == 1) {
 				return "${pageContext.request.contextPath}/register";
 			}else if(result == 0) {
+				System.out.println("id : " + dto.getUserId());
+				System.out.println("name : " + dto.getUserName());
+				System.out.println("phone : " + dto.getUserPhone());
+				System.out.println("address : " + dto.getAddress());
+				System.out.println("joinDate : " + dto.getUserJoinDate());
+				System.out.println("verify    : " + dto.getVerify());
 				System.out.println("암호화 전 비밀번호 : " + dto.getUserPass());
 				String encryPassword = UserSha256.encrypt(dto.getUserPass());
 				dto.setUserPass(encryPassword);
@@ -80,7 +86,7 @@ public class UserController {
 
 		}
 		
-		return"redirect:/";
+		return"redirect:/signin";
 	}
 	
 	@GetMapping("/signin")

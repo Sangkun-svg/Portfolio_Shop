@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" session="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="resource/includes/includeFile.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -117,6 +118,53 @@ header ul li :hover {
 	position: absolute;
 }
 </style>
+<script type="text/javascript">
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "d500bf30-80e9-4adc-8152-4bb473354edd", //please fill with your plugin key
+    "memberId": "asd@ad.com", //fill with user id
+    "profile": {
+      "name": "김상혁", //fill with user name
+      "mobileNumber": "010-0000-0000", //fill with user phone number
+      "CUSTOM_VALUE_1": "VALUE_1", //any other custom meta data
+      "CUSTOM_VALUE_2": "VALUE_2"
+    }
+  });
+</script>
 <body>
 
 	<div class="header">
