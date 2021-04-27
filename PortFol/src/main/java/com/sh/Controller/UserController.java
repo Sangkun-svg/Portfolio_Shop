@@ -101,13 +101,8 @@ public class UserController {
 		logger.info("Post Signin");
 		System.out.println("Post Signin");
 		
-		String test = dto.getUserId();
-		System.out.println("dto.userID : " + dto.getUserId());
-		System.out.println("dto.userPass : " + dto.getUserPass());
-		
-		System.out.println("userId : " + dto.getUserId());
+		String test = dto.getUserId();		
 		model.addAttribute("user" , userService.myInfo(dto));
-
 		HttpSession session = req.getSession();
 
 		
@@ -118,24 +113,17 @@ public class UserController {
 		UserDto login = userService.signin(dto);
   		System.out.println("login : " + login);
 
-		// 작동 안하는 이유는 mapper에 result 타입에 들어가지 않아서 이다????
-		// -> 1. DB 안에서 update 사용해서 id pass 만들고 로그인 시도
-		// -> 2. mapper.signup에 resultType을 Dto로 설정 해보기 
-		// -> 로그인 실패시  login : null
-		// -> 로그인 성공시 
-		
 		if(login != null) {
 			session.setAttribute("member", login);
 			System.out.println("Login Success");
 			System.out.println("session : " + session);
+			return"redirect:/nav?n="+test;
 		}else {
 			System.out.println("입력한 비밀번호 : " + dto.getUserPass());			
-			session.setAttribute("member", null);
-//			rttr.addFlashAttribute("msg" , false);
-	
-			System.out.println("Login false");			
+			session.setAttribute("member", null);	
+			System.out.println("Login false");
+			return "signin";
 		}
-		return"redirect:/nav?n="+test;
 	}
 	
 	
