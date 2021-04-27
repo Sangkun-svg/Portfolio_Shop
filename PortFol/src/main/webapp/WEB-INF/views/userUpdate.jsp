@@ -20,51 +20,12 @@ ul {
 	 
 }
 
-
-aside {
-	float: left;
-	width : 200px;
-}
-
-div#container_box {
-	float: right;
-	width: calc(100% - 200px - 20px);
-}
-
-aside ul li {
-	text-align: center;
-	margin-bottom: 10px;
-}
-
-aside ul li a {
-	display: block;
-	width: 100%;
-	padding: 10px 0;
-	text-decoration:none;
-}
-
-aside ul li a:hover {
-	background: #eee;
-}
-
-.select{
-    width: 30%;
-    height: 500px;
-    border: 1px solid;
-    float: left;
-
-}
-.select > aside > ul > li>a{
-    width: 100%;
-    height: 90px;
-    margin-top: 15px;
-}
-
 .info{
+	display : block;
     width: 30%;
     height: 500px;
     border: 1px solid;
-    float: left;
+	margin : 0 auto;
 }
 
 .info > .input-area > input{
@@ -75,42 +36,37 @@ aside ul li a:hover {
 }
 </style>
 <body>
-    <div class="select">
-        <aside style="width: 100%;">
-            <ul style="width: 100%;">
-                <li><a href="${pageContext.request.contextPath}/">아이디 변경</a></li>
-                <li><a href="${pageContext.request.contextPath}/">이름 변경</a></li>
-                <li><a href="${pageContext.request.contextPath}/">주소 변경</a></li>
-                <li><a href="${pageContext.request.contextPath}/">번호 변경</a></li>
-                </ul>
-        </aside>
-    </div>
-
-    <div class="info">
+    <form class="info" method="post">
         <div class="input-area">
             <label for><h2 style="margin: 0;">ID</h2></label><br>
-            <input type="text" id="userId" name="userId" value="${member.userId }" readonly="readonly" >
+            <input type="text" id="userId" name="userId" value='${info.userId }' readonly="readonly" >
+			<input type="hidden" value="${info.userId }" name="infoUserId">
             <button type="button" class="btn">수정하기</button>    
 
         </div>
 
         <div class="input-area">
             <label for><h2 style="margin: 0;">Name</h2></label><br>
-            <input type="text" id="userPass" name="userPass" value="${member.userPass }" readonly="readonly">    
+            <input type="text" id="userPass" name="userPass" value='${info.userName}' readonly="readonly">    
+			<input type="hidden" value="${info.userId }" name="infoUserName">
             <button type="button" class="btn">수정하기</button>    
         </div>
 
         <div class="input-area">
             <label for><h2 style="margin: 0;">Phone</h2></label><br>
-            <input type="text" id="userPhone" name="userPhone" value="${member.userName }" readonly="readonly">    
+            <input type="text" id="userPhone" name="userPhone" value='${info.userPhone}' readonly="readonly">    
+			<input type="hidden" value="${info.userId }" name="infoUserPhone">
             <button type="button" class="btn">수정하기</button>    
         </div>
 
         <div class="input-area">
             <label for><h2 style="margin: 0;">Address</h2></label><br>
-            <input type="text" id="" name="" value="" readonly="readonly">    
+            <input type="text" id="" name="address" value='${info.address }' >    
+			<input type="hidden" value="${info.userId }" name="infoUserAddress">
             <button type="button" class="btn">수정하기</button>    
+	
+		<button type="submit">수정</button>
         </div>
-    </div>
+    </form>
 </body>
 </html>

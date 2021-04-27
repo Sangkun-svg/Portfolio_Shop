@@ -43,7 +43,8 @@
 		set 
 			userPass = #{userPass},
 			userName = #{userName},
-			userPhone = #{userPhone}
+			userPhone = #{userPhone},
+			address = #{address}
 		where 
 			userId = #{userId}
 	</update>
@@ -67,7 +68,7 @@
 	
 	<select id="myInfo" resultType="com.sh.Dto.UserDto">
 		select 
-			userId , userName , userPhone , verify , address
+			userId ,userPass ,userName , userPhone , verify , address
 		from 
 			user
 		where 

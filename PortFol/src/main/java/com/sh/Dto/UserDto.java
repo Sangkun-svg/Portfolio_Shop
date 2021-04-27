@@ -11,7 +11,7 @@ public class UserDto {
 	private String userName;
 	private String address;	
 	private String userPhone;
-	String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+	String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm"));
 	private String userJoinDate = formatDate;	
 	private int verify;
 	

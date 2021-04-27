@@ -96,15 +96,15 @@ public class UserController {
 	}
 	
 	@PostMapping("/signin")
-	public String postSignin(UserDto dto , HttpServletRequest req , RedirectAttributes rttr , Model model)throws Exception {
+	public String postSignin(UserDto dto , HttpServletRequest req , 
+							RedirectAttributes rttr , Model model)throws Exception {
 		logger.info("Post Signin");
 		System.out.println("Post Signin");
+		
 		String test = dto.getUserId();
 		System.out.println("dto.userID : " + dto.getUserId());
 		System.out.println("dto.userPass : " + dto.getUserPass());
-		UserDto login = userService.signin(dto);
 		
-		System.out.println("login : " + login);
 		System.out.println("userId : " + dto.getUserId());
 		model.addAttribute("user" , userService.myInfo(dto));
 
@@ -114,7 +114,10 @@ public class UserController {
 		String encryPassword = UserSha256.encrypt(dto.getUserPass());
 		dto.setUserPass(encryPassword);
 		System.out.println(dto.getUserPass());
-				
+
+		UserDto login = userService.signin(dto);
+  		System.out.println("login : " + login);
+
 		// 작동 안하는 이유는 mapper에 result 타입에 들어가지 않아서 이다????
 		// -> 1. DB 안에서 update 사용해서 id pass 만들고 로그인 시도
 		// -> 2. mapper.signup에 resultType을 Dto로 설정 해보기 
@@ -128,8 +131,9 @@ public class UserController {
 		}else {
 			System.out.println("입력한 비밀번호 : " + dto.getUserPass());			
 			session.setAttribute("member", null);
-			rttr.addFlashAttribute("msg" , false);
-			System.out.println("Login false");
+//			rttr.addFlashAttribute("msg" , false);
+	
+			System.out.println("Login false");			
 		}
 		return"redirect:/nav?n="+test;
 	}
@@ -146,27 +150,42 @@ public class UserController {
 	}
 
 	@GetMapping("/userDelete")
-	public void GetUserDelete() throws Exception{
+	public void GetUserDelete(@RequestParam(value="n" , required=false) String string) throws Exception{
 		logger.info("Get userDelete");
 		System.out.println("Get UserDelete");
+		
+		System.out.println("string : " + string);
 	}
 	@PostMapping("/userDelete")
-	public String PostUserDelete(UserDto dto , HttpSession session , RedirectAttributes rttr	) throws Exception{
+	public String PostUserDelete(@RequestParam(value="n" , required=false) String string ,
+								UserDto dto , HttpSession session , RedirectAttributes rttr
+								, String deletePass ,Model model) throws Exception{
 		logger.info("Post userDelete");
 		System.out.println("Post UserDelete");
-
-		UserDto member = (UserDto)session.getAttribute("member");
+		// 내가 짠 코드 ↓
 		
-		String sessionPass = member.getUserPass();
-		String dtoPass = dto.getUserPass();
+		//넘어온 패스워드
+		String encryPassword2 = UserSha256.encrypt(deletePass);
+		System.out.println("입력된 Password 암호화 : "+ encryPassword2);
+		dto.setUserId(string);
+		// DB에 있는 회원가입 할 때 암호화된 패스워드 가져옴
+		System.out.println("DB에서 가져온 비밀번호 : " + userService.myInfo(dto).getUserPass());
 		
-		if(!(sessionPass.equals(dtoPass))) {
-			rttr.addFlashAttribute("msg" , false);
-			return "redirect:/userDelete";
+		
+		if(encryPassword2.equals(userService.myInfo(dto).getUserPass())) {	// ==(연산 비교자) 와  equals 의 차이
+			// 암호화된 두 비밀번호가 같을 때
+			System.out.println("탈퇴 성공");
+			dto.setUserId(string);
+			dto.setUserPass(encryPassword2);
+			userService.userDelete(dto);
+			session.invalidate();
+			return "main";
+		}else {
+			// 암호화된 두 비밀번호가 같지 않을 때
+			System.out.println("pass 불일치");
+			return "redirect:/userDelete?n="+string;
 		}
-		userService.userDelete(dto);
-		session.invalidate();
-		return"redirect:/"; 
+		
 	}
 
 
@@ -253,19 +272,25 @@ public class UserController {
 
 	
 	@GetMapping("/userUpdate")
-	public void GetUserUpdate() throws Exception {
+	public void GetUserUpdate(@RequestParam(value = "n" )String string , UserDto dto,
+								Model model) throws Exception {
 		logger.info("Get userUpdate");
 		System.out.println("Get UserUpdate");
+
+		System.out.println("id : " + string);
+		dto.setUserId(string);
+		model.addAttribute("info" , userService.myInfo(dto));
 	}
 	
 	@PostMapping("/userUpdate")
-	public String PostUserUpdate(UserDto dto , HttpSession session) throws Exception{
+	public String PostUserUpdate(UserDto dto , HttpSession session 
+					,String infoUserId , String infoUserName,String infoUserPhone,String infoUserAddress) throws Exception{
 		logger.info("Post userUpdate");
 		System.out.println("Post UserUpdate");
-
 		userService.userUpdate(dto);
 		session.invalidate();
-		return "redirect:/";
+
+		return "redirect:/myInfo"; // +string
 	}
 
 	@GetMapping("/orderPage")
