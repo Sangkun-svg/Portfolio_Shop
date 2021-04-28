@@ -1,6 +1,8 @@
 package com.sh.Dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Product {
 	private int bno;
@@ -9,12 +11,15 @@ public class Product {
 	private int 	proPrice;
 	private int 	proStock;
 	private String 	proDescription;
-	private LocalDate proRegDate = LocalDate.now();
+
+	String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm"));	
+	private String proRegDate = formatDate;
+	
 	private String proImg;
 	private String proThumbnail;
 	
 	public Product() {}
-	public Product(int bno ,int proCode, String proName, int proPrice, int proStock, String proDescription, LocalDate proRegDate,
+	public Product(int bno ,int proCode, String proName, int proPrice, int proStock, String proDescription, String proRegDate,
 			String proImg , String proThumbnail) {
 		this.bno= bno;
 		this.proCode = proCode;
@@ -65,10 +70,10 @@ public class Product {
 	public void setProDescription(String proDescription) {
 		this.proDescription = proDescription;
 	}
-	public LocalDate getProRegDate() {
+	public String getProRegDate() {
 		return proRegDate;
 	}
-	public void setProRegDate(LocalDate regDate) {
+	public void setProRegDate(String regDate) {
 		this.proRegDate = proRegDate;
 	}
 	public String getProImg() {

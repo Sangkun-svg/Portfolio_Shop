@@ -85,11 +85,11 @@ public class AdminController {
 	
 	@GetMapping("/proList")
 	public String postProList(Model model) throws Exception{
-		logger.info("Post proList");
-		System.out.println("Post proList");
+		logger.info("Get proList");
+		System.out.println("Get proList");
 		
 		model.addAttribute("proList" , adminService.proList());
-		
+		  
 		return "admin/proList";
 	}
 	
@@ -124,31 +124,7 @@ public class AdminController {
 		System.out.println("Delete Success");
 		return "redirect:/admin/proList";
 	}
-	
-	@GetMapping("/claim")
-	public void getClaim() throws Exception{
-		logger.info("Get claim");
-		System.out.println("Get claim");
-	}
-//	sales
-//	delivery
-//	refund
-
-	@GetMapping("/sales")
-	public String getSales () throws Exception{
-		logger.info("Get sales");
-		System.out.println("Get sales");
 		
-		return"admin/claims/sales";
-	}
-	
-	@GetMapping("/delivery")
-	public String getDelivery () throws Exception{		
-		logger.info("Get delivery");
-		System.out.println("Get delivery");
-		return"admin/claims/delivery";
-	}
-	
 
 	@GetMapping("/reqProList") // indexOutOfBoundsException occur & reason : 
 							   // numberException : for input string & reason :
@@ -184,7 +160,7 @@ public class AdminController {
 		System.out.println("set userID : " + n);
 		System.out.println("set orderID: " + orderId);		
 		
-		model.addAttribute("test" ,userService.myOrdered(orderInfo) ); 
+		model.addAttribute("reqRefund" ,userService.myOrdered(orderInfo) ); 
 	}
 	
 	@GetMapping("/acceptRefund")
@@ -205,7 +181,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("/disallowRefund")	// 환불 불허
-	public void disallowRefund(@RequestParam(value = "n" , required = false) String n
+	public String disallowRefund(@RequestParam(value = "n" , required = false) String n
 			  ,@RequestParam(value = "orderId" , required = false) String orderId
 			  , OrderInfo orderInfo ,Model model,DeliverySituation ds)throws Exception {
 		logger.info("Get disallowRefund");
@@ -217,7 +193,7 @@ public class AdminController {
 		userService.DsUpdate(orderInfo);
 		// 채널톡을 이용한 유저에게 불허 알림 
 		
-		
+		return "redirect:/admin/reqProList";
 	}
 	
 	
@@ -225,42 +201,112 @@ public class AdminController {
 	
 	
 	
-	
-	
-	@GetMapping("/reqCancle") 
-	public void getCancle (@RequestParam(value = "n" , required = false) String n
-			  			  ,@RequestParam(value = "orderId" , required = false) int orderId) throws Exception{
-		logger.info("Get user Request Cancle");
-		System.out.println("Get user Request Cancle");
 
-		System.out.println("넘어온 아이디  : " + n);
-		System.out.println("넘어온 주문번호 : " + orderId);		
-	}
+	
+	
+	
 	@GetMapping("/reqChange") 
 	public void getChange (@RequestParam(value = "n" , required = false) String n
-			  			  ,@RequestParam(value = "orderId" , required = false) int orderId) throws Exception{
+						  ,@RequestParam(value = "orderId" , required = false) String orderId
+						  , OrderInfo orderInfo ,Model model) throws Exception{
 		logger.info("Get user Request Change");
 		System.out.println("Get user Request Change");
 
 		System.out.println("넘어온 아이디  : " + n);
-		System.out.println("넘어온 주문번호 : " + orderId);		
-	}
-	
-
-	
-	@GetMapping("/acceptCancle")
-	public void acceptCancle()throws Exception {
+		System.out.println("넘어온 주문번호 : " + orderId);
+		orderInfo.setUserId(n);
+		orderInfo.setOrderId(orderId);
 		
+		model.addAttribute("reqChange" ,userService.myOrdered(orderInfo) ); 
+
 	}
 
-	
 	@GetMapping("/acceptChange")
-	public void acceptChange()throws Exception {
+	public String acceptChange(@RequestParam(value = "n" , required = false) String n
+			  ,@RequestParam(value = "orderId" , required = false) String orderId
+			  , OrderInfo orderInfo ,Model model,DeliverySituation ds)throws Exception {
+		logger.info("Get acceptChange");
+		System.out.println("Get acceptChange");
 		
+		orderInfo.setDeliveryInfo(ds.Success_Change);
+		orderInfo.setUserId(n);
+		orderInfo.setOrderId(orderId);
+		userService.DsUpdate(orderInfo);
+		System.out.println("1"+orderInfo.getDeliveryInfo());
+		System.out.println("2"+orderInfo.getUserId());
+		System.out.println("3"+orderInfo.getOrderId());
+		//주문 목록에서 삭제
+		adminService.DeleteOrderInfo(orderInfo);
+		//채널톡에서 교환 승인 알림
+		return "admin/reqProList";
+
 	}
 	@GetMapping("/disallowChange")	// 교환 불허
-	public void disallowChange()throws Exception {
+	public String disallowChange(@RequestParam(value = "n" , required = false) String n
+			  ,@RequestParam(value = "orderId" , required = false) String orderId
+			  , OrderInfo orderInfo ,Model model,DeliverySituation ds)throws Exception {
+		logger.info("Get disallowChange");
+		System.out.println("Get disallowChange");
 		
+		orderInfo.setDeliveryInfo(ds.GOING);
+		orderInfo.setUserId(n);
+		orderInfo.setOrderId(orderId);
+		userService.DsUpdate(orderInfo);
+		System.out.println("1"+orderInfo.getDeliveryInfo());
+		System.out.println("2"+orderInfo.getUserId());
+		System.out.println("3"+orderInfo.getOrderId());
+
+		// 채널톡을 이용한 유저에게 불허 알림 
+		return "redirect:/admin/reqProList";
+
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@GetMapping("/reqCancel") 
+	public void getCancel (@RequestParam(value = "n" , required = false) String n
+						  ,@RequestParam(value = "orderId" , required = false) String orderId
+						  , OrderInfo orderInfo ,Model model) throws Exception{
+		logger.info("Get user Request Cancel");
+		System.out.println("Get user Request Cancel");
+
+		System.out.println("넘어온 아이디  : " + n);
+		System.out.println("넘어온 주문번호 : " + orderId);		
+		orderInfo.setUserId(n);
+		orderInfo.setOrderId(orderId);
+
+		model.addAttribute("reqCancel" ,userService.myOrdered(orderInfo) ); 
+
+	}
+	
+	
+	@GetMapping("/acceptCancel")
+	public String acceptCancel(@RequestParam(value = "n" , required = false) String n
+			  ,@RequestParam(value = "orderId" , required = false) String orderId
+			  , OrderInfo orderInfo ,Model model,DeliverySituation ds)throws Exception {
+		logger.info("Get acceptCancel");
+		System.out.println("Get acceptCancel");
+
+		orderInfo.setDeliveryInfo(ds.Success_delivery_Cancel);
+		orderInfo.setUserId(n);
+		orderInfo.setOrderId(orderId);
+		userService.DsUpdate(orderInfo);
+		System.out.println("1"+orderInfo.getDeliveryInfo());
+		System.out.println("2"+orderInfo.getUserId());
+		System.out.println("3"+orderInfo.getOrderId());
+
+		//주문 목록에서 삭제
+		adminService.DeleteOrderInfo(orderInfo);
+		//채널톡에서 교환 승인 알림
+		return "admin/reqProList";
+
 	}
 
 	

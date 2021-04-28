@@ -52,7 +52,7 @@
 						<td style="text-align:center">
 							<c:if test ="${req.deliveryInfo == 'Stop_for_delivery_Cancle'}">
 								<button type="button" class="btn btn-danger"
-								 onclick="location.href='${pageContext.request.contextPath}/admin/reqCancle?n=${req.userId}&orderId=${req.orderId }'">취소 요청</button>
+								 onclick="location.href='${pageContext.request.contextPath}/admin/reqCancel?n=${req.userId}&orderId=${req.orderId }'">취소 요청</button>
 							</c:if>
 							<c:if test ="${req.deliveryInfo != 'Stop_for_delivery_Cancle'}">
 								<p style="text-align:center"> X </p>

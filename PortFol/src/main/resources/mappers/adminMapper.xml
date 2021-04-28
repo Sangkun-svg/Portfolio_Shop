@@ -42,6 +42,7 @@
 			proPrice As proPrice,
 			proStock As proStock,
 			proDescription As proDescription,
+			proRegDate As proRegDate, 
 			proImg As proImg,
 			proThumbnail As proThumbnail
 		FROM

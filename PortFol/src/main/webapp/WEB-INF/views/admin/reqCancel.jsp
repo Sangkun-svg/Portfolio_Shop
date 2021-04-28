@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>환불 결정 페이지</title>
+    <title>취소 결정 페이지</title>
 </head>
 <style>
 .wrap{
@@ -22,17 +22,17 @@
 </style>
 <body>
     <div class="wrap">
-        <p> User_ID  :  ${reqRefund.userId}</p>
-        <p> Refund_ProName  :  ${reqRefund.orderProName }</p>
-        <p> ProCode  :  ${reqRefund.proCode }</p>
+        <p> User_ID  :  ${reqCancel.userId}</p>
+        <p> Refund_ProName  :  ${reqCancel.orderProName }</p>
+        <p> ProCode  :  ${reqCancel.proCode }</p>
         <p> ProPrice  :  not yet</p>
-        <p> OrderStock  :  ${reqRefund.orderStock }</p>
-        <p> OrderPrice  :  ${reqRefund.orderPrice}</p>
+        <p> OrderStock  :  ${reqCancel.orderStock }</p>
+        <p> OrderPrice  :  ${reqCancel.orderPrice}</p>
         <p> Reason_Of_Refund  :  Option_N</p>        
         <p> Reason_Of_Refund  :  wrote_userSelf</p>
 
-        <button type="button" onclick="location.href='${pageContext.request.contextPath}/admin/acceptRefund?n=${test.userId}&orderId=${test.orderId}'">허가</button>
-        <button type="button" onclick="location.href='${pageContext.request.contextPath}/admin/disallowRefund?n=${test.userId}&orderId=${test.orderId}'">불허</button>
+        <button type="button" onclick="location.href='${pageContext.request.contextPath}/admin/acceptCancel?n=${reqCancel.userId}&orderId=${reqCancel.orderId}'">허가</button>
+        <button type="button" onclick="location.href='${pageContext.request.contextPath}/admin/disallowCancel?n=${reqCancel.userId}&orderId=${reqCancel.orderId}'">불허</button>
     </div>
 </body>
 </html>

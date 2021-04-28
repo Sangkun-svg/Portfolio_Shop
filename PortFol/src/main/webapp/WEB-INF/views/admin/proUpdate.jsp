@@ -73,7 +73,7 @@ textarea#gdsDes {
 		<img src="${pro.proImg}" class="oriImg" alt="Img Err"/>
 		
 		<p>썸네일</p>
-			<img src="${pro.proThumbImg}" class="thumbImg" alt="Thumbmail Err"/>
+			<img src="${pro.proThumbnail}" class="thumbImg" alt="Thumbmail Err"/>
 		</div>
 
 		<div class="inputArea">

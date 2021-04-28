@@ -22,15 +22,13 @@
 					<th style="text-align:center">등록일</th>
 					<th style="text-align:center">권한</th>
 					<th style="text-align:center">상세정보 보기</th>
-					<th style="text-align:center">환불 요청</th>
-					<th style="text-align:center">취소 요청</th>
 				</tr>
 				<c:forEach items="${userlist}" var="userlist">
 					<tr>
 						<td style="text-align:center"><c:out value="${userlist.userId}"  /></td>
 						<td style="text-align:center"><c:out value="${userlist.userName}" /></td>
 						<td style="text-align:center"><c:out value="${userlist.userPhone}" /></td>
-						<td style="text-align:center"><c:out value="${userlist.regDate}" /></td>
+						<td style="text-align:center"><c:out value="${userlist.userJoinDate}" /></td>
 						<td style="text-align:center"><c:out value="${userlist.verify}" /></td>					
 						<c:if test ="${userlist.verify != 9}">
 							<td style="text-align:center"><button type="button" onclick="location.href='${pageContext.request.contextPath}/admin/userInfo?n=${userlist.userId }'" class="btn btn-danger">수정</button></td>
