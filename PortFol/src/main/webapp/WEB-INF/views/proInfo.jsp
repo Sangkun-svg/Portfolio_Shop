@@ -37,9 +37,21 @@
         background-color: skyblue;
     }
 	#reply{
-		width: 500px;
-		height: 300px;
+		display : block;
+		width: 300px;
+		height: 100px;
 		border: 1px solid;
+		margin : 0 auto;
+		margin-top : 10px;
+		margin-bottom : 10px;
+	}
+	.replyWrite{
+		display : block;
+		width: 300px;
+		height: 100px;
+		margin : 0 auto;
+		margin-top : 10px;
+		margin-bottom : 10px;
 	}
 </style>
 <body>
@@ -71,11 +83,32 @@
 						location.href="${pageContext.request.contextPath}/main";
 					}
 				</script>																		
+
+
+				<!-- 댓글 -->
+			    <c:forEach items="${replyList}" var="replyList">
+					<div id="reply">
+						<tr>
+							<td style="text-align:center">bno : <c:out value="${replyList.bno}" /></td><br>
+							<td style="text-align:center">rno : <c:out value="${replyList.rno}" /></td><br>
+							<td style="text-align:center">writer : <c:out value="${replyList.writer}" /></td><br>
+							<td style="text-align:center">content : <c:out value="${replyList.content}" /></td><br>
+						</tr>
+					</div>				
+			    </c:forEach> 
+
+
+				<form class="replyWrite" action="${pageContext.request.contextPath}/replyWrite" method="get">
+					<label for="writer">작성자</label>
+					<input type="hidden" value="${user.userId} " name="n">
+					<input type="hidden" value="${pro.bno} " name="bno">
+
+			    	<input type="text" value="${member.userName }" readonly="readonly" name="writer"/>						    
+			    	<input type="text" name="content" placeholder="댓글을 작성해주세요" style="width : 100%; height: 100%" />
+			    	<button type="submit">댓글 작성</button>
+				</form>
 				
 	
-			<div>
-				<!-- 댓글에 값이 없어서 ERR 뜸 -> 그래서 일단 빼놈 -->
-			</div>
     </div>
 </body>
 </html>

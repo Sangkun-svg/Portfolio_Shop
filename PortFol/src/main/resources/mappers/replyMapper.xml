@@ -14,9 +14,9 @@
 	
 	<insert id="writeReply">
 		insert into productReply 
-			(rno , content , writer )
+			(bno , content , writer , writeDate )
 		values 
-			(#{rno} ,#{content} , #{writer} )
+			(#{bno} ,#{content} , #{writer} , #{writeDate} )
 	</insert>
 </mapper>
 

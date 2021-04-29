@@ -191,7 +191,7 @@ header ul li :hover {
 
 	<div class="center">
 		<c:forEach items="${prolist}" var="prolist">
-			<div class="test" onclick="location.href='${pageContext.request.contextPath}/proInfo?n=${prolist.bno}'">
+			<div class="test" onclick="location.href='${pageContext.request.contextPath}/proInfo?n=${user.userId}&bno=${prolist.bno}'">
 
 			<div class="thumbnail">
 				<img src="" alt="Err">

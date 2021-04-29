@@ -1,20 +1,25 @@
 package com.sh.Dto;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class ReplyDto {
 
 	private int bno;
 	private int rno;
 	private String content;
 	private String writer;
-	private String regdate;
+
+	String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm"));
+	private String writeDate = formatDate;	
 
 	public ReplyDto() {}
-	public ReplyDto(int bno, int rno, String content, String writer, String regdate) {
+	public ReplyDto(int bno, int rno, String content, String writer, String writeDate) {
 		this.bno = bno;
 		this.rno = rno;
 		this.content = content;
 		this.writer = writer;
-		this.regdate = regdate;
+		this.writeDate = writeDate;
 	}
 	public int getBno() {
 		return bno;
@@ -41,10 +46,10 @@ public class ReplyDto {
 		this.writer = writer;
 	}
 	public String getRegdate() {
-		return regdate;
+		return writeDate;
 	}
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
+	public void setRegdate(String writeDate) {
+		this.writeDate = writeDate;
 	}
 	
 	

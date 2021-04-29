@@ -86,6 +86,13 @@ public class UserDto {
 		this.verify = verify;
 	}
 
+	@Override
+	public String toString() {
+		return "UserDto [userId=" + userId + ", userPass=" + userPass + ", userName=" + userName + ", address="
+				+ address + ", userPhone=" + userPhone + ", formatDate=" + formatDate + ", userJoinDate=" + userJoinDate
+				+ ", verify=" + verify + "]";
+	}
+
 	
 	 
 	

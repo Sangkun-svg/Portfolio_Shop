@@ -222,32 +222,50 @@ public class UserController {
 	}
 	
 	@GetMapping("/proInfo")
-	public void getProInfo(@RequestParam("n") int bno ,Model model , Product pro , UserDto dto) throws Exception {
+	public void getProInfo(	@RequestParam(value = "n" , required = false) String string ,
+							@RequestParam(value = "bno", required = false) int bno ,Model model , Product pro , UserDto dto) throws Exception {
 		logger.info("Get ProInfo");
 		System.out.println("Get ProInfo");
 		
+		System.out.println("String : " + string);
+		  
 		pro.setBno(bno);
+		dto.setUserId(string);
 		System.out.println("bno : " + pro.getBno());
 		model.addAttribute("pro", adminService.proView(pro.getBno())); 
 
 		List<ReplyDto> replyList = replyService.readReply(pro.getBno());
-		
+		model.addAttribute("user", userService.myInfo(dto));		
 		model.addAttribute("replyList", replyList);
 	}
 	
-	@GetMapping("/replyWrite")
-	public String replyWrite(@RequestParam("n") int bno ,ReplyDto dto , RedirectAttributes rttr , Product pro) throws Exception {
-		logger.info("Post ReplyWrite");
-		System.out.println("Post ReplyWrite");
-		System.out.println("pro : " + pro.getBno());
+	@GetMapping("/replyWrite")	//proInfo 에서 넘어와서 reply_insert 후 다시 proInfo로 넘어갈 때 작성자 value 가 안뜸
+								// ${user.userName} 에서 ${member.userName} 로 바꾸니 해결 
+								// ${user.userName} 은 왜 1회성으로만 값을 넘기는 것인가?
+	
+	public String replyWrite(@RequestParam("n") String string,
+							 @RequestParam("bno") int bno 
+							 ,ReplyDto replydto , RedirectAttributes rttr , Product pro , Model model
+							 , UserDto dto) throws Exception {
+		logger.info("Get ReplyWrite");
+		System.out.println("Get ReplyWrite");
 		
-		bno = pro.getBno();
+		System.out.println("bno : " + bno);
+		System.out.println("string : " + string);
+
 		
-		replyService.writeReply(dto);
+		replydto.setBno(bno);
+		replyService.writeReply(replydto);
 
-		rttr.addAttribute("bno" , dto.getBno());
+		dto.setUserId(string);
+		System.out.println("dto.toString : "+dto.toString());
 
-		return"redirect:/proInfo";
+		model.addAttribute("user", userService.myInfo(dto));
+
+		
+		String test = "redirect:/proInfo?n="+string +"&bno="+bno;
+	
+		return test;
 	}
 
 	@GetMapping("/myInfo")
@@ -256,6 +274,7 @@ public class UserController {
 		System.out.println("My Info");
 		dto.setUserId(string);
 		model.addAttribute("user", userService.myInfo(dto));
+
 	}
 
 	

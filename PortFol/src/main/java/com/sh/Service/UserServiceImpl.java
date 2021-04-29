@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.sh.Dao.UserDao;
 import com.sh.Dto.OrderInfo;
 import com.sh.Dto.UserDto;
-import com.sh.Enum.DeliveryAdmin;
+import com.sh.Enum.PermissionToComment;
 import com.sh.Enum.DeliverySituation;
 
 @Service

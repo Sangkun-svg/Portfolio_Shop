@@ -13,6 +13,7 @@
 <input type="text" id="sample4_jibunAddress" placeholder="지번주소" name="address">
 <span id="guide" style="color:#999;display:none"></span>
 <input type="text" id="sample4_detailAddress" placeholder="상세주소" name="details"><br>
+<input type="text" id="sample4_extraAddress" placeholder="참고항목"><br>
             배송메모
             <select name="referenceInfo">
                 <option value="option_1">배송 시 요청사항을 선택해주세요</option>
@@ -25,7 +26,7 @@
                 <option value="option_8">직접입력</option>
             </select><br>
 
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function sample4_execDaumPostcode() {
