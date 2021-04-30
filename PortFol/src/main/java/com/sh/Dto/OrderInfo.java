@@ -1,6 +1,7 @@
 package com.sh.Dto;
 
 import com.sh.Enum.DeliverySituation;
+import com.sh.Enum.PermissionToComment;
 
 public class OrderInfo {
 
@@ -8,23 +9,25 @@ public class OrderInfo {
 	private String userId;
 	private String orderProName;
 	private int proCode;
+	private int proPrice;	
 	private int orderStock;
-	private int orderPrice;
+	private int orderPrice = orderStock * proPrice;
 	private String address;
 	private DeliverySituation deliveryInfo;
-
+	private PermissionToComment replyEnum;
 	public OrderInfo() {}
-	public OrderInfo(String orderId, String userId,String orderProName, int proCode, int orderStock, int orderPrice, String address,
-			DeliverySituation deliveryInfo) {
-		super();
+	public OrderInfo(String orderId, String userId,String orderProName, int proCode,int proPrice, int orderStock, int orderPrice, String address,
+			DeliverySituation deliveryInfo ,PermissionToComment replyEnum) {
 		this.orderId = orderId;
 		this.userId = userId;
 		this.proCode = proCode;
+		this.proPrice = proPrice;
 		this.orderStock = orderStock;
 		this.orderPrice = orderPrice;
 		this.address = address;
 		this.deliveryInfo = deliveryInfo;
 		this.orderProName = orderProName;
+		this.replyEnum = replyEnum;
 	}
 	public String getOrderId() {
 		return orderId;
@@ -73,6 +76,18 @@ public class OrderInfo {
 	}
 	public void setOrderProName(String orderProName) {
 		this.orderProName = orderProName;
+	}
+	public int getProPrice() {
+		return proPrice;
+	}
+	public void setProPrice(int proPrice) {
+		this.proPrice = proPrice;
+	}
+	public PermissionToComment getReplyEnum() {
+		return replyEnum;
+	}
+	public void setReplyEnum(PermissionToComment replyEnum) {
+		this.replyEnum = replyEnum;
 	}
 	
 	

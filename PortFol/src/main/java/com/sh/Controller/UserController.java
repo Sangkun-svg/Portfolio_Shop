@@ -28,6 +28,7 @@ import com.sh.Dto.Product;
 import com.sh.Dto.ReplyDto;
 import com.sh.Dto.UserDto;
 import com.sh.Enum.DeliverySituation;
+import com.sh.Enum.PermissionToComment;
 import com.sh.Service.AddressService;
 import com.sh.Service.AdminService;
 import com.sh.Service.OrderService;
@@ -111,8 +112,6 @@ public class UserController {
 		System.out.println(dto.getUserPass());
 
 		UserDto login = userService.signin(dto);
-  		System.out.println("login : " + login);
-
 		if(login != null) {
 			session.setAttribute("member", login);
 			System.out.println("Login Success");
@@ -309,13 +308,12 @@ public class UserController {
 		// 주문정보 中 회원정보 넣어주기
 		dto.setUserId(string);
 		model.addAttribute("member" , userService.myInfo(dto));
-//		userId , userName , userPhone , verify , address
 
 		System.out.println("test : " + userService.myInfo(dto).getUserId());
 		System.out.println("test : " + userService.myInfo(dto).getUserName());
 		System.out.println("test : " + userService.myInfo(dto).getUserPhone());
 		System.out.println("test : " + userService.myInfo(dto).getAddress());
-
+		
 		// 주문정보 中 상품정보 넣어주기
 		model.addAttribute("pro" , adminService.proView(bno));
 
@@ -328,7 +326,8 @@ public class UserController {
 	public String postOrderPage(@RequestParam("n") String string 
 								,@RequestParam("bno") int bno
 								,OrderInfo orderInfo , Model model , UserDto dto , Address address
-								, BindingResult bindingResult ,DeliverySituation userEnum ) throws Exception {
+								, BindingResult bindingResult , Product pro
+								,DeliverySituation userEnum , PermissionToComment ptc) throws Exception {
 		logger.info("POST OrderPage");
 		System.out.println("POST OrderPage");	
 		//
@@ -339,15 +338,14 @@ public class UserController {
 		orderInfo.setAddress(userService.myInfo(dto).getAddress());
 		orderInfo.setOrderPrice(adminService.proView(bno).getProPrice());
 		orderInfo.setDeliveryInfo(userEnum.Ready);
+		orderInfo.setProPrice(orderInfo.getOrderStock() * orderInfo.getOrderPrice());
+		orderInfo.setOrderProName(adminService.proView(bno).getProName());
+		orderInfo.setReplyEnum(ptc.ON);
+		userService.PtcUpdate(orderInfo);
 		orderService.order(orderInfo);
 		
 		// 주문 한 수량 가저오기
-		//enum class 세팅
-			/*
-			 * 1. 구매자 -> myInfo -> deliveryInfo.jsp -> Enum(배송상태).set 준비중
-			 * 2. 관리자 -> admin/claim/delivery(배송상태) -> Enum.set(주문요청) -> Btn click -> 구매자 Enum.set 배달진행중
-			 * 3. 관리자 -> 배송완료시 -> enum.set 배달완료
-			 */
+
 		//address 정보 보기
 		address.setUserId(userService.myInfo(dto).getUserId());
 		orderInfo.setDeliveryInfo(userEnum.Ready);
@@ -367,7 +365,6 @@ public class UserController {
 		addressService.insertAddress(address);
 		//
 		// 후기 권한 On
-		//adminService.proMinusProStock Dao , Service 만들기 (Dao 나 Service로만 처리 가능 한가?)
 
 //		if(order == true) {	// 주문이 성공하면
 //		return "main" or "myInfo";
@@ -376,9 +373,10 @@ public class UserController {
 //		System.out.println("주문이 실패하였습니다.");
 //		return "proInfo";
 
-		// 상품 수량 -1
-		System.out.println("proCode 비교 : " + orderInfo.getProCode());
-		adminService.minusProStock(orderInfo.getProCode());
+		// 상품 수량 minus
+		System.out.println("proCode : " + orderInfo.getProCode());
+		System.out.println("proStock : " + orderInfo.getOrderStock());
+		adminService.minusProStock(orderInfo);
 		return "redirect:/main?n="+string;
 	}
 
@@ -412,12 +410,14 @@ public class UserController {
 	@GetMapping("refund")
 	public void getRefund(@RequestParam(value = "userId" , required = false) String userId
 						 ,@RequestParam(value = "orderId" , required = false) String orderId
+						 ,@RequestParam(value = "proCode" , required = false) String proCode
 						 , UserDto dto , Model model , OrderInfo orderInfo)throws Exception {
 		logger.info("Get Refund Page");
 		System.out.println("Get Refund Page");
 
 		System.out.println("넘어온 주문 아이디 : " + orderId );
 		System.out.println("넘어온 아이디 : " + userId);
+		System.out.println("넘어온 proCode : " + proCode);
 		dto.setUserId(userId);
 
 		orderInfo.setUserId(userId);
@@ -432,22 +432,59 @@ public class UserController {
 	@PostMapping("refund")
 	public String postRefund(@RequestParam(value = "userId" , required = false)String userId
 							,@RequestParam(value = "orderId" , required = false)String orderId
-							,UserDto dto , OrderInfo orderInfo , DeliverySituation ds) throws Exception {
+							 ,@RequestParam(value = "proCode" , required = false) String proCode
+							,UserDto dto , OrderInfo orderInfo 
+							, DeliverySituation ds , PermissionToComment ptc) throws Exception {
 		logger.info("Post Refund");
 		System.out.println("Post Refund");
 		System.out.println("userId : " + userId); // -> 안넘어옴
 		System.out.println("orderId : " + orderId);
+		System.out.println("proCode   : " + proCode);
 		// 후기 기능 삭제
 		 
 		// amdin -> client.claim -> 환불요청 띄우기 
 //		adminService.userClaim(orderInfo).setDeliveryInfo(d.request_refund);
 
-		// user -> deliveryInfo -> 배송상황 = stop_for_refund 변경
+		// user -> deliveryInfo -> 배송  상황 = stop_for_refund 변경
 		orderInfo.setUserId(userId);
 		orderInfo.setOrderId(orderId);
 		orderInfo.setDeliveryInfo(ds.Stop_for_refund);
+		orderInfo.setOrderStock(userService.myOrdered(orderInfo).getOrderStock());
 		userService.DsUpdate(orderInfo);
-		adminService.plusProStock(userService.myOrdered(orderInfo).getProCode());
+		System.out.println("proCode : " + orderInfo.getProCode());
+		System.out.println("proStock : " + orderInfo.getOrderStock());
+		adminService.plusProStock(orderInfo);
+
+		orderInfo.setReplyEnum(ptc.OFF);
+		userService.PtcUpdate(orderInfo);
 		return "redirect:/main?n="+userId;
+	}
+	
+	
+	@GetMapping("/cancel")
+	public String cancel(@RequestParam(value = "n" , required = false)String userId
+					    ,@RequestParam(value = "bno" , required = false)String orderId
+					    ,@RequestParam(value = "proCode" , required = false) String proCode
+					    ,UserDto dto , OrderInfo orderInfo 
+					    ,DeliverySituation ds , PermissionToComment ptc) throws Exception {
+		logger.info("Get cancel");
+		System.out.println("Get cancel");
+		
+			
+		orderInfo.setUserId(userId);
+		orderInfo.setOrderId(orderId);
+		orderInfo.setDeliveryInfo(ds.Stop_for_delivery_Cancel);
+		orderInfo.setOrderStock(userService.myOrdered(orderInfo).getOrderStock());
+		orderInfo.setReplyEnum(ptc.OFF);
+
+		System.out.println("proCode : " + proCode);
+		System.out.println("orderStock : " + orderInfo.getOrderStock());
+
+		adminService.plusProStock(orderInfo);
+		userService.DsUpdate(orderInfo);
+		userService.PtcUpdate(orderInfo);
+		
+		return "redirect:/main?n="+userId;
+
 	}
 }

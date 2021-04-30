@@ -51,15 +51,6 @@ public class AdminServiceImpl implements AdminService{
 		return dao.userInfo(userId);
 	}
 
-	@Override
-	public void minusProStock(int proCode) throws Exception {
-		dao.minusProStock(proCode);
-	}
-
-	@Override
-	public void plusProStock(int proCode) throws Exception {
-		dao.plusProStock(proCode);
-	}
 
 	@Override
 	public List<OrderInfo> reqProList() throws Exception {
@@ -70,6 +61,17 @@ public class AdminServiceImpl implements AdminService{
 	public void DeleteOrderInfo(OrderInfo orderInfo) throws Exception {
 		dao.DeleteOrderInfo(orderInfo);
 	}
+
+	@Override
+	public void minusProStock(OrderInfo orderInfo) throws Exception {
+		dao.minusProStock(orderInfo);
+	}
+
+	@Override
+	public void plusProStock(OrderInfo orderInfo) throws Exception {
+		dao.plusProStock(orderInfo);
+	}
+
 
 
 }

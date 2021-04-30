@@ -46,8 +46,12 @@
 					<h1>주문상품_정보</h1>
 			        <li><h3>상품번호 : <c:out value="${pro.proCode}"/></li>
 			        <li><h3>상품이름 : <c:out value="${pro.proName}"/></li>
-			        <li><h3>상품가격 : <c:out value="${pro.proPrice}"/>원 (옆에 수량 체크기능)</li>
-			        
+			        <input type="hidden" value="${pro.proName}" name="proName">
+			        <li><h3>상품가격 : <c:out value="${pro.proPrice}"/>원</li>
+			        <li>
+			        	<h3>주문 수량</h3>
+			        	<input type="number" name="orderStock" max="${pro.proStock }" step="1" min="1" value="1" >
+			       	
 				</div>  
 		        <div class="결제정보_주문자동의">
 				            결제안내<input type="button" value="신용카드"><input type="button" value="가상계좌(무통장 입금)"><br>

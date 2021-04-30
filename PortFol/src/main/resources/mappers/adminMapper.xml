@@ -76,7 +76,7 @@
 	
 	<update id="minusProStock">
 		update 
-			product set proStock = proStock-1 
+			product set proStock = proStock - #{orderStock} 
 		where
 			proCode = #{proCode}
 	</update>
@@ -85,7 +85,7 @@
 		update 
 			product 
 		set 
-			proStock = proStock + 1 
+			proStock = proStock + #{orderStock}
 		where 
 			proCode = #{proCode};
 	</update>

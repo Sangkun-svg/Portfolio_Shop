@@ -68,6 +68,11 @@ public class UserDaoImpl implements UserDao{
 		sql.update("userMapper.DsUpdate" , orderInfo);
 	}
 
+	@Override   
+	public void PtcUpdate(OrderInfo orderInfo) throws Exception {
+		sql.update("userMapper.PtcUpdate" , orderInfo);
+	}
+
 	
 
 }

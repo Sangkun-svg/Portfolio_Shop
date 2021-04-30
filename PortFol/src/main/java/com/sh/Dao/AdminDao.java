@@ -24,9 +24,9 @@ public interface AdminDao {
 	
 	public UserDto userInfo(String userId) throws Exception; 
 
-	public void minusProStock(int proCode) throws Exception;
+	public void minusProStock(OrderInfo orderInfo) throws Exception;
 
-	public void plusProStock(int proCode) throws Exception;
+	public void plusProStock(OrderInfo orderInfo) throws Exception;
 
 	public List<OrderInfo> reqProList() throws Exception;
 

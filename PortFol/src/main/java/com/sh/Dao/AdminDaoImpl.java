@@ -52,13 +52,13 @@ public class AdminDaoImpl implements AdminDao{
 	}
 
 	@Override
-	public void minusProStock(int proCode) throws Exception {
-		sql.update("adminMapper.minusProStock" , proCode);
+	public void minusProStock(OrderInfo orderInfo) throws Exception {
+		sql.update("adminMapper.minusProStock" , orderInfo);
 	}
 
 	@Override
-	public void plusProStock(int proCode) throws Exception {
-		sql.update("adminMapper.plusProStock" , proCode);		
+	public void plusProStock(OrderInfo orderInfo) throws Exception {
+		sql.update("adminMapper.plusProStock" , orderInfo);		
 	}
 
 	@Override

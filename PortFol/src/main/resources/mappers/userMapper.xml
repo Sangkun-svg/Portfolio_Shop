@@ -78,7 +78,7 @@
 		<!-- 주문한 상품 리스트 뽑아서 담기 -->
 	<select id="orderList" resultType="com.sh.Dto.OrderInfo">
 		select 
-			orderId ,orderProName , userId , proCode , orderStock , orderPrice , address , deliveryInfo
+			orderId ,orderProName , userId , proCode,proPrice , orderStock , orderPrice , address , deliveryInfo
 		from
 			orderInfo 
 		where 
@@ -87,7 +87,7 @@
 
 	<select id="myOrdered" resultType="com.sh.Dto.OrderInfo">
 		select 
-			orderId ,orderProName , userId , proCode , orderStock , orderPrice , address , deliveryInfo
+			orderId ,orderProName , userId , proCode ,proPrice , orderStock , orderPrice , address , deliveryInfo
 		from
 			orderInfo 
 		where 
@@ -106,5 +106,17 @@
 		and 
 			orderId = #{orderId}
 	</update>
+
+	<update id="PtcUpdate">
+		update 
+			orderInfo 
+		set 
+			replyEnum = #{replyEnum} 
+		where 
+			userId = #{userId}
+		and 
+			orderId = #{orderId}
+	</update>
+
 	
 </mapper>

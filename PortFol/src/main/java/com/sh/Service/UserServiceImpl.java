@@ -75,5 +75,10 @@ public class UserServiceImpl implements UserService{
 		dao.DsUpdate(orderInfo);
 	}
 
+	@Override
+	public void PtcUpdate(OrderInfo orderInfo) throws Exception {
+		dao.PtcUpdate(orderInfo);
+	}
+
 
 }

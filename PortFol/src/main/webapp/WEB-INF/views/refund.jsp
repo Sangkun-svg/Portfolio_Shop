@@ -62,6 +62,7 @@
         <label for="refund_Price"><h2>ID : ${ordered.userId}</h2></label><br>
         <input type="hidden" name="userId" value="${ordered.userId}">        
         <input type="hidden" name="orderId" value="${ordered.orderId}">        
+        <input type="hidden" name="proCode" value="${ordered.proCode}">                
         <label for="refund_Price"><h2>상품명 : ${ordered.orderProName}</h2></label><br>
         <label for="refund_Price"><h2>상품 가격 : ${ordered.orderPrice}</h2></label><br>
         <label for="refund_Price"><h2>주문 수량 : ${ordered.orderStock}</h2></label><br>

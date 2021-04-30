@@ -3,16 +3,16 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="orderMapper">
-	<insert id="order"><!-- #{orderStock} 우선 빼놓음 -->
+	<insert id="order"> 
 		insert into orderInfo 
-			(orderId , userId , proCode , address , orderPrice , deliveryInfo)
+			(orderId , userId , proCode ,proPrice , orderStock , address , orderPrice ,orderProName ,deliveryInfo , replyEnum)
 		values
-			(#{orderId},#{userId},#{proCode},#{address},#{orderPrice},#{deliveryInfo})
+			(#{orderId},#{userId},#{proCode},#{proPrice},#{orderStock},#{address},#{orderPrice}, #{orderProName} ,#{deliveryInfo} ,#{replyEnum})
 	</insert>
 
 	<select id="orderInfo" resultType="com.sh.Dto.OrderInfo">
 		select 
-			orderId , user.userId , product.proCode , orderStock , product.proPrice As orderPrice
+			orderId , user.userId , product.proCode , orderStock , orderInfo.proPrice 
 		from
 			portfolio.orderInfo
 		LEFT JOIN

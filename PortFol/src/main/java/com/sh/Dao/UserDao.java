@@ -27,4 +27,6 @@ public interface UserDao {
 	public OrderInfo myOrdered (OrderInfo orderInfo) throws Exception;
 
 	public void DsUpdate (OrderInfo orderInfo) throws Exception; 
+
+	public void PtcUpdate (OrderInfo orderInfo) throws Exception; 
 }				

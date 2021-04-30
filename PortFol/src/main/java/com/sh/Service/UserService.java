@@ -31,4 +31,6 @@ public interface UserService {
 
 	public void DsUpdate (OrderInfo orderInfo) throws Exception; 
 
+	public void PtcUpdate (OrderInfo orderInfo) throws Exception; 
+
 }
