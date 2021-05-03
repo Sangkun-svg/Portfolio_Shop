@@ -83,9 +83,7 @@
 	
 	<update id="plusProStock">
 		update 
-			product 
-		set 
-			proStock = proStock + #{orderStock}
+			product set proStock = proStock + #{orderStock}
 		where 
 			proCode = #{proCode};
 	</update>

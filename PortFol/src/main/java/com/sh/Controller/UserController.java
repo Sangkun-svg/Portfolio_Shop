@@ -222,12 +222,17 @@ public class UserController {
 	
 	@GetMapping("/proInfo")
 	public void getProInfo(	@RequestParam(value = "n" , required = false) String string ,
-							@RequestParam(value = "bno", required = false) int bno ,Model model , Product pro , UserDto dto) throws Exception {
+							@RequestParam(value = "bno", required = false) int bno ,
+							@RequestParam(value = "orderId", required = false) String orderId 
+							,Model model , Product pro , UserDto dto , OrderInfo orderInfo
+							, PermissionToComment ptc) throws Exception {
 		logger.info("Get ProInfo");
 		System.out.println("Get ProInfo");
 		
 		System.out.println("String : " + string);
-		  
+
+		System.out.println("orderId : " + orderId);
+		
 		pro.setBno(bno);
 		dto.setUserId(string);
 		System.out.println("bno : " + pro.getBno());
@@ -236,6 +241,18 @@ public class UserController {
 		List<ReplyDto> replyList = replyService.readReply(pro.getBno());
 		model.addAttribute("user", userService.myInfo(dto));		
 		model.addAttribute("replyList", replyList);
+		orderInfo.setUserId(string);
+		orderInfo.setOrderId(orderId);
+		
+		if(orderId != null) {
+			if(userService.myOrdered(orderInfo).getReplyEnum() == ptc.ON) {
+				System.out.println("replyEnum : " + userService.myOrdered(orderInfo).getReplyEnum());
+				model.addAttribute("reply" , userService.myOrdered(orderInfo).getReplyEnum());			
+			}else {
+				model.addAttribute("reply" , null);
+			}
+		}
+		
 	}
 	
 	@GetMapping("/replyWrite")	//proInfo 에서 넘어와서 reply_insert 후 다시 proInfo로 넘어갈 때 작성자 value 가 안뜸

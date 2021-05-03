@@ -98,16 +98,17 @@
 			    </c:forEach> 
 
 
-				<form class="replyWrite" action="${pageContext.request.contextPath}/replyWrite" method="get">
-					<label for="writer">작성자</label>
-					<input type="hidden" value="${user.userId} " name="n">
-					<input type="hidden" value="${pro.bno} " name="bno">
-
-			    	<input type="text" value="${member.userName }" readonly="readonly" name="writer"/>						    
-			    	<input type="text" name="content" placeholder="댓글을 작성해주세요" style="width : 100%; height: 100%" />
-			    	<button type="submit">댓글 작성</button>
-				</form>
-				
+				<c:if test="${reply != null}">
+					<form class="replyWrite" action="${pageContext.request.contextPath}/replyWrite" method="get">
+						<label for="writer">작성자</label>
+						<input type="hidden" value="${user.userId} " name="n">
+						<input type="hidden" value="${pro.bno} " name="bno">
+	
+				    	<input type="text" value="${member.userName }" readonly="readonly" name="writer"/>						    
+				    	<input type="text" name="content" placeholder="댓글을 작성해주세요" style="width : 100%; height: 100%" />
+				    	<button type="submit">댓글 작성</button>
+					</form>
+				</c:if>
 	
     </div>
 </body>

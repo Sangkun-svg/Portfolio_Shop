@@ -87,7 +87,7 @@
 
 	<select id="myOrdered" resultType="com.sh.Dto.OrderInfo">
 		select 
-			orderId ,orderProName , userId , proCode ,proPrice , orderStock , orderPrice , address , deliveryInfo
+			orderId ,orderProName , userId , proCode ,proPrice , orderStock , orderPrice , address , deliveryInfo , replyEnum
 		from
 			orderInfo 
 		where 

@@ -20,6 +20,8 @@
 	function goDeliveryCanlePage(){
 		alert('주문 취소 페이지로 이동합니다.');
 	}
+
+	
 </script>
 <body>
 	<c:forEach items="${orderList}" var="orderList">
@@ -41,6 +43,7 @@
 				</c:if>				
 				<c:if test="${orderList.deliveryInfo == 'Success' }">
 					<button type="summit">환불 및 교환</button>
+					<button type="button" onclick="location.href='${pageContext.request.contextPath}/proInfo?n=${orderList.userId}&bno=${orderList.proCode}&orderId=${orderList.orderId }'">후기 남기기</button>					
 				</c:if>				
 			</li>		
 			
