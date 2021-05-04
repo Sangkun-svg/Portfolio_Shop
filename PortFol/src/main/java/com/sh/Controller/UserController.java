@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -16,11 +17,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.mysql.cj.x.protobuf.MysqlxCrud.Order;
 import com.sh.Dto.Address;
 import com.sh.Dto.OrderInfo;
@@ -51,6 +55,9 @@ public class UserController {
 	private OrderService orderService;
 	@Inject 
 	private AddressService addressService;
+	@Inject
+	public KakaoController kakaoController;
+	
 	
 	
 	@GetMapping("/signup")
@@ -91,10 +98,66 @@ public class UserController {
 	}
 	
 	@GetMapping("/signin")
-	public void getSignup()throws Exception{
+	public void getSignup(Model model , HttpSession session)throws Exception{
 		logger.info("Get Signin");
 		System.out.println("Get Signin");
-	}
+		
+		 String kakaoUrl = KakaoController.getAuthorizationUrl(session);
+		 
+	      // 카카오
+	      System.out.println("카카오:" + kakaoUrl);
+	      model.addAttribute("kakao_url", kakaoUrl);	
+		}	
+	
+
+   @RequestMapping(value = "/kakao/callback", produces = "application/json", method = { RequestMethod.GET,RequestMethod.POST })
+   public String kakaoLogin(@RequestParam("code") String code, HttpServletRequest request,
+		   			HttpServletResponse response, HttpSession session, Model model , UserDto dto) throws Exception {
+	   System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
+	   System.out.println("카카오 콜백");
+	   System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
+	   System.out.println("Code : " + code);
+      // 결과값을 node에 담아줌
+      JsonNode node = KakaoController.getAccessToken(code);
+      System.out.println("결과값을 노드에 담음 : "+node.toString());
+      // accessToken에 사용자의 로그인한 모든 정보가 들어있음
+      JsonNode accessToken = node.get("access_token");
+      System.out.println("사용자의 로그인한 모든 정보가 들어있는 accessToken : " + accessToken);
+      // 사용자의 정보
+      JsonNode userInfo = KakaoController.getKakaoUserInfo(accessToken);
+      String kemail = null;
+      String kname = null;
+      String kgender = null;
+      String kbirthday = null;
+      String kage = null;
+      String kimage = null;
+      // 유저정보 카카오에서 가져오기 Get properties
+      JsonNode properties = userInfo.path("properties");
+      JsonNode kakao_account = userInfo.path("kakao_account");
+      kemail = kakao_account.path("email").asText();
+      kname = properties.path("nickname").asText();
+      kimage = properties.path("profile_image").asText();
+      kgender = kakao_account.path("gender").asText();
+      kbirthday = kakao_account.path("birthday").asText();
+      kage = kakao_account.path("age_range").asText();
+      session.setAttribute("kemail", kemail);            //session으로 담아줘야 redirect가 가능
+      session.setAttribute("kname", kname); // 세션 생성      //redirect 해줘야 로그인 후 그래프가 잘 나옴
+      session.setAttribute("kimage", kimage);
+      session.setAttribute("kgender", kgender);
+      session.setAttribute("kbirthday", kbirthday);
+      session.setAttribute("kage", kage);
+
+      dto.setUserId(kemail);
+      dto.setUserName(kname);
+      dto.setPlatform("K");
+      if(idValidation(dto) == 0) {	// 아이디가 DB에 없을 때
+      userService.register(dto);
+      		return "redirect:/main?n="+kemail;
+      }else {						// 아이디가 DB에 있을 때
+          return "redirect:/main?n="+kemail;
+      }
+   }		
+
 	
 	@PostMapping("/signin")
 	public String postSignin(UserDto dto , HttpServletRequest req , 
@@ -105,7 +168,7 @@ public class UserController {
 		String test = dto.getUserId();		
 		model.addAttribute("user" , userService.myInfo(dto));
 		HttpSession session = req.getSession();
-
+		
 		
 		String encryPassword = UserSha256.encrypt(dto.getUserPass());
 		dto.setUserPass(encryPassword);
@@ -115,7 +178,6 @@ public class UserController {
 		if(login != null) {
 			session.setAttribute("member", login);
 			System.out.println("Login Success");
-			System.out.println("session : " + session);
 			return"redirect:/nav?n="+test;
 		}else {
 			System.out.println("입력한 비밀번호 : " + dto.getUserPass());			
@@ -182,6 +244,7 @@ public class UserController {
 		System.out.println("Post passValidation");
 
 		int result = userService.passValidation(dto);
+		System.out.println("result : " + result);
 		return result;
 	}
 	

@@ -14,11 +14,12 @@ public class UserDto {
 	String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm"));
 	private String userJoinDate = formatDate;	
 	private int verify;
+	private String platform;
 	
 	public UserDto() {}
 
 	public UserDto(String userId, String userPass, String userName, String address, String userPhone, String formatDate,
-			String userJoinDate, int verify) {
+			String userJoinDate, int verify , String platform) {
 		super();
 		this.userId = userId;
 		this.userPass = userPass;
@@ -28,6 +29,7 @@ public class UserDto {
 		this.formatDate = formatDate;
 		this.userJoinDate = userJoinDate;
 		this.verify = verify;
+		this.platform = platform;
 	}
 
 	public String getUserId() {
@@ -91,6 +93,22 @@ public class UserDto {
 		return "UserDto [userId=" + userId + ", userPass=" + userPass + ", userName=" + userName + ", address="
 				+ address + ", userPhone=" + userPhone + ", formatDate=" + formatDate + ", userJoinDate=" + userJoinDate
 				+ ", verify=" + verify + "]";
+	}
+
+	public String getFormatDate() {
+		return formatDate;
+	}
+
+	public void setFormatDate(String formatDate) {
+		this.formatDate = formatDate;
+	}
+
+	public String getPlatform() {
+		return platform;
+	}
+
+	public void setPlatform(String platform) {
+		this.platform = platform;
 	}
 
 	

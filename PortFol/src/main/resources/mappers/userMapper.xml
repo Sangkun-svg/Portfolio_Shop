@@ -13,7 +13,8 @@
 				address,
 				userPhone,
 				userJoinDate,
-				verify
+				verify,
+				platform
 				) 
 		VALUES (
 			#{userId},
@@ -22,7 +23,8 @@
 			#{address},
 			#{userPhone},
 			#{userJoinDate},
-			#{verify}
+			#{verify},
+			#{platform}
 		)
 	</insert>	
 	

@@ -58,8 +58,8 @@
 	<div class="Lmain">
 		<h2 style="text-align: center;">소셜 로그인</h2>
 		<div class="sosialLogin" style="background-color: yellow;"
-			onclick="location.href=''">
-			<h1 style="text-align: center;">카카오 로그인</h1>
+			onclick="location.href='${kakao_url}'">
+			<h1 style="text-align: center;">카카오 로그인</h1>	
 		</div>
 		<div class="sosialLogin" style="background-color: greenyellow;"
 			onclick="location.href=''">
