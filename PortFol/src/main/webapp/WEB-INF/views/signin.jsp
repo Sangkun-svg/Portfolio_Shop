@@ -62,7 +62,7 @@
 			<h1 style="text-align: center;">카카오 로그인</h1>	
 		</div>
 		<div class="sosialLogin" style="background-color: greenyellow;"
-			onclick="location.href=''">
+			onclick="location.href='${naver_url}'">
 			<h1 style="text-align: center;">네이버 로그인</h1>
 		</div>
 		<div class="sosialLogin" style="background-color: skyblue;"

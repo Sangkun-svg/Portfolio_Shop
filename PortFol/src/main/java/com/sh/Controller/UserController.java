@@ -1,6 +1,6 @@
 package com.sh.Controller;
 
-import java.time.LocalDate;
+import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,24 +8,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.mysql.cj.x.protobuf.MysqlxCrud.Order;
+import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.sh.Dto.Address;
 import com.sh.Dto.OrderInfo;
 import com.sh.Dto.Product;
@@ -39,6 +39,7 @@ import com.sh.Service.OrderService;
 import com.sh.Service.ReplyService;
 import com.sh.Service.UserService;
 import com.sh.Service.UserSha256;
+
 
 @Controller
 public class UserController {
@@ -56,8 +57,15 @@ public class UserController {
 	@Inject 
 	private AddressService addressService;
 	@Inject
-	public KakaoController kakaoController;
+	private KakaoController kakaoController;
+	@Inject
+	private NaverLoginBO naverLoginBO;
+	private String apiResult;
 	
+	@Autowired
+	public void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+		this.naverLoginBO = naverLoginBO;
+	}
 	
 	
 	@GetMapping("/signup")
@@ -103,21 +111,21 @@ public class UserController {
 		System.out.println("Get Signin");
 		
 		 String kakaoUrl = KakaoController.getAuthorizationUrl(session);
-		 
+		 String naverUrl = naverLoginBO.getAuthorizationUrl(session);
 	      // 카카오
 	      System.out.println("카카오:" + kakaoUrl);
+	      System.out.println("네이버:" + naverUrl);
+	      
 	      model.addAttribute("kakao_url", kakaoUrl);	
+	      model.addAttribute("naver_url", naverUrl);	
 		}	
 	
 
    @RequestMapping(value = "/kakao/callback", produces = "application/json", method = { RequestMethod.GET,RequestMethod.POST })
    public String kakaoLogin(@RequestParam("code") String code, HttpServletRequest request,
 		   			HttpServletResponse response, HttpSession session, Model model , UserDto dto) throws Exception {
-	   System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
-	   System.out.println("카카오 콜백");
-	   System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
 	   System.out.println("Code : " + code);
-      // 결과값을 node에 담아줌
+	   // 결과값을 node에 담아줌
       JsonNode node = KakaoController.getAccessToken(code);
       System.out.println("결과값을 노드에 담음 : "+node.toString());
       // accessToken에 사용자의 로그인한 모든 정보가 들어있음
@@ -158,7 +166,53 @@ public class UserController {
       }
    }		
 
-	
+   //네이버 로그인 성공시 callback호출 메소드
+   @RequestMapping(value = "/naver/callback", method = { RequestMethod.GET, RequestMethod.POST })
+   public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session , UserDto dto)
+           throws IOException {
+       System.out.println("Naver callback");
+       OAuth2AccessToken oauthToken;
+       oauthToken = naverLoginBO.getAccessToken(session, code, state);
+       // 1. 로그인 사용자 정보를 읽어온다.
+       apiResult = naverLoginBO.getUserProfile(oauthToken); // String형식의 json데이터
+
+       // 2. String형식인 apiResult를 json형태로 바꿈
+       JSONParser parser = new JSONParser();
+       Object obj;
+       try {
+          obj = parser.parse(apiResult);
+          JSONObject jsonObj = (JSONObject) obj;
+          System.out.println(jsonObj.toString());
+          // 3. 데이터 파싱
+          // Top레벨 단계 _response 파싱
+          JSONObject response_obj = (JSONObject) jsonObj.get("response");
+          // response의 nickname값 파싱
+          String name = (String) response_obj.get("name");
+          String email = (String)response_obj.get("email");
+          System.out.println(name);
+          System.out.println(email);
+          // 4.파싱 닉네임 세션으로 저장
+          session.setAttribute("sessionId", name); // 세션 생성
+          session.setAttribute("sessionEmail", email);
+          UserDto naverDto = new UserDto();
+          String nId = "n_"+email.substring(0, email.indexOf("@"));
+          session.setAttribute("sessionNid", nId);
+          naverDto.setUserId(nId);
+          naverDto.setUserName(name);
+          
+          System.out.println(naverDto.toString());
+//      if(ser.socialIdCheckAction(naverDto)>0) { // 아이디 체크
+//          // login성공.
+//        } else {
+//            ser.insertNaverAction(naverDto);
+//          }
+       } catch (org.json.simple.parser.ParseException e) {
+          e.printStackTrace();
+       }
+       model.addAttribute("result", apiResult);
+       return "redirect:/main";
+    }
+   
 	@PostMapping("/signin")
 	public String postSignin(UserDto dto , HttpServletRequest req , 
 							RedirectAttributes rttr , Model model)throws Exception {

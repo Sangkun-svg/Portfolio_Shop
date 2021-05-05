@@ -54,5 +54,5 @@
 		</interceptor>
 	</interceptors>
 
-
+	<beans:bean id="naverLoginBO" class="com.sh.Controller.NaverLoginBO" />
 </beans:beans>
