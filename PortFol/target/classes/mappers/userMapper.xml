@@ -120,5 +120,25 @@
 			orderId = #{orderId}
 	</update>
 
+	<insert id="goCart" >
+		INSERT INTO cart 
+				(
+				 proCode
+				,userId 
+				,proPrice				
+				,orderName	 
+				)
+			values
+				(
+					#{proCode},
+					#{userId},
+					#{proPrice},
+					#{orderName}
+				)
+	</insert>
+	
+	<select id="cartList" resultType="com.sh.Dto.Cart">
+		select * from cart where userId = #{userId}
+	</select>
 	
 </mapper>

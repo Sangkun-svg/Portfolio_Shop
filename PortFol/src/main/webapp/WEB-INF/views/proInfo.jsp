@@ -56,8 +56,8 @@
 </style>
 <body>
     <div class="wrap">
-    	<form action="${pageContext.request.contextPath}/orderPage?n=${member.userId}&bno=${pro.bno}" method="get">
-			<input type="hidden" value="${member.userId}" name="n">
+    	<form action="${pageContext.request.contextPath}/orderPage?n=${login.userId}&bno=${pro.bno}" method="get">
+			<input type="hidden" value="${login.userId}" name="n">
 			<input type="hidden" value="${pro.bno}" name="bno">
 	        <div class="img">
 	            <img src="" alt="img"
@@ -71,18 +71,13 @@
 	        <li><h3>상품번호 : <c:out value="${pro.proCode}"/></h3></li>
 	        <li><h3>상품Bno : <c:out value="${pro.bno}"/></h3></li>
 
-			<input type="hidden" value="${pro.proCode}">
+			<input type="hidden" value="${pro.proCode}" name="proCode">
 
 						
 	        <li><button type="submit"  class="btn">주문하기</button><br></li>
 		</form>
-	        <li><button onclick="goCart()" class="btn">장바구니에 담기</button><br></li>
-				<script type="text/javascript">
-					function goCart(){
-						alert('장바구니에 저장 되었습니다 !')
-						location.href="${pageContext.request.contextPath}/main";
-					}
-				</script>																		
+	        <li><button onclick="location.href='${pageContext.request.contextPath}/goCart?n=${login.userId}&bno=${pro.bno}'" class="btn">장바구니에 담기</button><br></li>
+			<input type="hidden" value="${pro.proCode}" name="proCode">
 
 
 				<!-- 댓글 -->
@@ -104,7 +99,7 @@
 						<input type="hidden" value="${user.userId} " name="n">
 						<input type="hidden" value="${pro.bno} " name="bno">
 	
-				    	<input type="text" value="${member.userName }" readonly="readonly" name="writer"/>						    
+				    	<input type="text" value="${login.userName }" readonly="readonly" name="writer"/>						    
 				    	<input type="text" name="content" placeholder="댓글을 작성해주세요" style="width : 100%; height: 100%" />
 				    	<button type="submit">댓글 작성</button>
 					</form>

@@ -2,10 +2,9 @@ package com.sh.Dao;
 
 import java.util.List;
 
+import com.sh.Dto.Cart;
 import com.sh.Dto.OrderInfo;
-import com.sh.Dto.Product;
 import com.sh.Dto.UserDto;
-import com.sh.Enum.DeliverySituation;
 
 public interface UserDao {
 	public void register(UserDto dto) throws Exception;
@@ -29,4 +28,7 @@ public interface UserDao {
 	public void DsUpdate (OrderInfo orderInfo) throws Exception; 
 
 	public void PtcUpdate (OrderInfo orderInfo) throws Exception; 
+	
+	public void goCart(Cart cart) throws Exception;
+
 }				

@@ -1,6 +1,5 @@
 package com.sh.Controller;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.sh.Dto.Address;
+import com.sh.Dto.Cart;
 import com.sh.Dto.OrderInfo;
 import com.sh.Dto.Product;
 import com.sh.Dto.ReplyDto;
@@ -155,7 +155,7 @@ public class UserController {
       session.setAttribute("kbirthday", kbirthday);
       session.setAttribute("kage", kage);
 
-      dto.setUserId(kemail);
+      dto.setUserId(kemail+"_K");
       dto.setUserName(kname);
       dto.setPlatform("K");
       if(idValidation(dto) == 0) {	// 아이디가 DB에 없을 때
@@ -169,7 +169,7 @@ public class UserController {
    //네이버 로그인 성공시 callback호출 메소드
    @RequestMapping(value = "/naver/callback", method = { RequestMethod.GET, RequestMethod.POST })
    public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session , UserDto dto)
-           throws IOException {
+           throws Exception {
        System.out.println("Naver callback");
        OAuth2AccessToken oauthToken;
        oauthToken = naverLoginBO.getAccessToken(session, code, state);
@@ -189,28 +189,27 @@ public class UserController {
           // response의 nickname값 파싱
           String name = (String) response_obj.get("name");
           String email = (String)response_obj.get("email");
-          System.out.println(name);
-          System.out.println(email);
-          // 4.파싱 닉네임 세션으로 저장
-          session.setAttribute("sessionId", name); // 세션 생성
-          session.setAttribute("sessionEmail", email);
-          UserDto naverDto = new UserDto();
-          String nId = "n_"+email.substring(0, email.indexOf("@"));
-          session.setAttribute("sessionNid", nId);
-          naverDto.setUserId(nId);
-          naverDto.setUserName(name);
-          
-          System.out.println(naverDto.toString());
-//      if(ser.socialIdCheckAction(naverDto)>0) { // 아이디 체크
-//          // login성공.
-//        } else {
-//            ser.insertNaverAction(naverDto);
-//          }
+          String phone = (String)response_obj.get("mobile");
+
+          dto.setUserId(email+"_N");
+          dto.setUserName(name);
+          dto.setUserPhone(phone);
+          dto.setPlatform("N");
+          int result = userService.idValidation(dto);
+	      if(result == 1) { // 아이디 체크
+	          // 중복 o
+	    	  System.out.println("로그인(가입 x )");	    	 
+	    	  return "redirect:/main?n="+email;	
+	      } else if(result == 0){
+	          // 중복 x 
+	          userService.register(dto);
+	    	  return "redirect:/main?n="+email;	
+          }
        } catch (org.json.simple.parser.ParseException e) {
           e.printStackTrace();
        }
        model.addAttribute("result", apiResult);
-       return "redirect:/main";
+       return "";
     }
    
 	@PostMapping("/signin")
@@ -230,12 +229,12 @@ public class UserController {
 
 		UserDto login = userService.signin(dto);
 		if(login != null) {
-			session.setAttribute("member", login);
+			session.setAttribute("login", login);
 			System.out.println("Login Success");
 			return"redirect:/nav?n="+test;
 		}else {
-			System.out.println("입력한 비밀번호 : " + dto.getUserPass());			
-			session.setAttribute("member", null);	
+			session.setAttribute("login", null);
+			rttr.addAttribute("msg" , false);
 			System.out.println("Login false");
 			return "signin";
 		}
@@ -320,18 +319,6 @@ public class UserController {
 		dto.setUserId(string);
 		model.addAttribute("user" , userService.myInfo(dto));
 		//내가 짠 코드
-		HttpSession session = req.getSession();
-		System.out.println("session : " + session );
-		System.out.println("session.getId : " + session.getId());
-		
-		if(session.isNew() == true) {
-			System.out.println(session.isNew());
-			System.out.println("새로 생긴 세션");
-			session = null;			
-		}else {
-			System.out.println(session.isNew());
-			model.addAttribute("session" , session);			
-		}
 		
 		// 여기까지
 		
@@ -619,6 +606,42 @@ public class UserController {
 		userService.PtcUpdate(orderInfo);
 		
 		return "redirect:/main?n="+userId;
+	}
+	
+	@GetMapping("/goCart")
+	public String goCart(@RequestParam(value = "n" , required = false) String string
+						,@RequestParam(value = "bno" , required = false) int bno
+						, Cart cart) throws Exception {
+		logger.info("get goCart");
+		System.out.println("get goCart");
+		System.out.println("bno : " + bno);
+		System.out.println("string : " + string);
+		System.out.println("price : " + adminService.proView(bno).getProPrice());
+		System.out.println("proCode : " + adminService.proView(bno).getProCode());
+		System.out.println("proName : " + adminService.proView(bno).getProName());
+		System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
+		cart.setUserId(string);
+		cart.setProPrice(adminService.proView(bno).getProPrice());
+		cart.setProCode(adminService.proView(bno).getProCode());
+		cart.setOrderName(adminService.proView(bno).getProName());
+
+		System.out.println("cart userId : " + cart.getUserId());
+		System.out.println("cart proPrice : " + cart.getProPrice());
+		System.out.println("cart proCode : " + cart.getProCode());
+		System.out.println("cart orderName : " + cart.getOrderName());
+		
+		
+		userService.goCart(cart);
+		String url = "redirect:/proInfo?n="+string+"&bno="+bno;
+		System.out.println("url : " + url);
+		return url;
+	}
+	
+	@GetMapping("/cart")
+	public void cart() throws Exception {
+		logger.info("get cart");
+		System.out.println("get cart");
 
 	}
+	
 }

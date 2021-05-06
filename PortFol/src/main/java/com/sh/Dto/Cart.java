@@ -4,17 +4,15 @@ public class Cart {
 	
 	private int proCode;
 	private	String userId;
-	private int orderStock;
-	private int orderName;
-	private int orderPirce;
+	private String orderName;
+	private int proPrice;
 	
 	public Cart() {}
-	public Cart(int proCode, String userId, int orderStock, int orderName, int orderPirce) {
+	public Cart(int proCode, String userId, String orderName, int proPirce) {
 		this.proCode = proCode;
 		this.userId = userId;
-		this.orderStock = orderStock;
 		this.orderName = orderName;
-		this.orderPirce = orderPirce;
+		this.proPrice = proPrice;
 	}
 	public int getProCode() {
 		return proCode;
@@ -28,23 +26,17 @@ public class Cart {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public int getOrderStock() {
-		return orderStock;
-	}
-	public void setOrderStock(int orderStock) {
-		this.orderStock = orderStock;
-	}
-	public int getOrderName() {
+	public String getOrderName() {
 		return orderName;
 	}
-	public void setOrderName(int orderName) {
+	public void setOrderName(String orderName) {
 		this.orderName = orderName;
 	}
-	public int getOrderPirce() {
-		return orderPirce;
+	public int getProPrice() {
+		return proPrice;
 	}
-	public void setOrderPirce(int orderPirce) {
-		this.orderPirce = orderPirce;
+	public void setProPrice(int proPrice) {
+		this.proPrice = proPrice;
 	}
 	
 	

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 
 import com.sh.Dao.UserDao;
+import com.sh.Dto.Cart;
 import com.sh.Dto.OrderInfo;
 import com.sh.Dto.UserDto;
 import com.sh.Enum.PermissionToComment;
@@ -78,6 +79,11 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void PtcUpdate(OrderInfo orderInfo) throws Exception {
 		dao.PtcUpdate(orderInfo);
+	}
+
+	@Override
+	public void goCart(Cart cart) throws Exception {
+		dao.goCart(cart);
 	}
 
 

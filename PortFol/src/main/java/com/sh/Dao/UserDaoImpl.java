@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.sh.Dto.Cart;
 import com.sh.Dto.OrderInfo;
 import com.sh.Dto.UserDto;
 import com.sh.Enum.DeliverySituation;
@@ -71,6 +72,11 @@ public class UserDaoImpl implements UserDao{
 	@Override   
 	public void PtcUpdate(OrderInfo orderInfo) throws Exception {
 		sql.update("userMapper.PtcUpdate" , orderInfo);
+	}
+
+	@Override
+	public void goCart(Cart cart) throws Exception {
+		sql.insert("userMapper.goCart" , cart);
 	}
 
 	
