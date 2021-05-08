@@ -30,4 +30,7 @@ public interface AdminService {
 
 	public void DeleteOrderInfo(OrderInfo orderInfo) throws Exception;
 
+	public int pickM() throws Exception;
+	public int pickG() throws Exception;
+
 }

@@ -15,7 +15,7 @@
 			<li><a href="${pageContext.request.contextPath}/admin/reqProList">주문 요청된 상품</a></li>
 			<li><a href="">상품 후기</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/userList">유저 목록</a></li>
-			<li><a href="${pageContext.request.contextPath}/admin/">매출 관리</a></li>
+			<li><a href="${pageContext.request.contextPath}/admin/chart/genderChart">매출 관리</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/">배송 상황</a></li>
 
 		</ul>

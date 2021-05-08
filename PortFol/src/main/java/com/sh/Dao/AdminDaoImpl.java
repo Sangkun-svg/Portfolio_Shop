@@ -71,6 +71,18 @@ public class AdminDaoImpl implements AdminDao{
 		sql.delete("adminMapper.DeleteOrderInfo" , orderInfo);
 	}
 
+	@Override
+	public int pickM() throws Exception {
+		int result = sql.selectOne("adminMapper.pickM");
+		return result;
+	}
+
+	@Override
+	public int pickG() throws Exception {
+		int result = sql.selectOne("adminMapper.pickG");
+		return result;
+	}
+
 
 	
 }

@@ -117,5 +117,14 @@
 		and
 			userId =#{userId}
 	</delete>	
+	
+	<select id="pickM" resultType="int">
+		SELECT COUNT(gender) FROM user where gender = 'M';
+	</select>
+
+	<select id="pickG" resultType="int">
+		SELECT COUNT(gender) FROM user where gender = 'G';
+	</select>
+	
 </mapper>
 

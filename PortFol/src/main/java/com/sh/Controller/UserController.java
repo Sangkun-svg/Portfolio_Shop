@@ -229,11 +229,12 @@ public class UserController {
 
 		UserDto login = userService.signin(dto);
 		if(login != null) {
-			session.setAttribute("login", login);
-			System.out.println("Login Success");
+			session.setAttribute("member", login);
+
+			System.out.println();
 			return"redirect:/nav?n="+test;
 		}else {
-			session.setAttribute("login", null);
+			session.setAttribute("member", null);
 			rttr.addAttribute("msg" , false);
 			System.out.println("Login false");
 			return "signin";

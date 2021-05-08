@@ -37,6 +37,18 @@ public class AdminController {
 	private String uploadPath;
 	
 	
+	
+	@GetMapping("/chart/gender")
+	public void getGenderChart(Model model) throws Exception {
+		System.out.println("chart");
+		System.out.println("남자성비 : "+adminService.pickM());
+		System.out.println("여자성비 : "+adminService.pickG());
+		
+		model.addAttribute("M" , adminService.pickM());
+		model.addAttribute("G" , adminService.pickG());
+	}
+	
+	
 	@GetMapping("/index")
 	public void getIndex() throws Exception{
 		logger.info("Get Index");

@@ -10,6 +10,7 @@ public class UserDto {
 	private String userPass;
 	private String userName;
 	private String address;	
+	private String gender;
 	private String userPhone;
 	String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm"));
 	private String userJoinDate = formatDate;	
@@ -19,7 +20,7 @@ public class UserDto {
 	public UserDto() {}
 
 	public UserDto(String userId, String userPass, String userName, String address, String userPhone, String formatDate,
-			String userJoinDate, int verify , String platform) {
+			String userJoinDate, int verify , String platform , String gender) {
 		super();
 		this.userId = userId;
 		this.userPass = userPass;
@@ -30,6 +31,7 @@ public class UserDto {
 		this.userJoinDate = userJoinDate;
 		this.verify = verify;
 		this.platform = platform;
+		this.gender = gender;
 	}
 
 	public String getUserId() {
@@ -109,6 +111,14 @@ public class UserDto {
 
 	public void setPlatform(String platform) {
 		this.platform = platform;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	

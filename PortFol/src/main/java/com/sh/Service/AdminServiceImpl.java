@@ -72,6 +72,18 @@ public class AdminServiceImpl implements AdminService{
 		dao.plusProStock(orderInfo);
 	}
 
+	@Override
+	public int pickM() throws Exception {
+		int result = dao.pickM();
+		return result;
+	}
+
+	@Override
+	public int pickG() throws Exception {
+		int result = dao.pickG();
+		return result;
+	}
+
 
 
 }

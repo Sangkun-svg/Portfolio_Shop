@@ -14,7 +14,8 @@
 				userPhone,
 				userJoinDate,
 				verify,
-				platform
+				platform,
+				gender
 				) 
 		VALUES (
 			#{userId},
@@ -24,7 +25,8 @@
 			#{userPhone},
 			#{userJoinDate},
 			#{verify},
-			#{platform}
+			#{platform},
+			#{gender}
 		)
 	</insert>	
 	
