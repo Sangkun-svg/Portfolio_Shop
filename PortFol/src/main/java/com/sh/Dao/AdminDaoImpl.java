@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.sh.Dto.OrderInfo;
 import com.sh.Dto.Product;
 import com.sh.Dto.UserDto;
+import com.sh.Dto.UserRequest;
 
 @Repository
 public class AdminDaoImpl implements AdminDao{
@@ -81,6 +82,11 @@ public class AdminDaoImpl implements AdminDao{
 	public int pickG() throws Exception {
 		int result = sql.selectOne("adminMapper.pickG");
 		return result;
+	}
+
+	@Override
+	public void reqRefund_Cancel(UserRequest userReq) throws Exception {
+		sql.insert("adminMapper.reqRefund_Cancel" , userReq);
 	}
 
 

@@ -10,6 +10,7 @@ import com.sh.Dao.AdminDao;
 import com.sh.Dto.OrderInfo;
 import com.sh.Dto.Product;
 import com.sh.Dto.UserDto;
+import com.sh.Dto.UserRequest;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -82,6 +83,11 @@ public class AdminServiceImpl implements AdminService{
 	public int pickG() throws Exception {
 		int result = dao.pickG();
 		return result;
+	}
+
+	@Override
+	public void reqRefund_Cancel(UserRequest userReq) throws Exception {
+		dao.reqRefund_Cancel(userReq);
 	}
 
 

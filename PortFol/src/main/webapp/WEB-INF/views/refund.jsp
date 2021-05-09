@@ -72,8 +72,8 @@
 
         </label><br>
 
-        <label for="refund_Price"><h2>환불 이유 : 
-        <select name="referenceInfo" id="refund_select">
+        <label for="Rs_Refund_option"><h2>환불 이유 : 
+        <select name="Rs_Refund_option" id="Rs_Refund_option">
             <option value="option_1" selected="selected">환불 이유를 선택해 주세요.</option>
             <option value="option_2">환불이유 2---------------</option>
             <option value="option_3">환불이유 3---------------</option>
@@ -81,7 +81,7 @@
             <option value="option_5">환불이유 5---------------</option>
             <option value="option_6">---------------그 외---------------</option>
         </select></h2></label><br>
-        <textarea id="refund_reason_textarea" placeholder="환불하시는 이유를 자세하게 기제해 주세요."></textarea>
+        <input type="text" name="Rs_Refund_text" placeholder="환불하시는 이유를 자세하게 기제해 주세요." style="width: 500px; height: 300px"></textarea>
         <br>
 
 

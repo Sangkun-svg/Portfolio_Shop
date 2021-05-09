@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import com.sh.Dto.OrderInfo;
 import com.sh.Dto.Product;
 import com.sh.Dto.UserDto;
+import com.sh.Dto.UserRequest;
 
 @Component
 public interface AdminDao {
@@ -34,4 +35,6 @@ public interface AdminDao {
 	
 	public int pickM() throws Exception;
 	public int pickG() throws Exception;
+	
+	public void reqRefund_Cancel(UserRequest userReq) throws Exception;
 }

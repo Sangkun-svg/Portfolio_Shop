@@ -125,6 +125,11 @@
 	<select id="pickG" resultType="int">
 		SELECT COUNT(gender) FROM user where gender = 'G';
 	</select>
+
+	<insert id="reqRefund_Cancel">
+		insert into userRequest (choose,userId , orderId , Rs_Refund_option , Rs_Refund_text , Rs_Change_option , Rs_Change_text)
+			values (#{choose} ,#{userId} ,#{orderId} ,#{Rs_Refund_option} ,#{Rs_Refund_text} ,#{Rs_Change_option} ,#{Rs_Change_text})
+	</insert>
 	
 </mapper>
 

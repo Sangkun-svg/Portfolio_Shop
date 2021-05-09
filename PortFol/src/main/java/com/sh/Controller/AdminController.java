@@ -37,6 +37,10 @@ public class AdminController {
 	private String uploadPath;
 	
 	
+	@GetMapping("/chart/dayPay")
+	public void getDayPay() {}
+	@GetMapping("/chart/monthPay")
+	public void getMonthPay() {}
 	
 	@GetMapping("/chart/gender")
 	public void getGenderChart(Model model) throws Exception {

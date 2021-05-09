@@ -31,6 +31,7 @@ import com.sh.Dto.OrderInfo;
 import com.sh.Dto.Product;
 import com.sh.Dto.ReplyDto;
 import com.sh.Dto.UserDto;
+import com.sh.Dto.UserRequest;
 import com.sh.Enum.DeliverySituation;
 import com.sh.Enum.PermissionToComment;
 import com.sh.Service.AddressService;
@@ -555,18 +556,27 @@ public class UserController {
 	public String postRefund(@RequestParam(value = "userId" , required = false)String userId
 							,@RequestParam(value = "orderId" , required = false)String orderId
 							 ,@RequestParam(value = "proCode" , required = false) String proCode
-							,UserDto dto , OrderInfo orderInfo 
-							, DeliverySituation ds , PermissionToComment ptc) throws Exception {
+							 ,@RequestParam(value = "Rs_Refund_text" , required = false) String Rs_Refund_text
+							 ,String Rs_Refund_option  
+							 ,UserDto dto , OrderInfo orderInfo , HttpServletRequest req
+							, DeliverySituation ds , PermissionToComment ptc , UserRequest userReq) throws Exception {
 		logger.info("Post Refund");
 		System.out.println("Post Refund");
 		System.out.println("userId : " + userId); // -> 안넘어옴
 		System.out.println("orderId : " + orderId);
 		System.out.println("proCode   : " + proCode);
+		System.out.println("option : " + req.getParameter("Rs_Refund_option"));
+		System.out.println("text : " + Rs_Refund_text);
 		// 후기 기능 삭제
-		 
-		// amdin -> client.claim -> 환불요청 띄우기 
-//		adminService.userClaim(orderInfo).setDeliveryInfo(d.request_refund);
-
+		
+		userReq.setChoose("Refund");
+		userReq.setUserId(userId);
+		userReq.setOrderId(orderId);
+		userReq.setProCode(proCode);
+		userReq.setRs_Refund_option(req.getParameter("Rs_Refund_option"));
+		userReq.setRs_Refund_text(Rs_Refund_text);
+		adminService.reqRefund_Cancel(userReq);
+		
 		// user -> deliveryInfo -> 배송  상황 = stop_for_refund 변경
 		orderInfo.setUserId(userId);
 		orderInfo.setOrderId(orderId);
