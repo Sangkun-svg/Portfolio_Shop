@@ -194,7 +194,8 @@ header ul li :hover {
 			<div class="test" onclick="location.href='${pageContext.request.contextPath}/proInfo?n=${user.userId}&bno=${prolist.bno}'">
 
 			<div class="thumbnail">
-				<img src="" alt="Err">
+				<img src="${prolist.proThumbnail}" alt="Err" width="100%" height="100%">
+							
 			</div>
 				<br><li>이름 : <c:out value="${prolist.proName}"/></li><br>
 				<li>가격 : <c:out value="${prolist.proPrice}"/></li>

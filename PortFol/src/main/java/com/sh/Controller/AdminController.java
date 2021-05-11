@@ -1,6 +1,8 @@
 package com.sh.Controller;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.annotation.Resource;
 
@@ -82,7 +84,9 @@ public class AdminController {
 		String imgUploadPath = uploadPath + File.separator + "imgUpload";
 		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
 		String fileName = null;
-
+		System.out.println("imgUploadPath : " + imgUploadPath);
+		System.out.println("ymdPath : " + ymdPath);
+		
 		if(file != null) {
 			fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
 		} else {
@@ -92,6 +96,14 @@ public class AdminController {
 		pd.setProImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 		pd.setProThumbnail(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 		
+		System.out.println("proImg : " + pd.getProImg());
+		System.out.println("proThumbnail : " + pd.getProThumbnail());
+		
+		String proImg = pd.getProImg();
+		String proThumb = pd.getProThumbnail();
+		
+		pd.setProImg(proImg.substring(1,proImg.length()));
+		pd.setProThumbnail(proThumb.substring(1,proThumb.length()));
 		
 		adminService.proRegister(pd);
 		System.out.println("상품 등록 완료");
