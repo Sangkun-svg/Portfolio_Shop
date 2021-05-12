@@ -1,5 +1,8 @@
 package com.sh.Dto;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import com.sh.Enum.DeliverySituation;
 import com.sh.Enum.PermissionToComment;
 
@@ -15,9 +18,12 @@ public class OrderInfo {
 	private String address;
 	private DeliverySituation deliveryInfo;
 	private PermissionToComment replyEnum;
+	String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh"));
+	private String orderDate = formatDate; 
+	
 	public OrderInfo() {}
 	public OrderInfo(String orderId, String userId,String orderProName, int proCode,int proPrice, int orderStock, int orderPrice, String address,
-			DeliverySituation deliveryInfo ,PermissionToComment replyEnum) {
+			DeliverySituation deliveryInfo ,PermissionToComment replyEnum , String orderDate) {
 		this.orderId = orderId;
 		this.userId = userId;
 		this.proCode = proCode;
@@ -28,6 +34,7 @@ public class OrderInfo {
 		this.deliveryInfo = deliveryInfo;
 		this.orderProName = orderProName;
 		this.replyEnum = replyEnum;
+		this.orderDate = orderDate;
 	}
 	public String getOrderId() {
 		return orderId;
@@ -89,8 +96,11 @@ public class OrderInfo {
 	public void setReplyEnum(PermissionToComment replyEnum) {
 		this.replyEnum = replyEnum;
 	}
+	public String getOrderDate() {
+		return orderDate;
+	}
 	
-	
+
 	
 	
 }

@@ -56,11 +56,11 @@
 </style>
 <body>
     <div class="wrap">
-    	<form action="${pageContext.request.contextPath}/orderPage?n=${login.userId}&bno=${pro.bno}" method="get">
-			<input type="hidden" value="${login.userId}" name="n">
+    	<form action="${pageContext.request.contextPath}/orderPage?n=${user.userId}&bno=${pro.bno}" method="get">
+			<input type="hidden" value="${user.userId}" name="n">
 			<input type="hidden" value="${pro.bno}" name="bno">
 	        <div class="img">
-	            <img src="" alt="img"
+	            <img src="${pro.proImg }" alt="img"
 	                style="width: 100%; height: 100%;">
 	        </div>
 	        

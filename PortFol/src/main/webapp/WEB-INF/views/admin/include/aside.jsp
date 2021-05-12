@@ -15,7 +15,8 @@
 			<li><a href="${pageContext.request.contextPath}/admin/reqProList">주문 요청된 상품</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/userList">유저 목록</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/chart/gender">남/녀 성비 그래프</a></li>
-			<li><a href="${pageContext.request.contextPath}/admin/chart/">매출 그래프1</a></li>
+			<li><a href="${pageContext.request.contextPath}/admin/chart/dayPay">매출 그래프1</a></li>
+			<li><a href="${pageContext.request.contextPath}/admin/chart/monthPay">매출 그래프2</a></li>
 
 		</ul>
 	</aside>

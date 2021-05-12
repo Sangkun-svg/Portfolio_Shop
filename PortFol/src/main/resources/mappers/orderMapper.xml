@@ -5,9 +5,9 @@
 <mapper namespace="orderMapper">
 	<insert id="order"> 
 		insert into orderInfo 
-			(orderId , userId , proCode ,proPrice , orderStock , address , orderPrice ,orderProName ,deliveryInfo , replyEnum)
+			(orderId , userId , proCode ,proPrice , orderStock , address , orderPrice ,orderProName ,deliveryInfo , replyEnum , orderDate)
 		values
-			(#{orderId},#{userId},#{proCode},#{proPrice},#{orderStock},#{address},#{orderPrice}, #{orderProName} ,#{deliveryInfo} ,#{replyEnum})
+			(#{orderId},#{userId},#{proCode},#{proPrice},#{orderStock},#{address},#{orderPrice}, #{orderProName} ,#{deliveryInfo} ,#{replyEnum} , #{orderDate})
 	</insert>
 
 	<select id="orderInfo" resultType="com.sh.Dto.OrderInfo">

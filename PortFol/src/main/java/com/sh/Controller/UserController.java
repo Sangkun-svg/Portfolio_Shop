@@ -1,5 +1,7 @@
 package com.sh.Controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -30,6 +32,7 @@ import com.sh.Dto.Cart;
 import com.sh.Dto.OrderInfo;
 import com.sh.Dto.Product;
 import com.sh.Dto.ReplyDto;
+import com.sh.Dto.Sales;
 import com.sh.Dto.UserDto;
 import com.sh.Dto.UserRequest;
 import com.sh.Enum.DeliverySituation;
@@ -227,29 +230,32 @@ public class UserController {
 		String encryPassword = UserSha256.encrypt(dto.getUserPass());
 		dto.setUserPass(encryPassword);
 		System.out.println(dto.getUserPass());
-
 		UserDto login = userService.signin(dto);
-		if(login != null) {
-			session.setAttribute("member", login);
-
-			System.out.println();
-			return"redirect:/nav?n="+test;
-		}else {
+		System.out.println("login : " + login);
+		if(login == null) {
 			session.setAttribute("member", null);
-			rttr.addAttribute("msg" , false);
-			System.out.println("Login false");
+			rttr.addFlashAttribute("msg" , false);
 			return "signin";
+		}else {
+			session.setAttribute("member", login);
+			System.out.println("Login 성공");
+			System.out.println("verify : " + login.getVerify());
+			if(login.getVerify() == 9) {
+				return"redirect:/nav?n="+test;
+			}else {
+				return"redirect:/main?n="+test;
+			}
 		}
 	}
 	
 	
 	@GetMapping("/signout")
-	public String signout(HttpSession session)throws Exception {
+	public String signout(HttpSession session ,HttpServletRequest req  )throws Exception {
 		logger.info("SignOut");
 
 		userService.signout(session);
 		System.out.println("SignOut");
-		
+
 		return"redirect:/main";
 	}
 
@@ -314,15 +320,14 @@ public class UserController {
 	}
 	
 	@GetMapping("/main")
-	public void getMainPage(@RequestParam(value="n" , required=false) String string ,Model model , HttpServletRequest req , UserDto dto) throws Exception {
+	public void getMainPage(@RequestParam(value="n" , required=false) String string ,Model model  
+							, UserDto dto) throws Exception {
 		logger.info("Main Page");
 		System.out.println("MainPage");
+
 		model.addAttribute("prolist", adminService.proList());
 		dto.setUserId(string);
 		model.addAttribute("user" , userService.myInfo(dto));
-		//내가 짠 코드
-		
-		// 여기까지
 		
 	}
 	
@@ -429,20 +434,14 @@ public class UserController {
 		logger.info("Get OrderPage");
 		System.out.println("Get OrderPage");	
 		// 주문정보 中 회원정보 넣어주기
+		System.out.println("string : " + string);
 		dto.setUserId(string);
 		model.addAttribute("member" , userService.myInfo(dto));
 
-		System.out.println("test : " + userService.myInfo(dto).getUserId());
-		System.out.println("test : " + userService.myInfo(dto).getUserName());
-		System.out.println("test : " + userService.myInfo(dto).getUserPhone());
-		System.out.println("test : " + userService.myInfo(dto).getAddress());
 		
 		// 주문정보 中 상품정보 넣어주기
 		model.addAttribute("pro" , adminService.proView(bno));
 
-		System.out.println("orderEntity userId : " + userService.myInfo(dto).getUserId()); //proCode , address
-		System.out.println("orderEntity proCode : " +adminService.proView(bno).getProCode() );
-		System.out.println("orderEntity userId : " + userService.myInfo(dto).getAddress()); //proCode , address
 	}
 
 	@PostMapping("orderPage")
@@ -450,7 +449,7 @@ public class UserController {
 								,@RequestParam("bno") int bno
 								,OrderInfo orderInfo , Model model , UserDto dto , Address address
 								, BindingResult bindingResult , Product pro
-								,DeliverySituation userEnum , PermissionToComment ptc) throws Exception {
+								,DeliverySituation userEnum , PermissionToComment ptc , Sales sales) throws Exception {
 		logger.info("POST OrderPage");
 		System.out.println("POST OrderPage");	
 		//
@@ -464,6 +463,24 @@ public class UserController {
 		orderInfo.setProPrice(orderInfo.getOrderStock() * orderInfo.getOrderPrice());
 		orderInfo.setOrderProName(adminService.proView(bno).getProName());
 		orderInfo.setReplyEnum(ptc.ON);
+		
+		String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		String formatDateHH = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh"));
+		
+		String lasted = adminService.selectLasted();
+
+		if(lasted.substring(0, 9) != formatDate) {
+			sales.setSalesDate(formatDateHH);
+			sales.setDaySales(adminService.proView(bno).getProPrice());
+			adminService.insertSales();
+		}else {
+//		dao & Service 완정하기			
+//		String daySales = adminService.selectSales(formatDateHH).getDaySales() + adminService.proView(bno).getProPrice();	
+//		adminService.daySalesUpdate(daySales);
+
+		}
+		
+		
 		userService.PtcUpdate(orderInfo);
 		orderService.order(orderInfo);
 		
