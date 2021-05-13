@@ -2,6 +2,7 @@ package com.sh.Dao;
 
 import java.util.List;
 
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -89,20 +90,6 @@ public class AdminDaoImpl implements AdminDao{
 		sql.insert("adminMapper.reqRefund_Cancel" , userReq);
 	}
 
-	@Override
-	public void insertSales() throws Exception {
-		sql.insert("adminMapper.insertSales");
-	}
-
-	@Override
-	public void daySalesUpdate() throws Exception {
-		sql.update("adminMapper.daySalesUpdate");
-	}
-
-	@Override
-	public String selectLasted() throws Exception {
-		return sql.selectOne("adminMapper.selectLasted");
-	}
 
 
 	

@@ -36,10 +36,4 @@ public interface AdminService {
 
 	public void reqRefund_Cancel(UserRequest userReq) throws Exception;
 
-	public void insertSales() throws Exception;
-	
-	public void daySalesUpdate() throws Exception; // + , - both
-
-	public String selectLasted() throws Exception;
-
 }

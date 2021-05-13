@@ -1,7 +1,5 @@
 package com.sh.Controller;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -32,7 +30,6 @@ import com.sh.Dto.Cart;
 import com.sh.Dto.OrderInfo;
 import com.sh.Dto.Product;
 import com.sh.Dto.ReplyDto;
-import com.sh.Dto.Sales;
 import com.sh.Dto.UserDto;
 import com.sh.Dto.UserRequest;
 import com.sh.Enum.DeliverySituation;
@@ -449,7 +446,7 @@ public class UserController {
 								,@RequestParam("bno") int bno
 								,OrderInfo orderInfo , Model model , UserDto dto , Address address
 								, BindingResult bindingResult , Product pro
-								,DeliverySituation userEnum , PermissionToComment ptc , Sales sales) throws Exception {
+								,DeliverySituation userEnum , PermissionToComment ptc ) throws Exception {
 		logger.info("POST OrderPage");
 		System.out.println("POST OrderPage");	
 		//
@@ -464,21 +461,6 @@ public class UserController {
 		orderInfo.setOrderProName(adminService.proView(bno).getProName());
 		orderInfo.setReplyEnum(ptc.ON);
 		
-		String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		String formatDateHH = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh"));
-		
-		String lasted = adminService.selectLasted();
-
-		if(lasted.substring(0, 9) != formatDate) {
-			sales.setSalesDate(formatDateHH);
-			sales.setDaySales(adminService.proView(bno).getProPrice());
-			adminService.insertSales();
-		}else {
-//		dao & Service 완정하기			
-//		String daySales = adminService.selectSales(formatDateHH).getDaySales() + adminService.proView(bno).getProPrice();	
-//		adminService.daySalesUpdate(daySales);
-
-		}
 		
 		
 		userService.PtcUpdate(orderInfo);
@@ -492,13 +474,6 @@ public class UserController {
 		System.out.println("userVerify : " + userService.myInfo(dto).getVerify());
 		System.out.println("enum class test : " + orderInfo.getDeliveryInfo());
 
-		System.out.println("address userId : " + address.getUserId());
-		System.out.println("address Code : " + address.getAddressCode());
-		System.out.println("address streetAddress : " + address.getStreetAddress());
-		System.out.println("address Address : " + address.getAddress());
-		System.out.println("address details : " + address.getDetails());
-		System.out.println("address ReferenceInfo : " + address.getReferenceInfo());
-
 		
 		
 		
@@ -506,12 +481,6 @@ public class UserController {
 		//
 		// 후기 권한 On
 
-//		if(order == true) {	// 주문이 성공하면
-//		return "main" or "myInfo";
-//	}else if(order == false) {
-//		//주문 실패 예시 찾아복;
-//		System.out.println("주문이 실패하였습니다.");
-//		return "proInfo";
 
 		// 상품 수량 minus
 		System.out.println("proCode : " + orderInfo.getProCode());
@@ -615,7 +584,7 @@ public class UserController {
 					    ,@RequestParam(value = "bno" , required = false)String orderId
 					    ,@RequestParam(value = "proCode" , required = false) String proCode
 					    ,UserDto dto , OrderInfo orderInfo 
-					    ,DeliverySituation ds , PermissionToComment ptc) throws Exception {
+					    ,DeliverySituation ds , PermissionToComment ptc ) throws Exception {
 		logger.info("Get cancel");
 		System.out.println("Get cancel");
 		
@@ -632,7 +601,7 @@ public class UserController {
 		adminService.plusProStock(orderInfo);
 		userService.DsUpdate(orderInfo);
 		userService.PtcUpdate(orderInfo);
-		
+
 		return "redirect:/main?n="+userId;
 	}
 	

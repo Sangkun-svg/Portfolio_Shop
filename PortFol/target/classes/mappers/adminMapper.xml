@@ -130,35 +130,5 @@
 		insert into userRequest (choose,userId , orderId , Rs_Refund_option , Rs_Refund_text , Rs_Change_option , Rs_Change_text)
 			values (#{choose} ,#{userId} ,#{orderId} ,#{Rs_Refund_option} ,#{Rs_Refund_text} ,#{Rs_Change_option} ,#{Rs_Change_text})
 	</insert>
-	
-	
-	<insert id="insertSales">
-		insert into sales 
-			(
-			salesDate 
-			,daySales
-			)
-		 values 
-		 	(
-		 	#{salesDate}
-		 	,#{daySales}
-		 	)
-	</insert>
-	<update id="daySalesUpdate">
-		update 
-			sales 
-		set 
-			daySales 
-		where 
-			salesDate = #{salesDate}
-	</update>
-	
-	<select id="selectLasted" resultType="com.sh.Dto.Sales">
-		SELECT * FROM sales ORDER BY salesDate DESC LIMIT 1
-	</select>
-	
-	<select id="selectSalse" resultType="com.sh.Dto.Sales">
-		SELECT * FROM sales where salesDate = #{salesDate}
-	</select>
 </mapper>
 

@@ -2,6 +2,7 @@ package com.sh.Service;
 
 import java.util.List;
 
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -88,21 +89,6 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public void reqRefund_Cancel(UserRequest userReq) throws Exception {
 		dao.reqRefund_Cancel(userReq);
-	}
-
-	@Override
-	public void insertSales() throws Exception {
-		dao.insertSales();
-	}
-
-	@Override
-	public void daySalesUpdate() throws Exception {
-		dao.daySalesUpdate();
-	}
-
-	@Override
-	public String selectLasted() throws Exception {
-		return dao.selectLasted();
 	}
 
 
