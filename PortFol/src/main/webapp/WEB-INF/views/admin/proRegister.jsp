@@ -10,7 +10,11 @@
 </head>
 <style>
 .inputArea {
-	margin: 10px 0;
+	display: block;
+	width : 35%;
+	margin : 0 auto;
+	margin-top : 15px;
+	margin-bottom : 15px;
 }
 
 select {
@@ -19,16 +23,19 @@ select {
 
 label {
 	display: inline-block;
-	width: 70px;
+	width: 100px;
 	padding: 5px;
+	font-size: 20px;
 }
 
 label[for='gdsDes'] {
 	display: block;
 }
 
-input {
-	width: 150px;
+input , textarea{
+	width: 300px;
+	border : 2px solid;
+	border-radius : 7px;
 }
 
 textarea#gdsDes {
@@ -53,8 +60,19 @@ textarea#gdsDes {
 	       reader.readAsDataURL(input.files[0]);
 	    }
 	}
+
+	function back(){
+		window.history.back();
+	}
 </script>
 <body>
+	<header>
+		<div id="header_box">
+			<%@ include file="include/adminHeader.jsp"%>
+		</div>
+	</header>
+	
+	
 	<form role="form" action="proRegister" method="post" enctype="multipart/form-data">
 		<div class="inputArea">
 			<label for="proCode">상품코드 </label> <input type="text" id="proCode"
@@ -101,13 +119,13 @@ textarea#gdsDes {
 				}
 			});
 		</script>
-			<%=request.getRealPath("/") %>
 		</div>
 
 
 
  
 		<div class="inputArea">
+			<button type="button" class="btn btn-secondary" onclick="back()">뒤로</button>
 			<button type="submit" id="register_Btn" class="btn btn-primary">등록</button>
 		</div>
 

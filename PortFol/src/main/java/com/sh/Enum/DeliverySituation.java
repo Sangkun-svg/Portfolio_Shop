@@ -8,3 +8,6 @@ public enum DeliverySituation {
 	// 환불 or 취소 완료
 	, Success_refund , Success_delivery_Cancel , Success_Change
 }
+
+
+

@@ -24,7 +24,7 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@RequestMapping(value = "/nav", method = {RequestMethod.GET,RequestMethod.POST})
-	public String home(@RequestParam("n") String string ,Model model , UserDto dto ,HttpServletRequest req) throws Exception {
+	public String home(@RequestParam("n") String string ,Model model , UserDto dto , HttpSession session) throws Exception {
 		System.out.println("Get nav");
 		System.out.println("RequestParam : " + string);
 		dto.setUserId(string);
@@ -36,10 +36,9 @@ public class HomeController {
 		System.out.println("address : " + userService.myInfo(dto).getAddress());
 		System.out.println("verify : " + userService.myInfo(dto).getVerify());
 		System.out.println("joinDate : " + userService.myInfo(dto).getUserJoinDate());
-//		System.out.println("verify : " + userService.myInfo(dto).getVerify());
 		
-		HttpSession session = req.getSession();
-
+		
+		
 		if(userService.myInfo(dto).getVerify() != 9) {
 			System.out.println("go main");
 			return "redirect:/main?n="+string; 

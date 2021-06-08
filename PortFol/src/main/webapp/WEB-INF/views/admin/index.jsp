@@ -97,15 +97,10 @@ footer#footer ul li {
 <body>
 	<header>
 		<div id="header_box">
-			<%@ include file="include/header.jsp"%>
+			<%@ include file="include/adminHeader.jsp"%>
 		</div>
 	</header>
 
-	<nav>
-		<div id="nav_box">
-			<%@ include file="include/nav.jsp"%>
-		</div>
-	</nav>
 
 	<aside>
 		<div id="aside_box">
@@ -113,10 +108,5 @@ footer#footer ul li {
 		</div>
 	</aside>
 
-	<footer>
-		<div id="aside_box">
-			<%@ include file="include/footer.jsp"%>
-		</div>
-	</footer>
 </body>
 </html>

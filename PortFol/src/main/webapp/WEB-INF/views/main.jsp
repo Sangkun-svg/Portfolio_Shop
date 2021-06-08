@@ -9,23 +9,6 @@
 <title>메인 페이지</title>
 </head>
 <style>
-.test {
-	border: 1px solid;
-	width: 30%;
-	height: 300px;
-	float: left;
-	margin: 3% 0 3% 3%;
-	cursor: pointer;
-}
-
-.thumbnail {
-	border: 1px solid;
-	width: 80%;
-	height: 55%;
-	display: block;
-	margin: 0 auto;
-	margin-top: 15px;
-}
 
 li {
 	text-align: center;
@@ -56,6 +39,7 @@ ul {
 a {
 	text-decoration: none;
 	outline: none;
+	color : black;
 }
 
 .container {
@@ -93,11 +77,9 @@ header ul>li {
 	height: 100%;
 	display: flex;
 	align-items: center;
+	
 }
 
-header ul li :hover {
-	color: brown;
-}
 /*-----------------------------------------------------*/
 .center {
 	border: 2px solid;
@@ -107,6 +89,24 @@ header ul li :hover {
 	margin-top: 50px;
 	margin-bottom: 50px;
 }
+.test {
+	border: 1px solid;
+	width: 30%;
+	height: 300px;
+	float: left;
+	margin: 3% 0 3% 3%;
+	cursor: pointer;
+}
+
+.thumbnail {
+	border: 1px solid;
+	width: 80%;
+	height: 55%;
+	display: block;
+	margin: 0 auto;
+	margin-top: 15px;
+}
+
 /*-----------------------------------------------------*/
 .footer {
 	width: 100%;
@@ -170,17 +170,17 @@ header ul li :hover {
 	<div class="header">
 		<div class="container">
 			<header>
-				<h2>Sangkun-Svg Portfolio</h2>
+				<h2><a href="${pageContext.request.contextPath}/main?n=${user.userId}">Sangkun-Svg Portfolio</a></h2>
 				<nav>
 					<ul>
-						<c:if test="${member == 'null'}">
+						<c:if test='${member2 == null}'>
 							<li><a href="${pageContext.request.contextPath}/signin">Login</a></li>
 							<li><a href="${pageContext.request.contextPath}/signup">Join</a></li>
 						</c:if>
-						<c:if test="${member != 'null'}">
+						<c:if test='${member2 != null}'>
 							<li>${user.userName}님환영합니다.</li>
-							<li><a href="${pageContext.request.contextPath}/signout">Logout</a></li>
 							<li><a href="${pageContext.request.contextPath}/myInfo?n=${user.userId}">My Info</a></li>
+							<li><a href="${pageContext.request.contextPath}/signout">Logout</a></li>
 						</c:if>
 					</ul>
 				</nav>

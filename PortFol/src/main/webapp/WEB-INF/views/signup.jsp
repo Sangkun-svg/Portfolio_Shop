@@ -8,6 +8,17 @@
  	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<title>회원가입</title>
 </head>
+<style>
+	#container{
+		width: 500px;
+	    height: auto;
+	    display: block;
+	    margin: 0 auto;
+		margin-top : 30px;
+		margin-bottom : 50px;
+		padding : 15px;
+	}
+</style>
 <script type="text/javascript">
 	$(document).ready(function(){
 		// 취소
@@ -60,12 +71,19 @@
 	}
 </script>
 <body>
-	<section id="container">
+	<header>
+		<div id="header_box">
+			<%@ include file="resource/includes/header.jsp"%>
+		</div>
+	</header><br><br>
+	
+
+	<div id="container">
 		<form action="${pageContext.request.contextPath}/signup" method="post" id="regForm">
 				<label class="control-label" for="userId">아이디</label>
 				<input class="form-control" type="text" id="userId" name="userId" />
-				<button class="idChk" type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button><br>
-
+				<button class="idChk btn btn-outline-primary" type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button><br>
+			
 				<label class="control-label" for="userPass">패스워드</label>
 				<input class="form-control" type="password" id="userPass" name="userPass" />
 
@@ -78,10 +96,20 @@
 				<label class="control-label" for="address">주소</label>
 				<input class="form-control" type="text" id="address" name="address" placeholder="Ex) 은평구 녹번동"/>
 
+				<label class="control-label" for="gender">성별</label><br>
+				<input type="radio" name="gender" value="남성">남성				
+				<input type="radio" name="gender" value="여성">여성<br>
 		
 				<button type="submit" class="btn btn-success" >회원가입</button>
 				<button class="cencle btn btn-danger" type="button">취소</button>
 		</form>
-	</section>	
+	</div>
+	
+	<footer>
+		<div id="footer_box">
+			<%@ include file="resource/includes/footer.jsp"%>
+		</div>
+	</footer><br><br>
+		
 </body>
 </html>

@@ -11,10 +11,20 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>회원탈퇴</title>
 </head>
+<style>
+	.container_userDelete{
+		display: block;
+		width : 350px;
+		padding-top : 100px;
+		padding-left : 15px;
+		height : 490px;
+		margin : 0 auto;
+	}
+	.form-control{
+		width: 300px;
+	}
+</style>
 <script type="text/javascript">
-
-
-
 	$(document).ready(function() {
 		// 취소
 		$("#cancel").on("click", function() {
@@ -41,27 +51,35 @@
 		    }
 		});		
 	});
-
-
 </script>
 <body>
-	<section id="container">
+	<header>
+		<div id="header_box">
+			<%@ include file="resource/includes/header.jsp"%>
+		</div>
+	</header><br><br>
+
+	<div class="container_userDelete">
 		<form actoin="${pageContext.request.contextPath}/userDelete?n=${info.userId}" method="post">
 			<label class="control-label" for="userId">아이디</label> 
 			<input class="form-control" type="text" id="userId" name="userId"/>
 		
 			<label class="control-label" for="userPass">패스워드</label> 
-			<input class="form-control" type="password" id="deletePass" name="deletePass" />
+			<input class="form-control" type="password" id="deletePass" name="deletePass" /><br>
 
 			<button class="btn btn-success" type="submit" id="submit">회원탈퇴</button>
 			<button class="cancel btn btn-danger" type="button" id="cancel">취소</button>
-		<div>
+
 			<c:if test="${msg == false}">
 					비밀번호가 맞지 않습니다.
 				</c:if>
 		</form>
-	</section>
+	</div>
 
+	<footer>
+		<div id="footer_box">
+			<%@ include file="resource/includes/footer.jsp"%>
+		</div>
+	</footer> 
 </body>
-
 </html>

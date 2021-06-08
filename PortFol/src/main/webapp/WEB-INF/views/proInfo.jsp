@@ -12,11 +12,9 @@
     .wrap{
         width: 80%;
         height: 1500px;
-        border: 1px solid;
         margin: 0 auto;
     }
     .img{
-        border: 1px solid;
         width: 80%;
         height: 600px;
         margin: 0 auto;
@@ -40,7 +38,6 @@
 		display : block;
 		width: 300px;
 		height: 100px;
-		border: 1px solid;
 		margin : 0 auto;
 		margin-top : 10px;
 		margin-bottom : 10px;
@@ -54,40 +51,53 @@
 		margin-bottom : 10px;
 	}
 </style>
+<script>
+	function back(){
+		window.history.back();
+	}
+	function img(){
+		var src = jQuery('#img').attr("src");
+		console.log("src : " + src);
+	}	
+</script>
 <body>
+	<header>
+		<div id="header_box">
+			<%@ include file="resource/includes/header.jsp"%>
+		</div>
+	</header><br><br>
+
     <div class="wrap">
     	<form action="${pageContext.request.contextPath}/orderPage?n=${user.userId}&bno=${pro.bno}" method="get">
 			<input type="hidden" value="${user.userId}" name="n">
 			<input type="hidden" value="${pro.bno}" name="bno">
 	        <div class="img">
-	            <img src="${pro.proImg }" alt="img"
-	                style="width: 100%; height: 100%;">
+	            <img src="${pro.proImg}" id="img" alt="img" style="width: 100%; height: 100%;">
 	        </div>
 	        
 	        <li><h3>이름 : <c:out value="${pro.proName}"/></h3></li>
 	        <li><h3>가격 : <c:out value="${pro.proPrice}"/></h3></li>
 	        <li><h3>수량 : <c:out value="${pro.proStock}"/></h3></li>
 	        <li><h3>상품소개 : <c:out value="${pro.proDescription}"/></h3></li>
-	        <li><h3>상품번호 : <c:out value="${pro.proCode}"/></h3></li>
-	        <li><h3>상품Bno : <c:out value="${pro.bno}"/></h3></li>
 
 			<input type="hidden" value="${pro.proCode}" name="proCode">
 
 						
 	        <li><button type="submit"  class="btn">주문하기</button><br></li>
 		</form>
-	        <li><button onclick="location.href='${pageContext.request.contextPath}/goCart?n=${login.userId}&bno=${pro.bno}'" class="btn">장바구니에 담기</button><br></li>
+			<li><button type="button" class="btn"onclick="back()">뒤로</button></li>
 			<input type="hidden" value="${pro.proCode}" name="proCode">
 
 
 				<!-- 댓글 -->
 			    <c:forEach items="${replyList}" var="replyList">
-					<div id="reply">
+					<div id="reply" style="border : 1px solid;border-radius : 5px; margin-top : 30px">
 						<tr>
-							<td style="text-align:center">bno : <c:out value="${replyList.bno}" /></td><br>
-							<td style="text-align:center">rno : <c:out value="${replyList.rno}" /></td><br>
-							<td style="text-align:center">writer : <c:out value="${replyList.writer}" /></td><br>
-							<td style="text-align:center">content : <c:out value="${replyList.content}" /></td><br>
+							<td style="text-align:center">
+								
+								<p>작성자 → <c:out value="${replyList.writer}" /></p>
+								<p>댓글 → <c:out value="${replyList.content}" /></p>
+							</td><br>
 						</tr>
 					</div>				
 			    </c:forEach> 
@@ -99,12 +109,18 @@
 						<input type="hidden" value="${user.userId} " name="n">
 						<input type="hidden" value="${pro.bno} " name="bno">
 	
-				    	<input type="text" value="${login.userName }" readonly="readonly" name="writer"/>						    
+				    	<input type="text" value="${user.userName }" readonly="readonly" name="writer"/>						    
 				    	<input type="text" name="content" placeholder="댓글을 작성해주세요" style="width : 100%; height: 100%" />
-				    	<button type="submit">댓글 작성</button>
+				    	<button class="btn btn-secondary" style="width: 100px; height: 35px" type="submit">댓글 작성</button>
 					</form>
-				</c:if>
-	
+				</c:if>		
     </div>
+    
+    <footer>
+		<div id="footer_box">
+			<%@ include file="resource/includes/footer.jsp"%>
+		</div>
+	</footer>
+    
 </body>
 </html>

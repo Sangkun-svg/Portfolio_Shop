@@ -26,9 +26,10 @@
         border-radius: 10px;
         display: block;
         margin: 0 auto;
+        margin-top: 30px;
         margin-bottom: 15px;
         position: relative;
-        top: 300px;
+        top: 400px;
         cursor: pointer;
     }
 
@@ -52,28 +53,23 @@
         position: relative;
         bottom: 30px;
     }
+    .social_login_Btn{
+		width: 100%;
+		height: 100%;
+    }
 </style>
 
 <body>
 	<div class="Lmain">
 		<h2 style="text-align: center;">소셜 로그인</h2>
-		<div class="sosialLogin" style="background-color: yellow;"
-			onclick="location.href='${kakao_url}'">
-			<h1 style="text-align: center;">카카오 로그인</h1>	
+		<div class="sosialLogin" onclick="location.href='${kakao_url}'">
+			<img class="social_login_Btn" alt="Kakao Login" src="resources/author_login_img/kakao_login_large_narrow.png">
 		</div>
-		<div class="sosialLogin" style="background-color: greenyellow;"
-			onclick="location.href='${naver_url}'">
-			<h1 style="text-align: center;">네이버 로그인</h1>
-		</div>
-		<div class="sosialLogin" style="background-color: skyblue;"
-			onclick="location.href=''">
-			<h1 style="text-align: center;">페이스북 로그인</h1>
-		</div>
-		<div class="sosialLogin" style="background-color: pink;"
-			onclick="location.href=''">
-			<h1 style="text-align: center;">구글 로그인</h1>
+		<div class="sosialLogin" onclick="location.href='${naver_url}'">
+			<img class="social_login_Btn" alt="네이버 아이디로 로그인" src="resources/author_login_img/btnG_완성형.png">
 		</div>
 	</div>
+
 	<div class="Rmain">
 		<h1 style="text-align: center;">로그인 폼</h1>
 		<form role="form" method="post">

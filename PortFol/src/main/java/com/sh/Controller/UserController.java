@@ -78,7 +78,6 @@ public class UserController {
 	@PostMapping("/signup")
 	public String postSignUp(UserDto dto) throws Exception{
 		logger.info("Post SignUp");
-		System.out.println("Post SignUp");
 		
 		int result  = userService.idValidation(dto);
 				
@@ -86,21 +85,13 @@ public class UserController {
 			if(result == 1) {
 				return "${pageContext.request.contextPath}/register";
 			}else if(result == 0) {
-				System.out.println("id : " + dto.getUserId());
-				System.out.println("name : " + dto.getUserName());
-				System.out.println("phone : " + dto.getUserPhone());
-				System.out.println("address : " + dto.getAddress());
-				System.out.println("joinDate : " + dto.getUserJoinDate());
-				System.out.println("verify    : " + dto.getVerify());
-				System.out.println("암호화 전 비밀번호 : " + dto.getUserPass());
 				String encryPassword = UserSha256.encrypt(dto.getUserPass());
 				dto.setUserPass(encryPassword);
-				System.out.println("암호화 후 비밀번호 : " + dto.getUserPass());
-				
+
 				userService.register(dto);
 			}
 		}catch (Exception e) {
-
+			e.printStackTrace();
 		}
 		
 		return"redirect:/signin";
@@ -217,28 +208,22 @@ public class UserController {
 	public String postSignin(UserDto dto , HttpServletRequest req , 
 							RedirectAttributes rttr , Model model)throws Exception {
 		logger.info("Post Signin");
-		System.out.println("Post Signin");
 		
 		String test = dto.getUserId();		
 		model.addAttribute("user" , userService.myInfo(dto));
 		HttpSession session = req.getSession();
 		
-		
 		String encryPassword = UserSha256.encrypt(dto.getUserPass());
 		dto.setUserPass(encryPassword);
-		System.out.println(dto.getUserPass());
 		UserDto login = userService.signin(dto);
-		System.out.println("login : " + login);
 		if(login == null) {
 			session.setAttribute("member", null);
 			rttr.addFlashAttribute("msg" , false);
 			return "signin";
-		}else {
+		}else {			
 			session.setAttribute("member", login);
-			System.out.println("Login 성공");
-			System.out.println("verify : " + login.getVerify());
 			if(login.getVerify() == 9) {
-				return"redirect:/nav?n="+test;
+				return"redirect:/admin/index";
 			}else {
 				return"redirect:/main?n="+test;
 			}
@@ -318,12 +303,15 @@ public class UserController {
 	
 	@GetMapping("/main")
 	public void getMainPage(@RequestParam(value="n" , required=false) String string ,Model model  
-							, UserDto dto) throws Exception {
+							, UserDto dto , HttpServletRequest req) throws Exception {
 		logger.info("Main Page");
 		System.out.println("MainPage");
 
+		HttpSession session = req.getSession();
+		model.addAttribute("member2" , session.getAttribute("member"));
+
 		model.addAttribute("prolist", adminService.proList());
-		dto.setUserId(string);
+  		dto.setUserId(string);
 		model.addAttribute("user" , userService.myInfo(dto));
 		
 	}
@@ -333,13 +321,11 @@ public class UserController {
 							@RequestParam(value = "bno", required = false) int bno ,
 							@RequestParam(value = "orderId", required = false) String orderId 
 							,Model model , Product pro , UserDto dto , OrderInfo orderInfo
-							, PermissionToComment ptc) throws Exception {
+							, PermissionToComment ptc , HttpServletRequest req ) throws Exception {
 		logger.info("Get ProInfo");
-		System.out.println("Get ProInfo");
-		
-		System.out.println("String : " + string);
+		HttpSession session = req.getSession();
+		model.addAttribute("member2" , session.getAttribute("member"));
 
-		System.out.println("orderId : " + orderId);
 		
 		pro.setBno(bno);
 		dto.setUserId(string);
@@ -354,7 +340,6 @@ public class UserController {
 		
 		if(orderId != null) {
 			if(userService.myOrdered(orderInfo).getReplyEnum() == ptc.ON) {
-				System.out.println("replyEnum : " + userService.myOrdered(orderInfo).getReplyEnum());
 				model.addAttribute("reply" , userService.myOrdered(orderInfo).getReplyEnum());			
 			}else {
 				model.addAttribute("reply" , null);
@@ -393,24 +378,29 @@ public class UserController {
 	}
 
 	@GetMapping("/myInfo")
-	public void getMyInfo(@RequestParam(value="n" , required=false) String string, Model model , UserDto dto) throws Exception {
+	public void getMyInfo(@RequestParam(value="n" , required=false) String string, Model model , UserDto dto, HttpServletRequest req) throws Exception {
 		logger.info("My Info");
-		System.out.println("My Info");
 		dto.setUserId(string);
 		model.addAttribute("user", userService.myInfo(dto));
+
+		HttpSession session = req.getSession();
+		model.addAttribute("member2" , session.getAttribute("member"));
 
 	}
 
 	
 	@GetMapping("/userUpdate")
 	public void GetUserUpdate(@RequestParam(value = "n" )String string , UserDto dto,
-								Model model) throws Exception {
+								Model model , HttpServletRequest req) throws Exception {
 		logger.info("Get userUpdate");
-		System.out.println("Get UserUpdate");
-
-		System.out.println("id : " + string);
-		dto.setUserId(string);
+  		System.out.println("Get UserUpdate");
+		dto.setUserId(string);  		
 		model.addAttribute("info" , userService.myInfo(dto));
+
+		HttpSession session = req.getSession();
+		model.addAttribute("member2" , session.getAttribute("member"));
+  		
+
 	}
 	
 	@PostMapping("/userUpdate")
@@ -427,11 +417,12 @@ public class UserController {
 	@GetMapping("/orderPage")
 	public void getOrderPage(@RequestParam("n") String string 
 							,@RequestParam("bno") int bno
-							,OrderInfo orderInfo , Model model , UserDto dto ,Product pro) throws Exception {
+							,OrderInfo orderInfo , Model model , UserDto dto ,Product pro ,HttpServletRequest req) throws Exception {
 		logger.info("Get OrderPage");
-		System.out.println("Get OrderPage");	
-		// 주문정보 中 회원정보 넣어주기
-		System.out.println("string : " + string);
+
+		HttpSession session = req.getSession();
+		model.addAttribute("member2" , session.getAttribute("member"));
+
 		dto.setUserId(string);
 		model.addAttribute("member" , userService.myInfo(dto));
 
@@ -498,10 +489,11 @@ public class UserController {
 
 	@GetMapping("/deliveryInfo")
 	public void getDeliveryInfo(@RequestParam(value="n" , required=false) String string
-								,OrderInfo orderInfo , UserDto dto , Model model) throws Exception {
+								,OrderInfo orderInfo , UserDto dto , Model model ,HttpServletRequest req) throws Exception {
 		logger.info("Get DeliveryInfo");
-		System.out.println("Get DeliveryInfo");
 
+		HttpSession session = req.getSession();
+		model.addAttribute("member2" , session.getAttribute("member"));
 		// 주문정보에 주문한 상품과 회원정보를 담는 코드 
 		dto.setUserId(string);
 		

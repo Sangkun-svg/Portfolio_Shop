@@ -1,7 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>adminHeader</title>
+</head>
 <style>
+li {
+	text-align: center;
+	text-decoration: none;
+	list-style: none;
+}
+
 
 ul {
 	list-style: none;
@@ -10,11 +21,12 @@ ul {
 a {
 	text-decoration: none;
 	outline: none;
+	color : white;
 }
 
 .container {
-	width:1440px;
-	margin:0 auto;
+	width: 1440px;
+	margin: 0 auto;
 }
 
 header {
@@ -23,7 +35,7 @@ header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	background-color: beige;
+	background-color: gray;
 }
 
 header>h2 {
@@ -49,26 +61,22 @@ header ul>li {
 	align-items: center;
 	
 }
+
 </style>
 <body>
 	<div class="header">
 		<div class="container">
 			<header>
-				<h2><a href="${pageContext.request.contextPath}/main?n=${member.userId}">Sangkun-Svg Portfolio</a></h2>
+				<h2><a href="${pageContext.request.contextPath}/main?n=${user.userId}">${user.userName}관리자님 환영합니다.</a></h2>
 				<nav>
 					<ul>
-						<c:if test="${empty member2}">
-							<li><a href="${pageContext.request.contextPath}/signin">Login</a></li>
-							<li><a href="${pageContext.request.contextPath}/signup">Join</a></li>
-						</c:if>
-						<c:if test="${!empty member2}">
-							<li>${member.userName}님환영합니다.</li>
-							<li><a href="${pageContext.request.contextPath}/myInfo?n=${member.userId}">My Info</a></li>
+							<li><a href="${pageContext.request.contextPath}/main?n=${user.userId}">Main</a></li>
 							<li><a href="${pageContext.request.contextPath}/signout">Logout</a></li>
-						</c:if>
 					</ul>
 				</nav>
 			</header>
 		</div>
 	</div>
+
 </body>
+</html>

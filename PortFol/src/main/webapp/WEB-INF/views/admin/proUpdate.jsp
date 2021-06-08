@@ -1,15 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="includeFile.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<%@ include file="includeFile.jsp"%>
 <title>상품 수정</title>
 </head>
 <style>
 .inputArea {
-	margin: 10px 0;
+	display: block;
+	width : 35%;
+	margin : 0 auto;
+	margin-top : 15px;
+	margin-bottom : 15px;
 }
 
 select {
@@ -18,16 +23,19 @@ select {
 
 label {
 	display: inline-block;
-	width: 70px;
+	width: 100px;
 	padding: 5px;
+	font-size: 20px;
 }
 
 label[for='gdsDes'] {
 	display: block;
 }
 
-input {
-	width: 150px;
+input , textarea{
+	width: 300px;
+	border : 2px solid;
+	border-radius : 7px;
 }
 
 textarea#gdsDes {
@@ -40,7 +48,23 @@ textarea#gdsDes {
 .oriImg{width: 500px; height: auto;}
 .thumbImg{}
 </style>
+<script>
+	function back(){
+		window.history.back();
+	}
+	function img(){
+		var src = jQuery('#img').attr("src");
+		console.log(src);
+	}	
+</script>
 <body>
+	<header>
+		<div id="header_box">
+			<%@ include file="include/adminHeader.jsp"%>
+		</div>
+	</header><br><br>
+	
+
 	<form role="form" action="${pageContext.request.contextPath}/admin/proUpdate" method="post">
 		<div class="inputArea">
 			<label for="proCode">상품코드 </label> <input type="text" id="proCode"
@@ -67,16 +91,9 @@ textarea#gdsDes {
 			<input type="text" id="proDescription" name="proDescription" value="${pro.proDescription}" style="width: 300px; height: 100px">
 		</div>
 
-		<div class="inputArea">
-			<label for="proImg">이미지</label>
-			<p>원본 이미지</p>
-		<img src="${pro.proImg}" class="oriImg" alt="Img Err"/>
-		
-		<p>썸네일</p>
-			<img src="${pro.proThumbnail}" class="thumbImg" alt="Thumbmail Err"/>
-		</div>
 
 		<div class="inputArea">
+			<button type="button" class="btn btn-secondary"onclick="back()">뒤로</button>
 			<button type="submit" id="update_Btn" class="btn btn-primary">수정</button>
 		</div>
 

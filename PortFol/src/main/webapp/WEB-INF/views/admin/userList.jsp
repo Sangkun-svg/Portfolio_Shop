@@ -2,16 +2,34 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="includeFile.jsp"%>
 <html>
 <head>
 <title>유저 리스트</title>
 </head>
 <style>
+#container_box{
+	display: block;
+	width: 65%;
+	margin : 0 auto;
+}
 #container_box table td {
 	width: 150px;
 }
 </style>
+<script>
+	function back(){
+		window.history.back();
+	}
+</script>
 <body>
+	<header>
+		<div id="header_box">
+			<%@ include file="include/adminHeader.jsp"%>
+		</div>
+	</header><br><br>
+
+
 	<div id="container_box">
 		<section id="container">
 			<table>
@@ -39,6 +57,7 @@
 					</tr>
 				</c:forEach>
 			</table>
+			<button type="button" class="btn btn-secondary"onclick="back()">뒤로</button>
 		</section>
 	</div>
 </body>

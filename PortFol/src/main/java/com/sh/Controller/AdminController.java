@@ -128,7 +128,7 @@ public class AdminController {
 		 System.out.println("Get proUpdate");
 		 pro.setBno(bno);
 		 model.addAttribute("pro", adminService.proView(pro.getBno())); 
-		}	
+	}	
 
 	
 	@PostMapping("/proUpdate")

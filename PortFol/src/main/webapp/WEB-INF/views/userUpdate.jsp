@@ -22,9 +22,10 @@ ul {
 
 .info{
 	display : block;
-    width: 30%;
-    height: 500px;
-    border: 1px solid;
+    width: 23%;
+    height: 650px;
+    border: 2px solid;
+    border-radius: 10px;
 	margin : 0 auto;
 }
 
@@ -34,39 +35,65 @@ ul {
     border-radius: 15px;
     margin: 12px 0px 12px 15px;
 }
+.btn {
+	width: 150px;
+	height: 35px;
+	border : 2px solid;
+	border-radius : 10px;
+	background-color: white;
+	margin-top: 10px;
+	margin-left: 97px;
+	cursor : pointer;
+	
+}
 </style>
+<script type="text/javascript">
+	function back(){
+		window.history.back();
+	}
+</script>
 <body>
+	<header>
+		<div id="header_box">
+			<%@ include file="resource/includes/header.jsp"%>
+		</div>
+	</header><br><br>
+	
+
     <form class="info" method="post">
         <div class="input-area">
             <label for><h2 style="margin: 0;">ID</h2></label><br>
-            <input type="text" id="userId" name="userId" value='${info.userId }' readonly="readonly" >
+            <input type="text" id="userId" name="userId" value='${info.userId }'>
 			<input type="hidden" value="${info.userId }" name="infoUserId">
-            <button type="button" class="btn">수정하기</button>    
-
         </div>
 
         <div class="input-area">
             <label for><h2 style="margin: 0;">Name</h2></label><br>
-            <input type="text" id="userPass" name="userPass" value='${info.userName}' readonly="readonly">    
+            <input type="text" id="userPass" name="userPass" value='${info.userName}'>    
 			<input type="hidden" value="${info.userId }" name="infoUserName">
-            <button type="button" class="btn">수정하기</button>    
         </div>
 
         <div class="input-area">
             <label for><h2 style="margin: 0;">Phone</h2></label><br>
-            <input type="text" id="userPhone" name="userPhone" value='${info.userPhone}' readonly="readonly">    
+            <input type="text" id="userPhone" name="userPhone" value='${info.userPhone}'>    
 			<input type="hidden" value="${info.userId }" name="infoUserPhone">
-            <button type="button" class="btn">수정하기</button>    
         </div>
 
         <div class="input-area">
             <label for><h2 style="margin: 0;">Address</h2></label><br>
             <input type="text" id="" name="address" value='${info.address }' >    
 			<input type="hidden" value="${info.userId }" name="infoUserAddress">
-            <button type="button" class="btn">수정하기</button>    
-	
-		<button type="submit">수정</button>
         </div>
+
+			<button class="btn" type="submit">수정</button><br>
+			<button class="btn" type="button" onclick="location.href='${pageContext.request.contextPath}/userDelete?n=${user.userId}'">회원탈퇴</button><br>
+			<button class="btn" type="button" onclick="back()">뒤로</button>
+
     </form>
+		<footer>
+		<div id="footer_box">
+			<%@ include file="resource/includes/footer.jsp"%>
+		</div>
+	</footer>
 </body>
 </html>

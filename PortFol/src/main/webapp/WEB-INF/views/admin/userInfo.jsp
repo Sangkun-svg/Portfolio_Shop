@@ -1,45 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="includeFile.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원정보 보기</title>
 <style>
 .inputArea {
-	margin: 10px 0;
-}
-
-select {
-	width: 100px;
+	width : 35%;
+	margin-top : 15px;
+	margin-bottom : 15px;
 }
 
 label {
 	display: inline-block;
-	width: 70px;
+	width: 100px;
 	padding: 5px;
+	font-size: 20px;
+}
+input , textarea{
+	width: 200px;
+	border : 2px solid;
+	border-radius : 7px;
 }
 
-label[for='gdsDes'] {
+.wrap{
 	display: block;
+	width: 300px;
+	margin-top: 50px;
+	margin: 0 auto;
 }
-
-input {
-	width: 150px;
-}
-
-textarea#gdsDes {
-	width: 400px;
-	height: 180px;
-}
-
-.select_img img{margin:20px 0;}
-
-.oriImg{width: 500px; height: auto;}
-.thumbImg{}
 </style>
+<script>
+	function back(){
+		window.history.back();
+	}
+	
+</script>
 <body>
-	<form role="form"  method="post">
+	<header>
+		<div id="header_box">
+			<%@ include file="include/adminHeader.jsp"%>
+		</div>
+	</header><br><br>
+
+	<div class="wrap">
 		<div class="inputArea">
 			<label for="userId">아이디</label> <input type="text" id="userId"
 				name="userId" value="${userInfo.userId}"/>
@@ -57,14 +63,13 @@ textarea#gdsDes {
 
 		<div class="inputArea">
 			<label for="regDate">등록일</label> <input type="text" id="regDate"
-				name="regDate" value="${userInfo.regDate}"/>
+				name="regDate" value="${userInfo.userJoinDate}"/>
 		</div>
 
 
 		<div class="inputArea">
-			<button type="submit" id="update_Btn" class="btn btn-danger">뒤로</button>
+			<button type="button" onclick="back()" class="btn btn-danger">뒤로</button>
 		</div>
-
-	</form>
+	</div>
 </body>
 </html>

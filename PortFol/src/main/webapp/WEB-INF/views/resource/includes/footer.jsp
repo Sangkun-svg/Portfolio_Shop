@@ -1,20 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <style>
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR|ZCOOL+QingKe+HuangYou');
-
-* {
-	margin:0;
-	padding:0;
-	color:#000;
-	font-family: 'ZCOOL QingKe HuangYou', cursive;
-	box-sizing: border-box;
-}
-
-.fn-font {
-	font-family: 'Noto Sans KR', sans-serif;
-}
 
 ul {
 	list-style: none;
+	width: 70%;
+	margin : auto;	
 }
 
 a {
@@ -27,19 +18,30 @@ a {
 	margin:0 auto;
 }
 .footer {
-	position : absolute;
-	bottom:0px;
 	width: 100%;
-	height: 200px;
+	height: 150px;
+	display : flex;
 	padding: 15px 0;
 	text-align: center;
-	color: white;
-	background-color: red;
+	background-color: beige;
+	margin-top : 15px;
+}
+.footer > p{
+	text-align: center;
+	width: auto;
+	height: auto;
+	font-weight: bolder;
 }
 </style>
 <body>
-    <div class="footer">
-        <br><h2><p>Sangkun-svg</p></h2><br>
-        <p>Copyrightⓒ All Right Reserved.</p>
-    </div>
+	<div class="footer">
+		<ul>
+			<li>
+				<p style="text-align: center;"><h2>Sangkun-svg</h2></p>
+			</li>
+			<li>
+				<p style="text-align: center;">Copyrightⓒ All Right Reserved.</p>
+			</li>
+		</ul>
+	</div>
 </body>
